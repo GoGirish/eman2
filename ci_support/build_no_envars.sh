@@ -5,7 +5,7 @@ source ci_support/pre_build.sh
 prefix="/Users/shadow_walker/anaconda"
 sp_dir="${prefix}/lib/python2.7/site-packages"
 
-/usr/local/bin/cmake $src_dir  -DENABLE_CONDA=OFF \
+/usr/local/bin/cmake $WORKSPACE -DENABLE_CONDA=OFF \
                     -DNUMPY_INCLUDE_PATH="$sp_dir/numpy/core/include" \
                     -DBOOST_INCLUDE_PATH="$prefix/include" \
                     -DBOOST_LIBRARY="$prefix/lib/libboost_python.${suffix}" \
