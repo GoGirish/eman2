@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'bash ci_support/build_no_envars.sh'
+                sh 'bash ci_support/build_recipe.sh'
             }
         }
         stage('Test') {
