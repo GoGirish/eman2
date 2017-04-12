@@ -6,6 +6,7 @@ set -x
 export MINICONDA_URL="https://repo.continuum.io/miniconda"
 export MINICONDA_FILE="Miniconda2-latest-Linux-x86_64.sh"
 
+rm -rf $HOME/miniconda2
 curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
 bash $MINICONDA_FILE -b
 
