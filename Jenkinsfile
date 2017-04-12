@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'bash ci_support/build_recipe.sh'
+                sh 'bash ci_support/build_jenkins.sh'
             }
         }
         stage('Test') {
