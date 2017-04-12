@@ -5,8 +5,10 @@ set -x
 # Download and install Miniconda
 export MINICONDA_URL="https://repo.continuum.io/miniconda"
 
-curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
-bash $MINICONDA_FILE -b
+if [ ! -d "$HOME/miniconda2" ] && [ -v MINICONDA_FILE ];then
+    curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
+    bash $MINICONDA_FILE -b
+fi
 
 # Configure conda
 source ${HOME}/miniconda2/bin/activate root
