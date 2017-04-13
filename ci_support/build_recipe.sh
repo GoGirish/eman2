@@ -16,7 +16,6 @@ fi
 source ${HOME}/miniconda2/bin/activate root
 conda config --set show_channel_urls true
 
-export CPU_COUNT=2
 
 conda install conda-build -c defaults --yes --quiet
 
