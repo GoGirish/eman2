@@ -2,6 +2,8 @@
 
 set -x
 
+export PYTHONUNBUFFERED=1
+
 # Download and install Miniconda
 export MINICONDA_URL="https://repo.continuum.io/miniconda"
 
