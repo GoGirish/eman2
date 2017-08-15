@@ -62,9 +62,9 @@ from emapplication import EMProgressDialog
 
 
 class EMMatrixPanel:
-	'''
+	"""
 	A class for managing the parameters of displaying a matrix panel
-	'''
+	"""
 	def __init__(self):
 		self.min_sep = 2 # minimum separation
 		self.max_y = 0
@@ -141,9 +141,9 @@ class EMMatrixPanel:
 		return [visiblerows,visiblecols]
 
 	def get_min_scale(self,view_width,view_height,view_scale,view_data):
-		'''
+		"""
 		Gets min scale using something like a bifurcation algorithm
-		'''
+		"""
 
 		s = str(view_width) + str(view_height)
 		if self.scale_cache.has_key(s):
@@ -375,7 +375,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		self.updateGL()
 
 	def delete_set(self,todel):
-		"Deletes a set or multiple sets. todel is a string or list of strings to delete"
+		"""Deletes a set or multiple sets. todel is a string or list of strings to delete"""
 
 		if isinstance(todel,str): todel=[todel]
 
@@ -422,9 +422,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		return self.sets[name]
 
 	def enable_set(self,name,lst=[],display=True,update=True, force=False):
-		'''
+		"""
 		Called from e2eulerxplor
-		'''
+		"""
 		if not self.sets.has_key(name) or force : self.sets[name]=set(lst)
 		if display : self.sets_visible[name]=self.sets[name]
 		if self.current_set==None : self.current_set=name
@@ -441,9 +441,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		if update: self.updateGL()
 
 	def set_single_active_set(self,db_name):
-		'''
+		"""
 		Called from emform
-		'''
+		"""
 		try: self.sets_visible={db_name:self.sets[db_name]}
 		except : self.sets_visible={}
 		if self.current_set==None : self.current_set=name
@@ -480,9 +480,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		js_open_dict(self.infoname)["sets"]=sets
 
 	def clear_set(self,update_gl=True):
-		'''
+		"""
 		Unset all images in the current set
-		'''
+		"""
 
 		if self.current_set==None : return
 
@@ -495,9 +495,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.updateGL()
 
 	def invert_set(self,update_gl=True):
-		'''
+		"""
 		Invert the current selection
-		'''
+		"""
 
 		if self.current_set==None : return
 
@@ -510,9 +510,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.updateGL()
 
 	def all_set(self,update_gl=True):
-		'''
+		"""
 		Sets all images in the current set
-		'''
+		"""
 		if self.current_set==None : return
 
 		self.sets[self.current_set]=set(range(self.nimg))
@@ -536,7 +536,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.updateGL()
 
 	def image_set_associate(self,idx,event=None,update_gl=False):
-		"toggles a single image in the current set"
+		"""toggles a single image in the current set"""
 
 		if self.current_set==None:
 			self.enable_set("bad_particles",[idx],update=update_gl)
@@ -561,9 +561,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		return {"set_origin":self.set_origin,"set_scale":self.set_scale,"origin_update":self.origin_update}
 
 	def get_data(self):
-		'''
+		"""
 		Gets the current data object, this is either an EMDataListCache, an EM3DDataListCache, an EMLightWeightParticleCache, or None
-		'''
+		"""
 		return self.data
 
 #	def width(self):
@@ -628,7 +628,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.tex_names = []
 
 	def force_display_update(self):
-		''' If display lists are being used this will force a regeneration'''
+		""" If display lists are being used this will force a regeneration"""
 		self.display_states = []
 		self.update_inspector_texture()
 
@@ -658,7 +658,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def get_hist(self): return self.hist
 	def get_image(self,idx): return self.data[idx]
 	def get_image_file_name(self):
-		''' warning - could return none in some circumstances'''
+		""" warning - could return none in some circumstances"""
 		return self.file_name
 
 	def optimally_resize(self):
@@ -697,11 +697,11 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.updateGL()
 
 	def __get_cache(self,obj,soft_delete=False):
-		'''
+		"""
 		Get the correct cache for the given obj
 		@param obj a string or a list of EMData objects
 		@param soft_delete only applicable if obj is a list
-		'''
+		"""
 		if isinstance(obj,str):
 			nx,ny,nz = gimme_image_dimensions3D(obj)
 			if nz == 1:
@@ -715,12 +715,12 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				return None
 
 	def set_data(self, obj, filename = '', update_gl = True, soft_delete = False) :
-		'''
+		"""
 		This function will work if you give it a list of EMData objects, or
 		if you give it the file name (as the first argument).
 		If this solution is undesirable one could easily split this function
 		into two equivalents.
-		'''
+		"""
 				
 		cache_size = -1
 
@@ -986,7 +986,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		return False
 
 	def set_font_render_resolution(self):
-		" "
+		""" """
 		#self.font_renderer.set_face_size(int(self.height()*0.015))
 		#print "scale is",self.scale
 
@@ -1254,9 +1254,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		#glPopMatrix()
 
 	def __render_excluded_hollow_square(self):
-		'''
+		"""
 		Renders a hollow square that goes from -1 to 1 and has a thickness of 10%
-		'''
+		"""
 		d = .1
 		glBegin(GL_QUADS)
 		#glColor(0,0,0)
@@ -1516,9 +1516,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			event.accept()
 
 	def save_data(self):
-		'''
+		"""
 		Overwrites existing data (the old file is removed)
-		'''
+		"""
 
 		msg = QtGui.QMessageBox()
 		msg.setWindowTitle("Woops")
@@ -1535,9 +1535,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		self.data.set_excluded_ptcls(None)
 
 	def save_lst(self,fsp):
-		'''
+		"""
 		If we make it here the dialog has taken care of check whether or not overwrite should occur
-		'''
+		"""
 
 		origname = self.get_image_file_name()
 
@@ -1734,9 +1734,9 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		self.mouse_double_click(event,lc)
 		
 	def mouse_double_click(self,event,lc=None):
-		'''
+		"""
 		Inheriting classes to potentially define this function
-		'''
+		"""
 		if lc != None:
 			a = self.get_box_image(lc[0])
 			d = a.get_attr_dict()
@@ -2445,7 +2445,7 @@ class EMImageInspectorMX(QtGui.QWidget):
 		#self.target().set_norm(state)
 
 	def snapShot(self):
-		"Save a screenshot of the current image display"
+		"""Save a screenshot of the current image display"""
 
 		#try:
 		qim=self.target().get_frame_buffer()
@@ -2532,9 +2532,9 @@ class EMImageInspectorMX(QtGui.QWidget):
 
 
 class EMMXDeletionManager:
-	'''
+	"""
 	This class handles everything to do with Deleting particles
-	'''
+	"""
 	def __init__(self,target):
 		self.target = weakref.ref(target)
 		self.deleted_idxs = []
@@ -2551,9 +2551,9 @@ class EMMXDeletionManager:
 
 
 class EMMXSetsPanel(QtGui.QWidget):
-	'''
+	"""
 	This is the set display panel
-	'''
+	"""
 	def __init__(self,target):
 		QtGui.QWidget.__init__(self)
 
@@ -2644,47 +2644,47 @@ class EMMXSetsPanel(QtGui.QWidget):
 
 
 class EMMXDataCache:
-	'''
+	"""
 	Base class for EMMXDataCaches
-	'''
+	"""
 	def __init__(self):
 		self.excluded_list = [] # a list of excluded idxs, used when saving the data to disk
 
 
 	def delete_box(self,idx):
-		'''
+		"""
 		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
 		and let the calling program display the deleted box differently
-		'''
+		"""
 		raise NotImplementedException
 	def __getitem__(self,idx):
-		'''
+		"""
 		operator[] must be supported
-		'''
+		"""
 		raise NotImplementedException
 
 	def __len__(self,idx):
-		'''
+		"""
 		must be able to get the length
-		'''
+		"""
 		raise NotImplementedException
 
 	def get_xsize(self):
-		'''
+		"""
 		must be able to get the xsize of the data
-		'''
+		"""
 		raise NotImplementedException
 
 	def get_ysize(self):
-		'''
+		"""
 		must be able to get the zsize of the data
-		'''
+		"""
 		raise NotImplementedException
 
 	def get_zsize(self):
-		'''
+		"""
 		must be able to get the zsize of the data
-		'''
+		"""
 		raise NotImplementedException
 
 	def is_complex(self):
@@ -2694,24 +2694,24 @@ class EMMXDataCache:
 		return self.get_image_header(0)[attr]
 
 	def get_image_header_keys(self):
-		'''
+		"""
 		Must be able to get the keys of in a typical EMData header, usually you just get the
 		header of first image, cache it, and return it whenever it is asked for
-		'''
+		"""
 		raise NotImplementedException
 
 	def get_image_header(self,idx):
-		'''
+		"""
 		Must be able to get the header of the image at the given index. Suggest reading only header
 		from disk if the image is not already in memory
-		'''
+		"""
 		raise NotImplementedException
 	def on_idle(self):
-		'''
+		"""
 		the EMImageMXWidget is at liberty to call this function when it becomes idle, etc.
 		This function is useful for miserly caching-strategies, i.e. you can load images that
 		are not already in memory
-		'''
+		"""
 		raise NotImplementedException
 
 	# CONCRETE FUNCTIONALITY
@@ -2726,16 +2726,16 @@ class EMMXDataCache:
 			return self[idx]
 
 	def is_3d(self):
-		'''
+		"""
 		Asks whether the cache is of type 3D - so the inspector can have an x/y/z combo box
-		'''
+		"""
 		raise NotImplementedException
 
 	def set_xyz(self,x_y_or_z):
-		'''
+		"""
 		Must be supplied by 3d type caches
 		@param x_y_or_z a string
-		'''
+		"""
 		raise NotImplementedException
 
 
@@ -2766,7 +2766,7 @@ class ApplyProcessor:
 
 
 class EMLightWeightParticleCache(EMMXDataCache):
-	'''
+	"""
 	A light weight particle cache is exactly that and more. Initialize it with a list of filenames and particle indices
 	corresponding to the particles that you want to view. So the calling function doesn't do any image reading, you just tell this
 	thing what will need to be (or not) read.
@@ -2779,12 +2779,12 @@ class EMLightWeightParticleCache(EMMXDataCache):
 	and refocuses the cache when asked for an image outside its current index bounds. This makes this cache only suitable for linear access
 	schemes, not random.
 
-	'''
+	"""
 	def from_file(file_name):
-		'''
+		"""
 		If this was C++ this would be the constructor for this class that took a single file name
 		@param file_name the name of a particle stack file
-		'''
+		"""
 
 		n = EMUtil.get_image_count(file_name)
 		data = [[file_name,i,[]] for i in xrange(n)]
@@ -2794,10 +2794,10 @@ class EMLightWeightParticleCache(EMMXDataCache):
 	from_file = staticmethod(from_file)
 
 	def __init__(self,data,cache_max=2048):
-		'''
+		"""
 		@param data list of lists - lists in in the list are of the form [image_name, idx, [list of functions that take an EMData as the first argument]]
 		@param cache_max the maximum number of stored images - you might have to shorten this if you have very large images
-		'''
+		"""
 		EMMXDataCache.__init__(self)
 		self.data = data
 		self.cache_start = 0
@@ -2812,24 +2812,24 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		self.sets = {}
 
 	def __len__(self):
-		'''
+		"""
 		support for len
-		'''
+		"""
 		return len(self.data)
 
 	def is_complex(self): return False
 
 	def delete_box(self,idx):
-		'''
+		"""
 		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
 		and let the calling program display the deleted box differently
-		'''
+		"""
 		return 0
 
 	def get_xsize(self):
-		'''
+		"""
 		Get the get_xsize of the particles. Assumes all particle have the same size, which is potentially flawed
-		'''
+		"""
 		if self.xsize == None:
 			image = self[self.cache_start]
 			self.xsize = image.get_xsize()
@@ -2837,9 +2837,9 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		return self.xsize
 
 	def get_ysize(self):
-		'''
+		"""
 		Get the get_ysize of the particles. Assumes all particle have the same size, which is potentially flawed
-		'''
+		"""
 		if self.ysize == None:
 			image = self[self.cache_start]
 			self.ysize = image.get_ysize()
@@ -2847,9 +2847,9 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		return self.ysize
 
 	def get_zsize(self):
-		'''
+		"""
 		Get the get_ysize of the particles. Assumes all particle have the same size, which is potentially flawed
-		'''
+		"""
 		if self.zsize == None:
 			image = self[self.cache_start]
 			self.zsize = image.get_zsize()
@@ -2857,11 +2857,11 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		return self.zsize
 
 	def get_image_header(self,idx):
-		'''
+		"""
 		Gets the header of the ith particle. Does not read the full image into memory if it's not stored, instead
 		just reading the header and returning it. This can give significant speeds ups where only headers are needed,
 		i.e. e2eulerxplor
-		'''
+		"""
 #		return self[idx].get_attr_dict()
 		adj_idx = idx-self.cache_start
 		image = self.cache[adj_idx]
@@ -2874,18 +2874,18 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		else:return image.get_attr_dict()
 
 	def get_image_header_keys(self):
-		'''
+		"""
 		Gets the keys in the header of the first image
-		'''
+		"""
 		if self.header_keys == None:
 			self.header_keys = self.get_image_header(self.cache_start).keys()
 		return self.header_keys
 
 	def refocus_cache(self,new_focus):
-		'''
+		"""
 		Called internally to refocus the cache on a new focal point.
 		@param new_focus the value at which the current cache failed - i.e. the first value that was beyond the current cache limits
-		'''
+		"""
 		new_cache_start = new_focus-self.cache_max/2
 		# Don't let cache start go negative; it will break.
 		if new_cache_start < 0:
@@ -2907,9 +2907,9 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		self.cache_start = new_cache_start
 
 	def __getitem__(self,idx):
-		'''
+		"""
 		operator[] support - the main interface
-		'''
+		"""
 		if idx < self.cache_start or idx > self.cache_start+self.cache_max:
 			self.refocus_cache(idx)
 
@@ -2923,9 +2923,9 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		else: return image
 
 	def __load_item(self,idx,adj_idx):
-		'''
+		"""
 		Work horse function for reading an image and applying any of the supplied functions
-		'''
+		"""
 		data = self.data[idx]
 
 		try:
@@ -2945,10 +2945,10 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		return a
 
 	def on_idle(self):
-		'''
+		"""
 		call this to load unloaded images in the cache
 		This needs to be rethought, maybe use a thread?
-		'''
+		"""
 		for idx,i in enumerate(self.cache):
 			if i == None:
 				# only does one at a time
@@ -2959,7 +2959,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 
 
 class EMDataListCache(EMMXDataCache):
-	'''
+	"""
 	This class became semi-redundant after the introduction of the EMLightWeightParticleCache, however it is still used
 	as the primary container for lists of the form [EMData,EMData,EMData,EMData,...].
 
@@ -2971,7 +2971,7 @@ class EMDataListCache(EMMXDataCache):
 
 	for i in data: i.write_image("test.hdf",-1) # iterable and enumerable
 
-	'''
+	"""
 	LIST_MODE = 'list_mode'
 	FILE_MODE = 'file_mode'
 	def __init__(self,object,cache_size=256,start_idx=0,soft_delete=False):
@@ -3099,9 +3099,9 @@ class EMDataListCache(EMMXDataCache):
 		return self.keys
 
 	def on_idle(self):
-		'''
+		"""
 		call this to load unloaded images in the cache
-		'''
+		"""
 		for idx,i in enumerate(self.cache):
 			if i == None:
 				# only does one at a time
@@ -3109,10 +3109,10 @@ class EMDataListCache(EMMXDataCache):
 				return
 
 	def delete_box(self,idx):
-		'''
+		"""
 		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
 		and let the calling program display the deleted box differently
-		'''
+		"""
 		if self.mode == EMDataListCache.LIST_MODE and not self.soft_delete:
 			# we can actually delete the emdata object
 			image = self.images.pop(idx)
@@ -3123,15 +3123,15 @@ class EMDataListCache(EMMXDataCache):
 			return 0
 
 	def get_max_idx(self):
-		''' Get the maximum image index  '''
+		""" Get the maximum image index  """
 		return self.max_idx
 
 	def get_num_images(self):
-		''' Get the number of images currently cached '''
+		""" Get the number of images currently cached """
 		return len(self.images)
 
 	def set_cache_size(self,cache_size,refresh=False):
-		''' Set the cache size. May cause the cache to be refreshed, which could take a few moments '''
+		""" Set the cache size. May cause the cache to be refreshed, which could take a few moments """
 		if self.mode != EMDataListCache.LIST_MODE:
 			if cache_size > self.max_idx: self.cache_size = self.max_idx
 			else: self.cache_size = cache_size
@@ -3143,7 +3143,7 @@ class EMDataListCache(EMMXDataCache):
 				return
 	
 	def set_start_idx(self,start_idx,refresh=True):
-		''' Set the starting index of the cache, '''
+		""" Set the starting index of the cache, """
 		self.start_idx = start_idx
 		if refresh: self.__refresh_cache()
 
@@ -3211,12 +3211,12 @@ class EMDataListCache(EMMXDataCache):
 		return self.max_idx
 
 	def __iter__(self):
-		''' Iteration support '''
+		""" Iteration support """
 		self.current_iter = 0
 		return self
 
 	def next(self):
-		''' Iteration support '''
+		""" Iteration support """
 		if self.current_iter >= self.max_idx:
 			raise StopIteration
 		else:
@@ -3224,20 +3224,20 @@ class EMDataListCache(EMMXDataCache):
 			return self[self.current_iter-1]
 	
 	def on_idle(self):
-		'''
+		"""
 		call this to load unloaded images in the cache, for example
-		'''
+		"""
 		pass
 
 	def is_3d(self): return False
 
 
 class EM3DDataListCache(EMMXDataCache):
-	'''
+	"""
 	A class that looks like a list to the outside word
 	automated way of handling 3d images for the EMImageMXWidget
 
-	'''
+	"""
 	def __init__(self,filename):
 		EMMXDataCache.__init__(self)
 		self.filename = filename
@@ -3252,10 +3252,10 @@ class EM3DDataListCache(EMMXDataCache):
 		self.max_idx = self.nz
 
 	def delete_box(self,idx):
-		'''
+		"""
 		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
 		and let the calling program display the deleted box differently
-		'''
+		"""
 		return 0
 
 	def is_complex(self): return False
@@ -3290,15 +3290,15 @@ class EM3DDataListCache(EMMXDataCache):
 		return self.keys
 
 	def get_max_idx(self):
-		''' Get the maximum image index  '''
+		""" Get the maximum image index  """
 		return self.max_idx
 
 	def get_num_images(self):
-		''' Get the number of images currently cached '''
+		""" Get the number of images currently cached """
 		return self.max_idx
 
 	def set_cache_size(self,cache_size,refresh=False):
-		''' Set the cache size. May cause the cache to be refreshed, which could take a few moments '''
+		""" Set the cache size. May cause the cache to be refreshed, which could take a few moments """
 		pass
 #		if self.mode != EMDataListCache.LIST_MODE:
 #			if cache_size > self.max_idx: self.cache_size = self.max_idx
@@ -3311,7 +3311,7 @@ class EM3DDataListCache(EMMXDataCache):
 #				return
 	
 	def set_start_idx(self,start_idx,refresh=True):
-		''' Set the starting index of the cache, '''
+		""" Set the starting index of the cache, """
 		pass
 #		self.start_idx = start_idx
 #		if refresh: self.__refresh_cache()
@@ -3343,12 +3343,12 @@ class EM3DDataListCache(EMMXDataCache):
 		return self.max_idx
 
 	def __iter__(self):
-		''' Iteration support '''
+		""" Iteration support """
 		self.current_iter = 0
 		return self
 
 	def next(self):
-		''' Iteration support '''
+		""" Iteration support """
 		if self.current_iter > self.max_idx:
 			raise StopIteration
 		else:
@@ -3356,9 +3356,9 @@ class EM3DDataListCache(EMMXDataCache):
 			return self[self.current_iter-1]
 
 	def on_idle(self):
-		'''
+		"""
 		call this to load unloaded images in the cache, for example
-		'''
+		"""
 		pass
 
 	def is_3d(self): return True
