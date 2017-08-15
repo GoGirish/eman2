@@ -156,7 +156,7 @@ class EMMatrixPanel:
 		if self.auto_scale_logic(visiblerows,visiblecols,n) == 1:
 			min_scale = view_scale
 			max_scale = min_scale
-			while (True):
+			while True:
 				max_scale *= 2
 				[visiblerows,visiblecols] = self.basic_visible_row_col(view_width,view_height,max_scale,view_data)
 				if self.auto_scale_logic(visiblerows,visiblecols,n) == -1:
@@ -164,13 +164,13 @@ class EMMatrixPanel:
 		else:
 			max_scale = view_scale
 			min_scale = max_scale
-			while (True):
+			while True:
 				min_scale /= 2
 				[visiblerows,visiblecols] = self.basic_visible_row_col(view_width,view_height,min_scale,view_data)
 				if self.auto_scale_logic(visiblerows,visiblecols,n) == 1:
 					break
 
-		while (True):
+		while True:
 			estimate_scale = (min_scale + max_scale)*0.5
 			[visiblerows,visiblecols] = self.basic_visible_row_col(view_width,view_height,estimate_scale,view_data)
 			#[rowstart,visiblerows,visiblecols] = self.visible_row_col(view_width,view_height,estimate_scale,view_data,-self.min_sep)
@@ -394,7 +394,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		"""Saves the particles in a named set to a file"""
 		outset=self.get_set(name)
 		if len(outset)==None :
-			QtGui.QMessageBox.warning(None,"Error","The set: %s is empty"%(name))
+			QtGui.QMessageBox.warning(None,"Error","The set: %s is empty" % name)
 			return
 		
 		# Get the output filespec
@@ -679,8 +679,8 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			hfac *= self.data.get_ysize()
 			if hfac > 512: hfac = 512
 			if w > 512: w = 512
-			return (int(w)+26,int(hfac)+12) # the 12 is related to the EMParentWin... hack...
-		else: return (512+12,512+12)
+			return int(w) + 26, int(hfac) + 12  # the 12 is related to the EMParentWin... hack...
+		else: return 512 + 12, 512 + 12
 
 	def set_title(self,title):
 		"""This function will set a base title for the window, which will automatically be modified with the current filename
@@ -1062,7 +1062,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 			txtcol=(1.0,1.0,1.0)
 
-			if ( len(self.tex_names) > 0 ):	glDeleteTextures(self.tex_names)
+			if len(self.tex_names) > 0:	glDeleteTextures(self.tex_names)
 			self.tex_names = []
 
 			self.nshown=0
@@ -1079,7 +1079,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			if self.matrix_panel.visiblerows:
 				for row in range(self.matrix_panel.ystart,self.matrix_panel.visiblerows):
 					for col in range(0,self.matrix_panel.visiblecols):
-						i = int((row)*self.matrix_panel.visiblecols+col)
+						i = int(row * self.matrix_panel.visiblecols + col)
 
 						if i >= n:
 							break
@@ -1087,8 +1087,8 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 							print "Bad image in imagemx display: ",i
 							continue
 
-						tx = int((w+self.matrix_panel.min_sep)*(col) + x)
-						ty = int((h+self.matrix_panel.min_sep)*(row) + y)
+						tx = int((w+self.matrix_panel.min_sep) * col + x)
+						ty = int((h+self.matrix_panel.min_sep) * row + y)
 						real_y = ty # need this for set display
 						tw = w
 						th = h
@@ -1388,8 +1388,8 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def texture(self,a,x,y,w,h):
 
 		tex_name = glGenTextures(1)
-		if ( tex_name <= 0 ):
-			raise("failed to generate texture name")
+		if tex_name <= 0:
+			raise "failed to generate texture name"
 
 		width = w/2.0
 		height = h/2.0
@@ -1500,7 +1500,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			if index != 0: index %= self.max_idx
 			data = item[1]
 			if absloc[0]>data[0] and data[0] + data[2] > data[1] < absloc[1] < data[1] + data[3]:
-				return (index,(absloc[0]-data[0])/self.scale,(absloc[1]-data[1])/self.scale, self.data[index].get_attr_dict())
+				return index, (absloc[0] - data[0]) / self.scale, (absloc[1] - data[1]) / self.scale, self.data[index].get_attr_dict()
 		return None
 
 	def dragEnterEvent(self,event):
@@ -1850,7 +1850,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 	def mousePressEvent(self, event):
 		if not self.data: return
-		if (self.width()-event.x() <= self.scroll_bar.width):
+		if self.width()-event.x() <= self.scroll_bar.width:
 			self.scroll_bar_has_mouse = True
 			self.scroll_bar.mousePressEvent(event)
 			return
@@ -2501,7 +2501,7 @@ class EMImageInspectorMX(QtGui.QWidget):
 
 	def update_brightness_contrast(self):
 		try:
-			b=0.5*(self.mins.value+self.maxs.value-(self.lowlim+self.highlim))/((self.highlim-self.lowlim))
+			b=0.5*(self.mins.value+self.maxs.value-(self.lowlim+self.highlim))/(self.highlim - self.lowlim)
 			c=(self.mins.value-self.maxs.value)/(2.0*(self.lowlim-self.highlim))
 		except:
 			b=0
