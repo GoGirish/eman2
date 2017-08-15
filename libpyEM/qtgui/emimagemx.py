@@ -2974,7 +2974,7 @@ class EMDataListCache(EMMXDataCache):
 	"""
 	LIST_MODE = 'list_mode'
 	FILE_MODE = 'file_mode'
-	def __init__(self,object,cache_size=256,start_idx=0,soft_delete=False):
+	def __init__(self, obj, cache_size=256, start_idx=0, soft_delete=False):
 		EMMXDataCache.__init__(self)
 		#DB = EMAN2db.EMAN2DB.open_db(".")
 		self.xsize = -1
@@ -2985,21 +2985,21 @@ class EMDataListCache(EMMXDataCache):
 		self.set_init_flag = {} # sets stored on disk need an initialization flag, so action is only ever taken if the user chooses the set
 		self.visible_sets = [] # stores the current sets, if there are more than one
 		self.exclusions = []
-		if isinstance(object,list):
+		if isinstance(obj, list):
 			# in list mode there is no real caching
 			self.mode = EMDataListCache.LIST_MODE
-			self.max_idx = len(object)
+			self.max_idx = len(obj)
 			self.cache_size = self.max_idx
-			self.images = object
+			self.images = obj
 			self.start_idx = 0
 
-		elif isinstance(object,str):
+		elif isinstance(obj, str):
 			#print "file mode"
 			self.mode = EMDataListCache.FILE_MODE
-			if not os.path.exists(object) and not db_check_dict(object):
-				print "error, the file you specified does not exist:",object
+			if not os.path.exists(obj) and not db_check_dict(obj):
+				print "error, the file you specified does not exist:",obj
 				return
-			self.file_name = object
+			self.file_name = obj
 			self.max_idx = EMUtil.get_image_count(self.file_name)
 			self.images = {}
 			if self.max_idx < cache_size:
