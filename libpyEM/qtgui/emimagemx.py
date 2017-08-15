@@ -95,6 +95,7 @@ class EMMatrixPanel:
 		self.height = ceil(len(view_data)/float(self.visiblecols))*(rendered_image_height+self.min_sep) + self.min_sep
 		self.max_y = self.height - view_height # adjusted height is the maximum value for current y!
 		return True
+	
 	def visible_row_col(self,view_width,view_height,view_scale,view_data,y):
 		rendered_image_width = (view_data.get_xsize())*view_scale
 		rendered_image_height = view_data.get_ysize()*view_scale
@@ -129,7 +130,6 @@ class EMMatrixPanel:
 		rowstart = int(rowstart)
 
 		return [rowstart,visiblerows,visiblecols]
-
 
 	def basic_visible_row_col(self,view_width,view_height,view_scale,view_data):
 		rendered_image_width = (view_data.get_xsize())*view_scale
@@ -170,7 +170,6 @@ class EMMatrixPanel:
 				if self.auto_scale_logic(visiblerows,visiblecols,n) == 1:
 					break
 
-
 		while (True):
 			estimate_scale = (min_scale + max_scale)*0.5
 			[visiblerows,visiblecols] = self.basic_visible_row_col(view_width,view_height,estimate_scale,view_data)
@@ -184,8 +183,6 @@ class EMMatrixPanel:
 				self.scale_cache[s] = max_scale
 				return max_scale
 
-
-
 	def auto_scale_logic(self,visiblerows,visiblecols,n):
 		if (visiblerows*visiblecols) >= n :
 			if ((visiblerows-1)*visiblecols) < n:
@@ -197,8 +194,6 @@ class EMMatrixPanel:
 			return -1 # scale is too large
 
 
-#		print self.height,self.xsep,self.visiblecols
-
 class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def __init__(self, data=None,application=None,winid=None, parent=None, title=""):
 		self.emit_events = False
@@ -209,7 +204,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 #		QtOpenGL.QGLWidget.__init__(self,fmt, parent)
 		EMGLWidget.__init__(self,winid=winid)
 		EMGLProjectionViewMatrices.__init__(self)
-
 
 		self.init_size_flag = True
 		self.data=None
@@ -272,14 +266,12 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		self.font_size = 11
 		self.font_renderer.set_face_size(self.font_size)
 
-
 		self.text_bbs = {} # bounding box cache - key is a string, entry is a list of 6 values defining a
 
 		self.use_display_list = True # whether or not a display list should be used to render the main view - if on, this will save on time if the view is unchanged
 		self.main_display_list = 0	# if using display lists, the stores the display list
 		self.display_states = [] # if using display lists, this stores the states that are checked, and if different, will cause regeneration of the display list
 		self.draw_background = False # if true  will paint the background behind the images black using a polygon - useful in 3D contexts, ie i the emimagemxrotary
-
 
 		self.img_num_offset = 0		# used by emimagemxrotary for display correct image numbers
 		self.max_idx = 99999999		# used by emimagemxrotary for display correct image numbers
@@ -321,7 +313,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		#context = OpenGL.contextdata.getContext(None)
 		#print "Matrix context is", context
 		self.render()
-
 
 	def resizeGL(self, width, height):
 		if width <= 0 or height <= 0: return
@@ -419,7 +410,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			QtGui.QMessageBox.warning(None,"Error","Could not save images: %s"%(str(badimg)))
 		else:
 			QtGui.QMessageBox.information(None,"Save Succesful","%d images appended to %s"%(len(outset),fsp))
-		
 
 	def get_set(self,name):
 		"""Returns the actual set object for the named set. Creates a new empty set of that
@@ -430,7 +420,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 		if not self.sets.has_key(name) : self.sets[name]=set()
 		return self.sets[name]
-
 
 	def enable_set(self,name,lst=[],display=True,update=True, force=False):
 		'''
@@ -520,7 +509,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.force_display_update()
 			self.updateGL()
 
-
 	def all_set(self,update_gl=True):
 		'''
 		Sets all images in the current set
@@ -546,7 +534,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		if update_gl:
 			self.force_display_update()
 			self.updateGL()
-
 
 	def image_set_associate(self,idx,event=None,update_gl=False):
 		"toggles a single image in the current set"
@@ -627,7 +614,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				if event != None: self.emit(QtCore.SIGNAL("mx_boxdeleted"),event,[idx],False)
 		else:
 			self.emit(QtCore.SIGNAL("mx_boxdeleted"),event,[idx],False)
-
 
 	def get_box_image(self,idx):
 		return self.data[idx]
@@ -810,7 +796,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			m0     = min(m0, d["minimum"])
 			m1     = max(m1, d["maximum"])
 
-
 		#print "\n mn=", mn, "mx=", mx, "m0=", m0, "m1=", m1
 
 		if nav == 0 :
@@ -861,7 +846,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			my=xys.height()*2/3
 			
 			self.resize(min(x,mx),min(y,my))
-
 		
 		self.set_scale(self.scale)
 		if update_gl : self.updateGL()
@@ -1011,7 +995,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 		return False
 
-
 	def set_font_render_resolution(self):
 		" "
 		#self.font_renderer.set_face_size(int(self.height()*0.015))
@@ -1032,7 +1015,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		glVertex(0,self.height(),-1)
 		glEnd()
 		if light: glEnable(GL_LIGHTING)
-
 
 	def view_width(self):
 		return EMGLWidget.width(self) - self.draw_scroll*self.scroll_bar.width
@@ -1262,6 +1244,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 #			glMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE,(.8,.2,.2,1.0))
 #			glMaterial(GL_FRONT,GL_SPECULAR,(.8,.2,.2,1.0))
 #		  	glMaterial(GL_FRONT,GL_SHININESS,100.0)
+	
 	def __render_excluded_square(self):
 
 		glBegin(GL_QUADS)
@@ -1298,7 +1281,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		#glColor(0.22,0.22,0.22)
 		glNormal(1,-1,0.1)
 		glVertex(-1+d,1,0.1)
-
 
 
 		glNormal(-.1,.1,1)
@@ -1406,7 +1388,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			glEnable(GL_LIGHTING)
 #			glDisable(GL_TEXTURE_2D)
 
-
 	def bounding_box(self,character):
 		try: self.text_bbs[character]
 		except:
@@ -1443,7 +1424,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		# this makes it so that the texture is impervious to lighting
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE)
 
-
 		# POSITIONING POLICY - the texture occupies the entire screen area
 		glBegin(GL_QUADS)
 
@@ -1470,7 +1450,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		glRasterPos(x+2,y+2)
 		for c in s:
 			GLUT.glutBitmapCharacter(GLUT.GLUT_BITMAP_9_BY_15,ord(c))
-
 
 	def is_visible(self,n):
 		try:
@@ -1632,7 +1611,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				except:
 					QtGui.QMessageBox.warning(None,"Error","Failed to save inverted image at: %s %d"%(i["source_path"],i["source_n"]))
 					return
-
 
 			QtGui.QMessageBox.warning(None,"Images Saved","Images have been inverted on-disk")
 			return
@@ -1838,7 +1816,6 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		 				get_application().setOverrideCursor(Qt.ArrowCursor)
 			 			return
 
-
 				progress.close()
 				get_application().setOverrideCursor(Qt.ArrowCursor)
 
@@ -1981,6 +1958,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		self.scroll_bar.draw()
 		glPopMatrix()
 
+
 class EMGLScrollBar:
 	def __init__(self,target):
 		self.min = 0
@@ -2022,7 +2000,6 @@ class EMGLScrollBar:
 		self.up_arrow_color = self.scroll_bar_idle_color
 		self.down_arrow_color = self.scroll_bar_idle_color
 
-
 	def update_stuff(self):
 
 		view_height = self.target().height()
@@ -2043,6 +2020,7 @@ class EMGLScrollBar:
 		self.scroll_bit_position = self.scroll_bit_position_ratio *adjusted_scroll_bar_height
 
 		return True
+
 	def update_target_ypos(self):
 
 		view_height = self.target().height()
@@ -2201,6 +2179,7 @@ class EMGLScrollBar:
 		self.down_arrow_color = self.scroll_bar_idle_color
 		self.target().updateGL()
 
+
 class EMImageInspectorMX(QtGui.QWidget):
 	def __init__(self,target, allow_opt_button=False):
 		QtGui.QWidget.__init__(self,None)
@@ -2288,7 +2267,6 @@ class EMImageInspectorMX(QtGui.QWidget):
 
 		self.mapp.setChecked(True)
 
-
 		self.hbl = QtGui.QHBoxLayout()
 		self.hbl.setMargin(0)
 		self.hbl.setSpacing(6)
@@ -2310,7 +2288,6 @@ class EMImageInspectorMX(QtGui.QWidget):
 		self.hbl.addWidget(self.font_size)
 
 		QtCore.QObject.connect(self.font_size, QtCore.SIGNAL("valueChanged(int)"), self.target().set_font_size)
-
 
 		self.banim = QtGui.QPushButton("Animate")
 		self.banim.setCheckable(True)
@@ -2582,6 +2559,7 @@ class EMMXDeletionManager:
 	def deleted_ptcls(self):
 		return self.deleted_idxs
 
+
 class EMMXSetsPanel(QtGui.QWidget):
 	'''
 	This is the set display panel
@@ -2619,7 +2597,6 @@ class EMMXSetsPanel(QtGui.QWidget):
 		QtCore.QObject.connect(self.setlist,QtCore.SIGNAL("currentRowChanged(int)"),self.set_list_row_changed)
 		QtCore.QObject.connect(self.target(),QtCore.SIGNAL("setsChanged"),self.sets_changed)
 
-
 	def sets_changed(self):
 		self.update_sets()
 		#keys=sorted(self.target().sets.keys())
@@ -2646,7 +2623,6 @@ class EMMXSetsPanel(QtGui.QWidget):
 		names=[str(i.text()) for i in selections]
 
 		self.target().delete_set(names)
-
 
 	def new_set(self,unused=None):
 		name,ok=QtGui.QInputDialog.getText( self, "Set Name", "Enter a name for the new set:")
@@ -2675,7 +2651,6 @@ class EMMXSetsPanel(QtGui.QWidget):
 			self.setlist.addItem(item)
 			if k in viskeys : item.setCheckState(Qt.Checked)
 			else : item.setCheckState(Qt.Unchecked)
-
 
 
 class EMMXDataCache:
@@ -2753,7 +2728,6 @@ class EMMXDataCache:
 	def set_excluded_ptcls(self,excluded_list):
 		self.excluded_list = excluded_list
 
-
 	def get_item_from_emsave(self,idx):
 		try:
 			(i for i in self.excluded_list if i == idx).next()
@@ -2774,12 +2748,14 @@ class EMMXDataCache:
 		'''
 		raise NotImplementedException
 
+
 class ApplyTransform:
 	def __init__(self,transform):
 		self.transform = transform
 
 	def __call__(self,emdata):
 		emdata.transform(self.transform)
+
 
 class ApplyAttribute:
 	def __init__(self,attribute,value):
@@ -2789,6 +2765,7 @@ class ApplyAttribute:
 	def __call__(self,emdata):
 		emdata.set_attr(self.attribute,self.value)
 
+
 class ApplyProcessor:
 	def __init__(self,processor="",processor_args={}):
 		self.processor = processor
@@ -2796,6 +2773,7 @@ class ApplyProcessor:
 
 	def __call__(self,data):
 		data.process_inplace(self.processor,self.processor_args)
+
 
 class EMLightWeightParticleCache(EMMXDataCache):
 	'''
@@ -2938,7 +2916,6 @@ class EMLightWeightParticleCache(EMMXDataCache):
 
 		self.cache_start = new_cache_start
 
-
 	def __getitem__(self,idx):
 		'''
 		operator[] support - the main interface
@@ -2989,6 +2966,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 				return
 
 	def is_3d(self): return False
+
 
 class EMDataListCache(EMMXDataCache):
 	'''
@@ -3073,7 +3051,6 @@ class EMDataListCache(EMMXDataCache):
 						self.xsize = i.get_xsize()
 						break
 					except: pass
-
 
 		return self.xsize
 
@@ -3174,6 +3151,7 @@ class EMDataListCache(EMMXDataCache):
 			if self.cache_size != self.max_idx:
 				print "error, in list mode the cache size is always equal to the max idx"
 				return
+	
 	def set_start_idx(self,start_idx,refresh=True):
 		''' Set the starting index of the cache, '''
 		self.start_idx = start_idx
@@ -3238,6 +3216,7 @@ class EMDataListCache(EMMXDataCache):
 				#for i in self.images:
 					#print i,
 				#print ''
+	
 	def __len__(self):
 		return self.max_idx
 
@@ -3253,6 +3232,7 @@ class EMDataListCache(EMMXDataCache):
 		else:
 			self.current_iter += 1
 			return self[self.current_iter-1]
+	
 	def on_idle(self):
 		'''
 		call this to load unloaded images in the cache, for example
@@ -3260,6 +3240,7 @@ class EMDataListCache(EMMXDataCache):
 		pass
 
 	def is_3d(self): return False
+
 
 class EM3DDataListCache(EMMXDataCache):
 	'''
@@ -3280,7 +3261,6 @@ class EM3DDataListCache(EMMXDataCache):
 		self.major_axis = "z"
 		self.max_idx = self.nz
 
-
 	def delete_box(self,idx):
 		'''
 		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
@@ -3296,6 +3276,7 @@ class EM3DDataListCache(EMMXDataCache):
 			self.images = {}
 			return True
 		return False
+
 	def get_xsize(self):
 		return self.nx
 
@@ -3311,7 +3292,6 @@ class EM3DDataListCache(EMMXDataCache):
 			self.header = image.get_attr_dict()
 
 		return self.header
-
 
 	def get_image_header_keys(self):
 		if self.keys == None:
@@ -3339,6 +3319,7 @@ class EM3DDataListCache(EMMXDataCache):
 #			if self.cache_size != self.max_idx:
 #				print "error, in list mode the cache size is always equal to the max idx"
 #				return
+	
 	def set_start_idx(self,start_idx,refresh=True):
 		''' Set the starting index of the cache, '''
 		pass
@@ -3392,11 +3373,13 @@ class EM3DDataListCache(EMMXDataCache):
 
 	def is_3d(self): return True
 
+
 class EMImageMXModule(EMImageMXWidget):
 	def __init__(self, data=None,application=None,winid=None, parent=None):
 		EMImageMXWidget.__init__(self, data, application, winid, parent)
 		import warnings
 		warnings.warn("convert EMImageMXModule to EMImageMXWidget", DeprecationWarning)
+
 
 if __name__ == '__main__':
 	em_app = EMApp()
