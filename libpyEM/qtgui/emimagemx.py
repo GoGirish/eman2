@@ -1328,7 +1328,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 	def __draw_mx_text(self,tx,ty,txtcol,i):
 		# try for a sensible background color
-		if txtcol[0]+txtcol[1]+txtcol[2]>.4 and txtcol[0]+txtcol[1]+txtcol[2]<.6 : bgcol=(0.0,0.0,0.0)
+		if .4 < txtcol[0]+txtcol[1]+txtcol[2] < .6: bgcol=(0.0, 0.0, 0.0)
 		else : bgcol = (1.0-txtcol[0],1.0-txtcol[1],1.0-txtcol[2])
 
 		#glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE)
@@ -1509,7 +1509,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			index = item[0]+self.img_num_offset
 			if index != 0: index %= self.max_idx
 			data = item[1]
-			if absloc[0]>data[0] and absloc[1]>data[1] and absloc[0]<data[0]+data[2] and absloc[1]<data[1]+data[3] :
+			if absloc[0]>data[0] and absloc[1]>data[1] < data[0]+data[2] and absloc[1]<data[1]+data[3] :
 				return (index,(absloc[0]-data[0])/self.scale,(absloc[1]-data[1])/self.scale, self.data[index].get_attr_dict())
 		return None
 
@@ -2155,7 +2155,7 @@ class EMGLScrollBar:
 		else:
 			scroll_bit_ymin = self.starty +self.scroll_bit_position
 			scroll_bit_ymax = scroll_bit_ymin + self.scroll_bit_height
-			if y >= scroll_bit_ymin and y < scroll_bit_ymax:
+			if scroll_bit_ymin <= y < scroll_bit_ymax:
 				self.scroll_bit_color = self.scroll_bit_press_color
 				self.mouse_scroll_pos = y
 				self.target().updateGL()
@@ -2900,12 +2900,12 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		# Don't let cache start go negative; it will break.
 		if new_cache_start < 0:
 			new_cache_start = 0
-		if new_cache_start < self.cache_start and (new_cache_start + self.cache_max) > self.cache_start:
+		if new_cache_start < self.cache_start < (new_cache_start + self.cache_max):
 			overlap = new_cache_start + self.cache_max - self.cache_start
 			cache = [None for i in range(0,self.cache_max-overlap)]
 			cache.extend(self.cache[0:overlap])
 			self.cache = cache
-		elif new_cache_start > self.cache_start and  new_cache_start < (self.cache_start + self.cache_max):
+		elif self.cache_start < new_cache_start < (self.cache_start + self.cache_max):
 			cache = self.cache[new_cache_start:self.cache_start+self.cache_max]
 			overlap =self.cache_max - ( new_cache_start - self.cache_start)
 			cache = [None for i in range(0,self.cache_max-overlap)]
