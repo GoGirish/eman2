@@ -36,7 +36,7 @@ from emimage3dsym import EM3DSymModel,EMSymInspector
 import os,sys
 from EMAN2 import *
 from PyQt4 import QtGui,QtCore
-from emimagemx import EMImageMXModule
+from emimagemx import EMImageMXWidget
 
 	
 def main():
@@ -119,7 +119,7 @@ class EMCmpExplorer(EM3DSymModel):
 		for i in self.ptcl_data : i.process_inplace("normalize.edgemean",{})
 
 		if self.ptcl_display==None : 
-			self.ptcl_display = EMImageMXModule()
+			self.ptcl_display = EMImageMXWidget()
 			self.ptcl_display.set_mouse_mode("App")
 			QtCore.QObject.connect(self.ptcl_display,QtCore.SIGNAL("mx_image_selected"),self.ptcl_selected)		
 			QtCore.QObject.connect(self.ptcl_display,QtCore.SIGNAL("module_closed"),self.on_mx_display_closed)
@@ -151,7 +151,7 @@ class EMCmpExplorer(EM3DSymModel):
 		self.current_projection = object_number
 		resize_necessary = False
 		if self.mx_display == None:
-			self.mx_display = EMImageMXModule()
+			self.mx_display = EMImageMXWidget()
 			QtCore.QObject.connect(self.mx_display,QtCore.SIGNAL("module_closed"),self.on_mx_display_closed)
 			resize_necessary = True
 
