@@ -606,7 +606,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		return self.scale
 
 	def remove_particle_image(self,idx,event=None,update_gl=False):
-		if self.reroute_delete == False:
+		if not self.reroute_delete:
 			self.deletion_manager.delete_box(idx)
 			if update_gl:
 				self.force_display_update()
