@@ -971,18 +971,8 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		#self.data.on_idle()
 
 	def display_state_changed(self):
-		display_states = []
-		display_states.append(self.width())
-		display_states.append(self.height())
-		display_states.append(self.origin[0])
-		display_states.append(self.origin[1])
-		display_states.append(self.scale)
-		display_states.append(self.invert)
-		display_states.append(self.minden)
-		display_states.append(self.maxden)
-		display_states.append(self.gamma)
-		display_states.append(self.draw_background)
-		display_states.append(self.img_num_offset)
+		display_states = [self.width(), self.height(), self.origin[0], self.origin[1], self.scale, self.invert,
+						  self.minden, self.maxden, self.gamma, self.draw_background, self.img_num_offset]
 		if len(self.display_states) == 0:
 			self.display_states = display_states
 			return True
