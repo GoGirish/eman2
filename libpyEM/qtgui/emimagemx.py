@@ -3241,7 +3241,7 @@ class EM3DDataListCache(EMMXDataCache):
 	def __init__(self,filename):
 		EMMXDataCache.__init__(self)
 		self.filename = filename
-		self.nx,self.ny,self.nz = gimme_image_dimensions3D(filename)
+		self.nx, self.ny, self.nz = gimme_image_dimensions3D(filename)
 		if self.nz == 1: raise RuntimeError("EM3DDataForMx class is only meant to be used with 3D images")
 		self.keys = None
 		self.header = None
