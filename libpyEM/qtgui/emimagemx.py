@@ -3246,7 +3246,6 @@ class EM3DDataListCache(EMMXDataCache):
 		self.keys = None
 		self.header = None
 		self.exclusions = []
-		self.nz
 		self.images = {}
 		self.major_axis = "z"
 		self.max_idx = self.nz
