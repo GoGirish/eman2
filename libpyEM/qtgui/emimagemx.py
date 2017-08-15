@@ -3022,7 +3022,7 @@ class EMDataListCache(EMMXDataCache):
 		self.image_height = -1
 
 	def __del__(self):
-	   pass
+		pass
 
 	def get_xsize(self):
 		if self.xsize == -1:
