@@ -96,7 +96,7 @@ add_custom_target(Gui
 				  COMMAND ${CMAKE_COMMAND} -DCOMPONENT=Gui -P cmake_install.cmake
 				  )
 
-install(DIRECTORY gui
+install(DIRECTORY gui utils
 		DESTINATION ${SP_DIR}
 		COMPONENT Gui
 		)
