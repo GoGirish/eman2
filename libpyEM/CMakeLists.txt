@@ -92,6 +92,15 @@ install(FILES ${empythonlibs}
 
 add_subdirectory(qtgui)
 
+add_custom_target(Gui
+				  COMMAND ${CMAKE_COMMAND} -DCOMPONENT=Gui -P cmake_install.cmake
+				  )
+
+install(DIRECTORY gui
+		DESTINATION ${SP_DIR}
+		COMPONENT Gui
+		)
+
 target_link_libraries(pyUtils2         NumPy)
 target_link_libraries(pyTypeConverter2 NumPy)
 target_link_libraries(pyTransform2     NumPy)
