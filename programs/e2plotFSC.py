@@ -33,7 +33,7 @@
 from EMAN2 import *
 from EMAN2fsc import *
 from emplot2d import EMPlot2DWidget,colortypes
-from empmwidgets import PMFSCTableWidget
+from pm.empmwidgets import PMFSCTableWidget
 from emapplication import EMApp
 
 def main():

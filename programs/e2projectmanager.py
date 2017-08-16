@@ -36,7 +36,7 @@ from PyQt4.QtCore import Qt
 from gui.pmicons import *
 import os, json, re, glob, signal
 import subprocess
-from empmwidgets import *
+from pm.empmwidgets import *
 from valslider import EMQTColorWidget
 from embrowser import EMBrowserWidget
 
