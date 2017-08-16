@@ -1510,6 +1510,9 @@ class EMDirEntry(object) :
 						else :
 							chl = child
 						matching = matches_pats(chl, self.dirregex)
+						val=re.compile(r'%s'%self.dirregex)
+						rr=val.match(chl)
+						print "embrpwser: 1512: %s %s %s %s" % (chl, self.dirregex, matching, rr)
 						have_dir = False
 					else :
 						matching = self.dirregex.match(child) != None
