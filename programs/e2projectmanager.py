@@ -33,7 +33,7 @@
 from EMAN2 import *
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt
-from pmicons import *
+from gui.pmicons import *
 import os, json, re, glob, signal
 import subprocess
 from empmwidgets import *
