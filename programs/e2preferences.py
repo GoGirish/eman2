@@ -33,7 +33,7 @@
 import EMAN2db
 from emdatastorage import ParamDef 
 
-from emsprworkflow import WorkFlowTask
+from utils.emsprworkflow import WorkFlowTask
 from emapplication import get_application
 
 global HOMEDB

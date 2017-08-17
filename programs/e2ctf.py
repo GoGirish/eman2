@@ -2529,7 +2529,7 @@ class GUIctf(QtGui.QWidget):
 		self.newSet(self.curset)
 
 	def on_output(self):
-		from emsprworkflow import E2CTFOutputTaskGeneral
+		from utils.emsprworkflow import E2CTFOutputTaskGeneral
 
 		n = self.setlist.count()
 		names = [str(self.setlist.item(i).text()) for i in xrange(0,n)]

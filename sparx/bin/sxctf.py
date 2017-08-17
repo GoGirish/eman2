@@ -1000,7 +1000,7 @@ class GUIctf(QtGui.QWidget):
 #	def get_output_params(self):
 	
 	def on_output(self):
-		from emsprworkflow import E2CTFOutputTaskGeneral
+		from utils.emsprworkflow import E2CTFOutputTaskGeneral
 		self.form = E2CTFOutputTaskGeneral()
 		self.form.run_form()
 	

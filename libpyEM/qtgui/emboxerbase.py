@@ -50,7 +50,7 @@ from pyemtbx.boxertools import BigImageCache,BinaryCircleImageCache,Cache
 from EMAN2 import file_exists,EMANVERSION,gimme_image_dimensions2D,EMData,get_image_directory,Region,file_exists,gimme_image_dimensions3D,abs_path,get_platform,base_name
 from EMAN2db import db_open_dict,db_check_dict,db_close_dict
 from EMAN2jsondb import *
-from emsprworkflow import workflow_path
+from utils.emsprworkflow import workflow_path
 from EMAN2 import *
 
 import os,sys,weakref,math, json
@@ -1936,7 +1936,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 			print "\n\nThis operation has been deactivated for Gauss mode.\n\nPlease use sxwindow.py for windowing!\n\n"
 			error("This operation has been deactivated for Gauss mode.\n\nPlease use sxwindow.py for windowing!","Error")
 			return
-		from emsprworkflow import E2BoxerProgramOutputTask
+		from utils.emsprworkflow import E2BoxerProgramOutputTask
 		if self.output_task != None: return
 		from PyQt4 import QtCore
 		self.output_task = EMBoxerWriteOutputTask(self.file_names, dfl_boxsize=self.box_size, current_tool=self.current_tool)
@@ -2157,7 +2157,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 
 		self.inspector.add_mouse_tool(event_tool)
 
-from emsprworkflow import WorkFlowTask
+from utils.emsprworkflow import WorkFlowTask
 from emapplication import error
 class EMBoxerWriteOutputTask(WorkFlowTask):
 	"""Use this form for writing boxed particles and/or coordinate files to disk."""
