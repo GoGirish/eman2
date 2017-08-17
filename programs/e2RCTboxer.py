@@ -38,8 +38,8 @@ from emapplication import EMApp
 from emimagemx import EMImageMXWidget
 from emimage2d import EMImage2DWidget
 from pyemtbx.boxertools import BigImageCache
-from emrctstrategy import Strategy2IMGMan, Strategy2IMGPair
-from emrctboxergui import ControlPannel
+from rct.emrctstrategy import Strategy2IMGMan, Strategy2IMGPair
+from rct.emrctboxergui import ControlPannel
 from emshape import EMShape
 import os, sys, itertools
 
