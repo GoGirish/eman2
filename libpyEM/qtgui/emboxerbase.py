@@ -2171,7 +2171,7 @@ class EMBoxerWriteOutputTask(WorkFlowTask):
 		self.current_tool = current_tool
 
 	def get_table(self):
-		from emform import EM2DFileTable,EMFileTable,int_lt
+		from gui.emform import EM2DFileTable,EMFileTable,int_lt
 		table = EM2DFileTable(self.file_names,desc_short="Raw Data",desc_long="")
 		table.add_column_data(EMFileTable.EMColumnData("Stored Boxes",EMBoxerWriteOutputTask.get_num_boxes,"The number of stored boxes",int_lt))
 		table.add_column_data(EMFileTable.EMColumnData("Quality",EMBoxerWriteOutputTask.get_quality,"Quality metadata score stored in local database",int_lt))
@@ -2200,7 +2200,7 @@ class EMBoxerWriteOutputTask(WorkFlowTask):
 
 	def get_params(self):
 #		params.append(ParamDef(name="blurb",vartype="text",desc_short="",desc_long="",property=None,defaultunits=E2CTFGenericTask.documentation_string,choices=None))
-		from emdatastorage import ParamDef
+		from gui.emdatastorage import ParamDef
 		db = js_open_dict(self.form_db_name)
 		is_gauss = self.current_tool == 'Gauss'
 

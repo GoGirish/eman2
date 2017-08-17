@@ -589,7 +589,7 @@ class EMMetaDataTable(object):
 		left = [str(k) for k in metadata.keys()]
 		right = [str(v) for v in metadata.values()]
 		
-		from emform import EMParamTable, ParamDef,EMFormWidget
+		from gui.emform import EMParamTable, ParamDef,EMFormWidget
 		
 		params = []
 		a = EMParamTable(name="Metadata",desc_short="",desc_long="Meta data associated with this image")

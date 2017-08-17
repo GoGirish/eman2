@@ -442,7 +442,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 	def set_single_active_set(self,db_name):
 		"""
-		Called from emform
+		Called from gui.emform
 		"""
 		try: self.sets_visible={db_name:self.sets[db_name]}
 		except : self.sets_visible={}
