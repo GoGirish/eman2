@@ -5,7 +5,7 @@ import numpy as np
 import random
 from emapplication import EMApp
 from emimage import EMImageWidget
-from emboxerbase import *
+from boxer.emboxerbase import *
 import shutil
 
 

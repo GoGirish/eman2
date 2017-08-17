@@ -37,7 +37,7 @@ from EMAN2jsondb import *
 from pyemtbx.boxertools import CoarsenedFlattenedImageCache,FLCFImageCache
 from copy import deepcopy
 from EMAN2 import *
-from emboxerbase import *
+from boxer.emboxerbase import *
 import os
 
 SWARM_TEMPLATE_MIN = TEMPLATE_MIN # this comes from emboxerbase

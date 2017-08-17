@@ -32,7 +32,7 @@
 
 from EMAN2 import *
 import sys
-from emboxerbase import *
+from boxer.emboxerbase import *
 import subprocess as sp
 
 def main():

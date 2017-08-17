@@ -1255,7 +1255,7 @@ project database, and gives an opportunity to apply a number of common filters t
 				shrink = self.get_thumb_shrink(e.get_xsize(),e.get_ysize())
 				thumb = e.process("math.meanshrink",{"n":shrink})
 				thumb.process_inplace("normalize.edgemean")
-				from emboxerbase import set_idd_image_entry
+				from boxer.emboxerbase import set_idd_image_entry
 				if not write_large: outname = name
 				set_idd_image_entry(outname,"image_thumb",thumb) # boxer uses the full name
 				i += 1
@@ -1999,7 +1999,7 @@ class E2BoxerTask(ParticleWorkFlowTask):
 		'''
 		A static function for getting the number of boxes associated with each file
 		'''
-		from emboxerbase import get_database_entry
+		from boxer.emboxerbase import get_database_entry
 		val = get_database_entry(file_name,"quality")
 		
 		if val == None: return "-"
@@ -2426,7 +2426,7 @@ Generally you don't want to work with more than ~10 at a time. To autobox, make 
 			options.running_mode = "gui"
 			options.method = "Swarm"
 			
-			from emboxerbase import EMBoxerModule
+			from boxer.emboxerbase import EMBoxerModule
 			from e2boxer import  SwarmTool
 			self.boxer_module = EMBoxerModule(params["filenames"],params["interface_boxsize"])
 															
