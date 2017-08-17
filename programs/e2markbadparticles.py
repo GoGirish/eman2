@@ -41,7 +41,7 @@ from PyQt4.QtCore import Qt
 from emapplication import EMApp
 import os
 from EMAN2db import *
-from valslider import *
+from gui.valslider import *
 import traceback
 
 def main():

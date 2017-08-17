@@ -43,7 +43,7 @@ try:
 	from PyQt4.QtCore import Qt
 	from PyQt4.QtCore import QTimer
 	from emshape import *
-	from valslider import *
+	from gui.valslider import *
 	from emplot2d import EMPlot2DWidget
 except:
 	print "Warning: PyQt4 must be installed"

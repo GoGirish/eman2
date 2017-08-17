@@ -48,7 +48,7 @@ try:
 	from PyQt4.QtCore import Qt
 	from PyQt4.QtCore import QTimer
 	from emshape import *
-	from valslider import *
+	from gui.valslider import *
 except:
 	print "Warning: PyQt4 must be installed"
 	sys.exit(1)

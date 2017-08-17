@@ -48,7 +48,7 @@ from emimage3d import EMImage3DWidget
 from emscene3d import EMScene3D
 from emdataitem3d import EMDataItem3D, EMIsosurface
 from emshape import EMShape
-from valslider import ValSlider, ValBox
+from gui.valslider import ValSlider, ValBox
 
 	
 def run(cmd):

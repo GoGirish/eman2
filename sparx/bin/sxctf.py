@@ -827,7 +827,7 @@ def ctf_env_points(im_1d,bg_1d,ctf) :
 try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
 	from PyQt4.QtCore import Qt
-	from valslider import ValSlider
+	from gui.valslider import ValSlider
 except:
 	print "Warning: PyQt4 must be installed to use the --gui option"
 	class dummy:

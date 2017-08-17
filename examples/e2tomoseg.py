@@ -37,7 +37,7 @@ from emimage2d import EMImage2DWidget
 from emimagemx import EMImageMXWidget
 from emscene3d import EMScene3D, EMInspector3D, EMQTreeWidget
 import os
-from valslider import ValSlider, EMANToolButton, EMSpinWidget, EMQTColorWidget
+from gui.valslider import ValSlider, EMANToolButton, EMSpinWidget, EMQTColorWidget
 import weakref
 
 from PyQt4 import QtCore

@@ -51,7 +51,7 @@ from emscene3d import EMScene3D
 from emdataitem3d import EMDataItem3D, EMIsosurface
 from emshape import EMShape
 '''
-#from valslider import *
+#from gui.valslider import *
 
 
 from sys import argv
@@ -926,7 +926,7 @@ def sptboxergui(options,args):
 	from emscene3d import EMScene3D
 	from emdataitem3d import EMDataItem3D, EMIsosurface
 	from emshape import EMShape
-	from valslider import ValSlider, ValBox
+	from gui.valslider import ValSlider, ValBox
 
 	class EMAverageViewer(QtGui.QWidget):
 		"""This is a multi-paned view showing a single boxed out particle from a larger tomogram"""

@@ -43,7 +43,7 @@ from libpyGLUtils2 import GLUtil
 import math
 import os
 import pickle
-from valslider import ValSlider, EMLightControls, CameraControls, EMSpinWidget, EMQTColorWidget, EMANToolButton
+from gui.valslider import ValSlider, EMLightControls, CameraControls, EMSpinWidget, EMQTColorWidget, EMANToolButton
 import weakref
 
 from OpenGL import GLU

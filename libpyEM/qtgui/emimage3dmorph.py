@@ -37,7 +37,7 @@
 #from OpenGL import GL,GLU,GLUT
 #from OpenGL.GL import *
 #from OpenGL.GLU import *
-#from valslider import ValSlider
+#from gui.valslider import ValSlider
 #from math import *
 #from EMAN2 import *
 #import sys

@@ -47,7 +47,7 @@ from emimagemx import EMImageMXWidget
 from emscene3d import EMScene3D
 from emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D
 from emshape import EMShape
-from valslider import *
+from gui.valslider import *
 import traceback
 
 def main():

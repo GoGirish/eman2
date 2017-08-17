@@ -45,7 +45,7 @@ from utils.expand_string import expand_string
 from libpyUtils2 import EMUtil
 from utils.matching import matches_pats
 from string import lower
-from valslider import StringBox
+from gui.valslider import StringBox
 import os
 import re
 import threading

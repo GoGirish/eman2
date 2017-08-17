@@ -48,7 +48,7 @@ try:
 	from emimage2d import EMImage2DWidget
 	from emplot2d import EMPlot2DWidget
 	from emimagemx import EMImageMXWidget
-	from valslider import ValSlider,CheckBox,ValBox
+	from gui.valslider import ValSlider,CheckBox,ValBox
 	from emshape import EMShape
 except:
 	QtGui=nothing()

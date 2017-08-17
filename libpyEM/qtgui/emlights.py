@@ -43,7 +43,7 @@ from emglobjects import Camera2, get_default_gl_colors, EMViewportDepthTools2, g
 from emimageutil import EMTransformPanel # for EMLightsInspector
 from math import *
 from time import *
-from valslider import ValSlider
+from gui.valslider import ValSlider
 import weakref # for EMLightsInspector
 
 

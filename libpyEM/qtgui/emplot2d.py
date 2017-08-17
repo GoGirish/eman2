@@ -71,7 +71,7 @@ import weakref
 from cPickle import dumps,loads
 import struct, math
 from numpy import *
-from valslider import *
+from gui.valslider import *
 from cStringIO import StringIO
 import re
 import emimage2d

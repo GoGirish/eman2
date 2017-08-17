@@ -37,7 +37,7 @@ from gui.pmicons import *
 import os, json, re, glob, signal
 import subprocess
 from pm.empmwidgets import *
-from valslider import EMQTColorWidget
+from gui.valslider import EMQTColorWidget
 from embrowser import EMBrowserWidget
 
 class EMProjectManager(QtGui.QMainWindow):

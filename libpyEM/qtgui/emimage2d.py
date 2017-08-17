@@ -36,7 +36,7 @@ from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 from OpenGL import GL,GLU,GLUT
 from OpenGL.GL import *
-from valslider import ValSlider,ValBox,StringBox
+from gui.valslider import ValSlider,ValBox,StringBox
 from math import *
 import EMAN2db
 from EMAN2 import *
