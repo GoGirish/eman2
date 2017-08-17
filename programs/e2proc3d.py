@@ -43,9 +43,9 @@ from optparse import OptionParser
 import sys
 from math import *
 import os.path
-import pyemtbx.options
-from pyemtbx.options import intvararg_callback
-from pyemtbx.options import floatvararg_callback
+import utils.options
+from utils.options import intvararg_callback
+from utils.options import floatvararg_callback
 from time import time
 from numpy import arange
 import traceback
@@ -151,7 +151,7 @@ def main():
 
 	append_options = ["clip", "fftclip", "process", "filter", "filtertable",  "meanshrink", "medianshrink", "scale", "sym", "multfile", "addfile", "trans", "rot", "align","ralignzphi","alignctod"]
 
-	optionlist = pyemtbx.options.get_optionlist(sys.argv[1:])
+	optionlist = utils.options.get_optionlist(sys.argv[1:])
 
 	(options, args) = parser.parse_args()
 

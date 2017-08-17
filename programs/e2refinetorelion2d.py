@@ -10,7 +10,7 @@
 #import block
 from EMAN2 import *
 from EMAN2db import db_open_dict
-import pyemtbx.options
+import utils.options
 import os
 import sys
 import shutil
@@ -75,7 +75,7 @@ parser.add_argument("--ppid", type=int, help="Set the PID of the parent process,
 
 
 
-optionList = pyemtbx.options.get_optionlist(sys.argv[1:])
+optionList = utils.options.get_optionlist(sys.argv[1:])
 (options, args) = parser.parse_args()
 
 

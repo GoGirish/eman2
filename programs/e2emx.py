@@ -12,7 +12,7 @@
 
 #import block
 from EMAN2 import *
-import pyemtbx.options
+import utils.options
 import os
 import sys
 import shutil
@@ -39,7 +39,7 @@ parser.add_argument("--refitdefocus",  action="store_true", help="Will use EMAN2
 parser.add_argument("--writeimages",  action="store_true", help="If specified, micrographs and particles will be written to the emx directory.")
 parser.add_argument("--verbose", "-v", dest="verbose", action="store", metavar="n", type=int, default=0, help="verbose level [0-9], higher number means higher level of verboseness")
 parser.add_argument("--ppid", type=int, help="Set the PID of the parent process, used for cross platform PPID",default=-1)
-optionList = pyemtbx.options.get_optionlist(sys.argv[1:])
+optionList = utils.options.get_optionlist(sys.argv[1:])
 (options, args) = parser.parse_args()
 
 #Check for basic usage

@@ -10,7 +10,7 @@
 # import block
 from EMAN2 import *
 from EMAN2db import db_open_dict
-import pyemtbx.options
+import utils.options
 import os
 import sys
 from subprocess import *
@@ -30,7 +30,7 @@ parser.add_argument("--ppid", type=int, help="Set the PID of the parent process,
 parser.add_argument("--icosahedral_symmetry", action="store_true", help="Does it have icosahedral symmetry?", default=False, guitype='boolbox', row=1, col=0, rowspan=1, colspan=1)
 #row=2, col=0, rowspan=1, colspan=1)
 
-optionList = pyemtbx.options.get_optionlist(sys.argv[1:])
+optionList = utils.options.get_optionlist(sys.argv[1:])
 
 (options, args) = parser.parse_args()
 

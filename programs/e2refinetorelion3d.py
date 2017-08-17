@@ -13,7 +13,7 @@
 #import block
 from EMAN2 import *
 from EMAN2db import db_open_dict
-import pyemtbx.options
+import utils.options
 import os
 import sys
 import shutil
@@ -93,7 +93,7 @@ parser.add_argument("--ppid", type=int, help="Set the PID of the parent process,
 #parser.add_argument("--numiter", type=int, help="# of iterations", default=25, guitype='intbox', row=8, col=0, rowspan=1, colspan=1)
 #parser.add_argument("--numclasses", type=int, help="# of classes", default=8, guitype='intbox', row=8, col=1, rowspan=1, colspan=1)
 
-optionList = pyemtbx.options.get_optionlist(sys.argv[1:])
+optionList = utils.options.get_optionlist(sys.argv[1:])
 (options, args) = parser.parse_args()
 
 #Check for basic usage
