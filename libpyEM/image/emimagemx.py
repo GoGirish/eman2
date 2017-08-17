@@ -51,7 +51,7 @@ from pickle import dumps,loads
 from PyQt4.QtGui import QImage
 from libpyGLUtils2 import *
 
-from emglobjects import EMOpenGLFlagsAndTools,EMGLProjectionViewMatrices,EMBasicOpenGLObjects,init_glut
+from emglobjects import EMOpenGLFlagsAndTools, EMGLProjectionViewMatrices
 from emapplication import EMGLWidget, get_application, EMApp
 from emanimationutil import LineAnimation
 import weakref
