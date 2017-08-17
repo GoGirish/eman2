@@ -35,7 +35,7 @@ from EMAN2 import *
 from EMAN2db import db_open_dict, db_close_dict, db_remove_dict
 from PyQt4 import QtCore
 from emapplication import EMApp
-from emimagemx import EMImageMXWidget
+from image.emimagemx import EMImageMXWidget
 from emimage2d import EMImage2DWidget
 from boxer.boxertools import BigImageCache
 from rct.emrctstrategy import Strategy2IMGMan, Strategy2IMGPair

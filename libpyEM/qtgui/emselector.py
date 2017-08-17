@@ -40,7 +40,7 @@ from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 from emapplication import ModuleEventsManager, EMApp, get_application
 from emimage2d import EMImage2DWidget
-from emimagemx import EMImageMXWidget
+from image.emimagemx import EMImageMXWidget
 from emimage3diso import EMIsosurfaceModel
 from emimage3dslice import EM3DSliceModel
 from emimage3dsym import EM3DSymModel
@@ -233,11 +233,11 @@ class EM2DStackPreviewAction(DataDisplayModuleTemplate(EMImageMXWidget,"get_2d_s
 	def multi_item_action(self,items,target):
 		single_mode = target.single_preview_only()
 		data = []
-		from emimagemx import ApplyAttribute
+		from image.emimagemx import ApplyAttribute
 		for item in items:
 			data.append([item.image_path(),item.get_idx(),[ApplyAttribute("Img #",item.get_idx())]])
 		
-		from emimagemx import EMLightWeightParticleCache
+		from image.emimagemx import EMLightWeightParticleCache
 		data = EMLightWeightParticleCache(data)
 		
 		if single_mode and len(self.display_modules) != 0:
@@ -754,7 +754,7 @@ class EMBrowser(EMBrowserType):
 		else:
 			from emimage3d import EMImage3DWidget
 			self.action_delegates[VIEWER_3D] = DataDisplayModuleTemplate(EMImage3DWidget)()
-		from emimagemx import ApplyProcessor
+		from image.emimagemx import ApplyProcessor
 		self.action_delegates[VOLUME_VIEWER] = DataDisplayModuleTemplate(EMVolumeModel,data_functors=[ApplyProcessor("normalize",{})])()
 		self.action_delegates[SLICE_VIEWER] = DataDisplayModuleTemplate(EM3DSliceModel,data_functors=[ApplyProcessor("normalize",{})])()
 		self.action_delegates[SINGLE_2D_VIEWER] = DataDisplayModuleTemplate(EMImage2DWidget)()
@@ -1119,7 +1119,7 @@ class EMBrowseDelegate:
 		Might return a cache, of if that's not possible, a list of EMData objects, for example.
 		The return value should 'look' like a list
 		'''
-		#from emimagemx import EMLightWeightParticleCache
+		#from image.emimagemx import EMLightWeightParticleCache
 		#return EMLightWeightParticleCache.from_file(full_path)
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
@@ -1190,7 +1190,7 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 		Return is a cache that can be treated like a list of EMData objects
 		Can give speed ups
 		'''
-		from emimagemx import EMLightWeightParticleCache,EM3DDataListCache
+		from image.emimagemx import EMLightWeightParticleCache,EM3DDataListCache
 		md = self.get_metadata(full_path,0)
 		if md["nz"] > 1: return EM3DDataListCache(full_path)
 		else: return EMLightWeightParticleCache.from_file(full_path)
@@ -1821,7 +1821,7 @@ class EMBDBDelegate(EMBrowseDelegate):
 		This function is called by EM2DStackItem and EM3DImageItem
 		Return is a cache that can be treated like a list of EMData objects
 		'''
-		from emimagemx import EMLightWeightParticleCache,EM3DDataListCache
+		from image.emimagemx import EMLightWeightParticleCache,EM3DDataListCache
 		md = self.get_metadata(full_path,0)
 		if md["nz"] > 1: return EM3DDataListCache(db_convert_path(full_path))
 		else: return EMLightWeightParticleCache.from_file(db_convert_path(full_path))

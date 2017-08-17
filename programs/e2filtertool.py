@@ -43,7 +43,7 @@ from EMAN2 import *
 from emapplication import get_application, EMApp
 from emimage2d import EMImage2DWidget
 from emplot2d import EMPlot2DWidget
-from emimagemx import EMImageMXWidget
+from image.emimagemx import EMImageMXWidget
 from emscene3d import EMScene3D
 from emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D
 from emshape import EMShape

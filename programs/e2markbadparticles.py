@@ -32,7 +32,7 @@
 
 #
 from EMAN2 import *
-from emimagemx import EMImageMXWidget
+from image.emimagemx import EMImageMXWidget
 
 import sys
 from PyQt4 import QtCore, QtGui, QtOpenGL

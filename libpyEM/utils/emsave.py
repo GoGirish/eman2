@@ -372,7 +372,7 @@ class EMStackSaveDialog(EMFileSaver):
 		@return true or False
 		'''
 		
-		#from emimagemx import EMMXDataCache
+		#from image.emimagemx import EMMXDataCache
 		fine = False
 		if hasattr(item_object,"get_item_from_emsave"): # this is True EMMXDataCache
 			fine = True

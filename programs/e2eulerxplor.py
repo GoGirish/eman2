@@ -43,7 +43,7 @@ from emapplication import EMApp, get_application, error
 from emglobjects import EM3DModel
 from emimage2d import EMImage2DWidget
 from emimage3dsym import EM3DSymModel, EMSymInspector, EMSymViewerWidget
-from emimagemx import EMImageMXWidget, EMLightWeightParticleCache
+from image.emimagemx import EMImageMXWidget, EMLightWeightParticleCache
 import os
 import sys
 import weakref
@@ -413,7 +413,7 @@ class EMEulerExplorer(EM3DSymModel,Animator):
 		#eulers = s.gen_orientations("rand",{"n":EMUtil.get_image_count(self.average_file)})
 
 		self.specify_eulers(eulers)
-		#from emimagemx import EMDataListCache
+		#from image.emimagemx import EMDataListCache
 		#a = EMData.read_images(self.average_file)
 		#a = [test_image() for i in range(EMUtil.get_image_count(self.average_file))]
 		#print len(a),len(eulers)
@@ -590,7 +590,7 @@ class EMEulerExplorer(EM3DSymModel,Animator):
 			data = []
 			idx_included = []
 			running_idx = 0
-			from emimagemx import ApplyAttribute
+			from image.emimagemx import ApplyAttribute
 			for val in included:
 				bdata.append([self.particle_file,val,[ApplyAttribute("Img #",val)]])
 				idx_included.append(running_idx)
@@ -641,7 +641,7 @@ class EMEulerExplorer(EM3DSymModel,Animator):
 
 					t = Transform({"type":"2d","alpha":a,"mirror":int(m)})
 					t.set_trans(x,y)
-					from emimagemx import ApplyTransform
+					from image.emimagemx import ApplyTransform
 					f.append(ApplyTransform(t))
 					#data[i].transform(t)
 				self.particle_viewer.set_data(data)

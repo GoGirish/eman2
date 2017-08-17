@@ -45,7 +45,7 @@ import weakref
 from e2history import HistoryForm
 import time
 from utils.emsave import save_data
-from emimagemx import EMDataListCache
+from image.emimagemx import EMDataListCache
 import traceback
 
 USING_RELATIVE_DIRS = True # used by database infrastructure for recording file names

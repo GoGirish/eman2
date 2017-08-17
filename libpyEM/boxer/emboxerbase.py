@@ -1959,7 +1959,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 			if self.image_thumbs == None:
 				sys.exit(1)
 
-			from emimagemx import EMImageMXWidget
+			from image.emimagemx import EMImageMXWidget
 			self.thumbs_window=EMImageMXWidget(application=get_application())
 
 			self.thumbs_window.set_data(self.image_thumbs,soft_delete=True)
@@ -1992,7 +1992,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 
 	def __init_particles_window(self):
 		if self.particles_window == None:
-			from emimagemx import EMImageMXWidget
+			from image.emimagemx import EMImageMXWidget
 			self.particles_window=EMImageMXWidget(application=get_application())
 
 			self.particles_window.set_mouse_mode("App")

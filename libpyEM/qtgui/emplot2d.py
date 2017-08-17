@@ -2098,7 +2098,7 @@ class EMPlot2DClassInsp(QtGui.QWidget):
 
 	def imgSelect(self,sel=None):
 		if self.imgwin==None :
-			from emimagemx import EMImageMXWidget
+			from image.emimagemx import EMImageMXWidget
 			self.imgwin=EMImageMXWidget()
 
 		try:

@@ -45,7 +45,7 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt
 from emapplication import get_application, EMApp
 from emimage2d import EMImage2DWidget
-from emimagemx import EMImageMXWidget
+from image.emimagemx import EMImageMXWidget
 from emimage3d import EMImage3DWidget
 from emscene3d import EMScene3D
 from emdataitem3d import EMDataItem3D, EMIsosurface
@@ -206,7 +206,7 @@ def main():
 		from PyQt4.QtCore import Qt
 		from emapplication import get_application, EMApp
 		from emimage2d import EMImage2DWidget
-		from emimagemx import EMImageMXWidget
+		from image.emimagemx import EMImageMXWidget
 		from emimage3d import EMImage3DWidget
 		from emscene3d import EMScene3D
 		from emdataitem3d import EMDataItem3D, EMIsosurface
@@ -921,7 +921,7 @@ def sptboxergui(options,args):
 	from PyQt4.QtCore import Qt
 	from emapplication import get_application, EMApp
 	from emimage2d import EMImage2DWidget
-	from emimagemx import EMImageMXWidget
+	from image.emimagemx import EMImageMXWidget
 	from emimage3d import EMImage3DWidget
 	from emscene3d import EMScene3D
 	from emdataitem3d import EMDataItem3D, EMIsosurface

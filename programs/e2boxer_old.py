@@ -1257,7 +1257,7 @@ class SwarmBoxer:
 		Brings the template viewer to the foreground
 		'''
 		if self.template_viewer == None:
-			from emimagemx import EMImageMXWidget
+			from image.emimagemx import EMImageMXWidget
 			self.template_viewer = EMImageMXWidget()
 
 			self.template_viewer.set_data(self.templates,soft_delete=True) # should work if self.templates is None

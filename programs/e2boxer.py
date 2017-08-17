@@ -47,7 +47,7 @@ try:
 	from PyQt4.QtCore import Qt
 	from emimage2d import EMImage2DWidget
 	from emplot2d import EMPlot2DWidget
-	from emimagemx import EMImageMXWidget
+	from image.emimagemx import EMImageMXWidget
 	from gui.valslider import ValSlider,CheckBox,ValBox
 	from emshape import EMShape
 except:

@@ -747,7 +747,7 @@ class EM2DStackTable(EMFileTable):
 			if not file_exists(name):
 				error("File %s doesn't exist" %s, "Error")
 				continue
-			from emimagemx import EMDataListCache
+			from image.emimagemx import EMDataListCache
 			tmp = EMDataListCache(table_widget.convert_text(name))
 			from utils.emsave import save_data
 			val = save_data(tmp)
@@ -769,7 +769,7 @@ class EM2DStackTable(EMFileTable):
 			from emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
 		else:
-			from emimagemx import EMLightWeightParticleCache
+			from image.emimagemx import EMLightWeightParticleCache
 			self.display_module.set_data(EMLightWeightParticleCache.from_file(filename)) #  I know this looks stupid, but c'est la vie
 			self.display_module.updateGL()
 					
@@ -861,7 +861,7 @@ class EM2DStackExamineTable(EM2DStackTable):
 		if not file_exists(filename): return # this happens sometimes when there is filtered data but no raw data
 		get_application().setOverrideCursor(Qt.BusyCursor)
 		if self.display_module == None:
-			from emimagemx import EMImageMXWidget
+			from image.emimagemx import EMImageMXWidget
 			self.display_module = EMImageMXWidget(None,get_application())
 			from emapplication import ModuleEventsManager
 			#self.module_events_manager = ModuleEventsManager(self,self.display_module)
