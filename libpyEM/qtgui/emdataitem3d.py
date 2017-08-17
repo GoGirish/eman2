@@ -35,7 +35,7 @@ from EMAN2 import *
 from embrowser import EMBrowserWidget
 from emglobjects import EMViewportDepthTools, Camera2, get_default_gl_colors, get_RGB_tab, EM3DModel
 from emglobjects import get_default_gl_colors
-from emimageutil import ImgHistogram
+from image.emimageutil import ImgHistogram
 from emitem3d import EMItem3D, EMItem3DInspector, drawBoundingBox
 from emshapeitem3d import EMInspectorControlShape
 from libpyGLUtils2 import GLUtil

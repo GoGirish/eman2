@@ -34,7 +34,7 @@
 
 #from EMAN2 import *
 #from emimage import EMImage
-#from emimageutil import EMParentWin
+#from image.emimageutil import EMParentWin
 import sys
 import os
 #from optparse import OptionParser

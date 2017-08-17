@@ -40,7 +40,7 @@ from OpenGL.GLUT import *
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 from emglobjects import Camera2, get_default_gl_colors, EMViewportDepthTools2, get_RGB_tab, get_gl_lights_vector, init_glut, EM3DModel
-from emimageutil import EMTransformPanel # for EMLightsInspector
+from image.emimageutil import EMTransformPanel # for EMLightsInspector
 from math import *
 from time import *
 from gui.valslider import ValSlider

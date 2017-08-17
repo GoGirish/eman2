@@ -45,7 +45,7 @@ from emimage3diso import EMIsosurfaceModel
 from emimage3dslice import EM3DSliceModel
 from emimage3dsym import EM3DSymModel
 from emimage3dvol import EMVolumeModel
-from emimageutil import EMTransformPanel
+from image.emimageutil import EMTransformPanel
 from emplot2d import EMPlot2DWidget
 #from e2simmxxplor import EMSimmxExplorer
 from utils.emsave import save_data

@@ -39,7 +39,7 @@ from PyQt4 import QtGui, QtCore
 from PyQt4.QtCore import Qt
 import sys
 import weakref
-from emimageutil import EMTransformPanel
+from image.emimageutil import EMTransformPanel
 
 
 
