@@ -56,7 +56,7 @@ try:
 	#if not IPython.lib.guisupport.is_event_loop_running_qt4():
 		#IPython.lib.guisupport.start_event_loop_qt4()
 	
-	from emimage import image_update
+	from image.emimage import image_update
 
 	def ipy_on_timer():
 		image_update()

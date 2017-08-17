@@ -31,7 +31,7 @@
 #
 
 from EMAN2 import *
-from emimage import *
+from image.emimage import *
 import time
 
 def live():

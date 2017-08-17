@@ -33,7 +33,7 @@
 
 import EMAN2
 from EMAN2 import *
-from emimage import image_update
+from image.emimage import image_update
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 import threading

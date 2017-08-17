@@ -670,7 +670,7 @@ class EM2DFileTable(EMFileTable):
 		if not file_exists(filename): return # this happens sometimes when there is filtered data but no raw data
 		get_application().setOverrideCursor(Qt.BusyCursor)
 		if self.display_module == None:
-			from emimage import EMWidgetFromFile
+			from image.emimage import EMWidgetFromFile
 			self.display_module = EMWidgetFromFile(filename,get_application())
 			from emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
@@ -764,7 +764,7 @@ class EM2DStackTable(EMFileTable):
 		if not file_exists(filename): return # this happens sometimes when there is filtered data but no raw data
 		get_application().setOverrideCursor(Qt.BusyCursor)
 		if self.display_module == None:
-			from emimage import EMWidgetFromFile
+			from image.emimage import EMWidgetFromFile
 			self.display_module = EMWidgetFromFile(filename,get_application())
 			from emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
@@ -803,7 +803,7 @@ class EMPlotTable(EMFileTable):
 		if not file_exists(filename): return # this happens sometimes when there is filtered data but no raw data
 		get_application().setOverrideCursor(Qt.BusyCursor)
 		if self.display_module == None:
-			from emimage import EMWidgetFromFile
+			from image.emimage import EMWidgetFromFile
 			self.display_module = EMWidgetFromFile(filename,get_application())
 			from emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)

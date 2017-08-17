@@ -51,7 +51,7 @@ try:
 	app=EMApp()
 	IPython.lib.inputhook.enable_qt4(app)
 
-	from emimage import image_update
+	from image.emimage import image_update
 
 	def ipy_on_timer():
 		image_update()

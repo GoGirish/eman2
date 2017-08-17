@@ -33,7 +33,7 @@
 
 
 #from EMAN2 import *
-#from emimage import EMImage
+#from image.emimage import EMImage
 #from image.emimageutil import EMParentWin
 import sys
 import os

@@ -41,7 +41,7 @@ import sys
 from math import *
 try:
 	import wx
-	from emimage import *
+	from image.emimage import *
 except:
 	print "no wx"
 

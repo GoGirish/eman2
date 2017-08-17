@@ -35,7 +35,7 @@ from EMAN2 import EMANVERSION, E2init, E2end, EMData, base_name, file_exists, EM
 import EMAN2db
 from emapplication import EMApp
 import embrowser
-from emimage import EMImageWidget, EMWidgetFromFile
+from image.emimage import EMImageWidget, EMWidgetFromFile
 from emscene3d import EMScene3D
 import os
 import sys
