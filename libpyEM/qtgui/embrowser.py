@@ -37,7 +37,7 @@ from PyQt4.QtCore import QChar, QString, Qt
 from emapplication import EMApp
 from image.emimage2d import *
 from image.emimagemx import *
-from empdbitem3d import *
+from item3d.empdbitem3d import *
 from emplot2d import *
 from emhist import *
 from emplot3d import *
