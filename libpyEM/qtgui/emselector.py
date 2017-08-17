@@ -48,7 +48,7 @@ from emimage3dvol import EMVolumeModel
 from emimageutil import EMTransformPanel
 from emplot2d import EMPlot2DWidget
 #from e2simmxxplor import EMSimmxExplorer
-from emsave import save_data
+from utils.emsave import save_data
 import PyQt4
 import math
 import os

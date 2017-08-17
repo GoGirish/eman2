@@ -578,7 +578,7 @@ class EMFileTable(QtGui.QTableWidget):
 		@table_widget The table widget from which the entries were selected
 		'''
 		for name in list_of_names:
-			from emsave import LightEMDataSave, save_data
+			from utils.emsave import LightEMDataSave, save_data
 			tmp = LightEMDataSave(table_widget.convert_text(name))
 			val = save_data(tmp)
 			if val == "":
@@ -749,7 +749,7 @@ class EM2DStackTable(EMFileTable):
 				continue
 			from emimagemx import EMDataListCache
 			tmp = EMDataListCache(table_widget.convert_text(name))
-			from emsave import save_data
+			from utils.emsave import save_data
 			val = save_data(tmp)
 			if val == "":
 				break

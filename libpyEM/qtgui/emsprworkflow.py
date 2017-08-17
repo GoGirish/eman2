@@ -44,7 +44,7 @@ import subprocess
 import weakref
 from e2history import HistoryForm
 import time
-from emsave import save_data
+from utils.emsave import save_data
 from emimagemx import EMDataListCache
 import traceback
 
@@ -1817,7 +1817,7 @@ class EMParticleCoordImportTask(WorkFlowTask):
 	def get_params(self):
 		params = []
 		from emform import EMPlotTable
-		from emsave import EMCoordFileValidator
+		from utils.emsave import EMCoordFileValidator
 		coord_table = EMPlotTable(name="coordfiles",desc_short="Coord File",desc_long="Use this tool to browse for your coordinate files")
 		context_menu_data = ParticleWorkFlowTask.DataContextMenu(EMCoordFileValidator())
 		coord_table.add_context_menu_data(context_menu_data)

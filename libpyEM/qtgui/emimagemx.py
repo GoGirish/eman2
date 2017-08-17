@@ -1528,7 +1528,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			return
 
 		self.data.set_excluded_ptcls(self.deletion_manager.deleted_ptcls())
-		from emsave import save_data
+		from utils.emsave import save_data
 		file_name = save_data(self.data)
 		if file_name == self.file_name and file_exists(file_name): # the file we are working with was overwritten
 			self.set_data(file_name)
