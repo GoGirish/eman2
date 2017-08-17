@@ -37,7 +37,7 @@ import os
 import sys
 import testlib
 import os
-from pyemtbx.exceptions import *
+from exceptions import *
 from optparse import OptionParser
 from EMAN2 import remove_file
 
