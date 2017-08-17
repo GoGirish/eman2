@@ -45,7 +45,7 @@ from image.emimage2d import EMImage2DWidget
 from emplot2d import EMPlot2DWidget
 from image.emimagemx import EMImageMXWidget
 from emscene3d import EMScene3D
-from emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D
+from item3d.emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D
 from emshape import EMShape
 from gui.valslider import *
 import traceback

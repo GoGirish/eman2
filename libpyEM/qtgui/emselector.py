@@ -138,7 +138,7 @@ def DataDisplayModuleTemplate(Type,get_data_attr="get_data",data_functors=[],use
 			
 		def item_action(self,item,target):
 			from EMAN2 import Transform
-			from emdataitem3d import EMDataItem3D, EMIsosurface
+			from item3d.emdataitem3d import EMDataItem3D, EMIsosurface
 			from emshapeitem3d import EMCube
 			
 			name = os.path.basename(str(item.get_url()))

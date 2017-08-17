@@ -34,7 +34,7 @@
 from EMAN2 import *
 import copy
 from emapplication import EMGLWidget
-from emdataitem3d import *
+from item3d.emdataitem3d import *
 from emglobjects import get_default_gl_colors
 from emitem3d import EMItem3D, EMItem3DInspector
 from empdbitem3d import *
@@ -52,7 +52,7 @@ from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 
 
-#from emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D, EMVolumeItem3D
+#from item3d.emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D, EMVolumeItem3D
 # XPM format Cursors
 visibleicon = [
     '16 12 3 1',

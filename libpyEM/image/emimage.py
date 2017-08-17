@@ -38,7 +38,7 @@ from EMAN2 import Util,EMUtil,file_exists,IMAGE_UNKNOWN,gimme_image_dimensions3D
 import os
 from EMAN2 import Transform
 from emscene3d import EMScene3D
-from emdataitem3d import EMDataItem3D, EMIsosurface
+from item3d.emdataitem3d import EMDataItem3D, EMIsosurface
 
 def image_update():
 	from emimage2d import EMImage2DWidget

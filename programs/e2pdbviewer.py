@@ -31,7 +31,7 @@
 
 from EMAN2 import *
 from emapplication import EMApp
-from emdataitem3d import EMDataItem3D
+from item3d.emdataitem3d import EMDataItem3D
 from emscene3d import EMScene3D, EMInspector3D
 import os
 import sys
