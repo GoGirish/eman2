@@ -39,7 +39,7 @@ from EMAN2db import EMAN2DB, db_convert_path, db_open_dict, db_check_dict, e2get
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 from emapplication import ModuleEventsManager, EMApp, get_application
-from emimage2d import EMImage2DWidget
+from image.emimage2d import EMImage2DWidget
 from image.emimagemx import EMImageMXWidget
 from image.emimage3diso import EMIsosurfaceModel
 from image.emimage3dslice import EM3DSliceModel

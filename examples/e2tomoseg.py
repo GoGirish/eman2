@@ -33,7 +33,7 @@
 from EMAN2 import *
 from emapplication import EMApp
 from emdataitem3d import EMDataItem3D, EMIsosurface
-from emimage2d import EMImage2DWidget
+from image.emimage2d import EMImage2DWidget
 from image.emimagemx import EMImageMXWidget
 from emscene3d import EMScene3D, EMInspector3D, EMQTreeWidget
 import os

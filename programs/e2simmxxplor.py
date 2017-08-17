@@ -38,7 +38,7 @@ from gui.valslider import ValSlider
 
 from e2eulerxplor import get_eulers_from
 from image.emimagemx import EMImageMXWidget
-from emimage2d import EMImage2DWidget
+from image.emimage2d import EMImage2DWidget
 from emplot2d import EMPlot2DWidget
 from EMAN2db import db_convert_path, db_open_dict, db_check_dict, db_list_dicts
 from emapplication import EMApp, get_application

@@ -35,7 +35,7 @@ import sys
 import os
 from EMAN2 import *
 from emapplication import EMApp
-from emimage2d import EMImage2DWidget
+from image.emimage2d import EMImage2DWidget
 from image.emimage3d import EMImage3DModule
 from gui.valslider import ValSlider
 import weakref

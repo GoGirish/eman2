@@ -450,7 +450,7 @@ except:
 	QtGui.QWidget=QWidget
 
 def display_validation_plots(path, radcut, planethres, plotdatalabels=False, color='#00ff00', plotzaxiscolor=False):
-	from emimage2d import EMImage2DWidget
+	from image.emimage2d import EMImage2DWidget
 	from emapplication import EMApp
 	r = []
 	theta = []

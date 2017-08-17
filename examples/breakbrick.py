@@ -3,7 +3,7 @@
 from EMAN2 import *
 import numpy as np
 from emapplication import EMApp
-from emimage2d import EMImage2DWidget
+from image.emimage2d import EMImage2DWidget
 from emshape import EMShape
 
 import PyQt4

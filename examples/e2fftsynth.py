@@ -39,7 +39,7 @@ try:
 	from emshape import *
 	from gui.valslider import ValSlider,ValBox
 	from emimage import EMImageWidget
-	from emimage2d import EMImage2DWidget
+	from image.emimage2d import EMImage2DWidget
 	from emplot2d import EMPlot2DWidget
 	from emapplication import EMApp
 except:
