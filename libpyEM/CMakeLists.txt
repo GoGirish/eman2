@@ -96,7 +96,7 @@ add_custom_target(Gui
 				  COMMAND ${CMAKE_COMMAND} -DCOMPONENT=Gui -P cmake_install.cmake
 				  )
 
-install(DIRECTORY gui utils pm rct boxer image
+install(DIRECTORY gui utils pm rct boxer image item3d
 		DESTINATION ${SP_DIR}
 		COMPONENT Gui
 		)
