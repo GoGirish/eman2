@@ -38,7 +38,7 @@ from item3d.emdataitem3d import *
 from emglobjects import get_default_gl_colors
 from item3d.emitem3d import EMItem3D, EMItem3DInspector
 from item3d.empdbitem3d import *
-from emshapeitem3d import *
+from item3d.emshapeitem3d import *
 from libpyGLUtils2 import GLUtil
 import math
 import os
