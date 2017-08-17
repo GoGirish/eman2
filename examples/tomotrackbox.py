@@ -36,7 +36,7 @@ import os
 from EMAN2 import *
 from emapplication import EMApp
 from image.emimage2d import EMImage2DWidget
-from image.emimage3d import EMImage3DModule
+from image.emimage3d import EMImage3DWidget
 from gui.valslider import ValSlider
 import weakref
 from emshape import EMShape
@@ -142,7 +142,7 @@ class TrackerControl(QtGui.QWidget):
 		self.imboxed = EMImage2DWidget(application=app,winid="tomotrackbox.small")
 		self.improj =  EMImage2DWidget(application=app,winid="tomotrackbox.proj")
 		self.imslice = EMImage2DWidget(application=app,winid="tomotrackbox.3dslice")
-		self.imvol =   EMImage3DModule(application=app,winid="tomotrackbox.3d")
+		self.imvol =   EMImage3DWidget(application=app,winid="tomotrackbox.3d")
 	
 		# get some signals from the window. 
 		QtCore.QObject.connect(self.im2d,QtCore.SIGNAL("mousedown"),self.down)
