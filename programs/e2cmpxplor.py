@@ -156,10 +156,6 @@ class EMCmpExplorer(EM3DSymModel):
 			QtCore.QObject.connect(self.mx_display,QtCore.SIGNAL("module_closed"),self.on_mx_display_closed)
 			resize_necessary = True
 
-		#if self.frc_display == None:
-			#self.frc_display = EMPlot2DModule()
-#			QtCore.QObject.connect(self.frc_display,QtCore.SIGNAL("module_closed"),self.on_frc_display_closed)
-
 		self.update_display(False)
 
 		if resize_necessary:
