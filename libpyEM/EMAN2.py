@@ -42,7 +42,7 @@ import zlib
 import socket
 import subprocess
 from EMAN2_cppwrap import *
-from imagetypes import *
+from image.imagetypes import *
 from boxer.box import *
 from EMAN2_meta import *
 import EMAN2db, EMAN2jsondb
