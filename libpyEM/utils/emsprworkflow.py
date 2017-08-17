@@ -2352,7 +2352,7 @@ def recover_old_boxer_database():
 					new_db_name = "bdb:e2boxercache#boxes"
 					db = db_open_dict(new_db_name)
 					for item in recovery_items:
-						from pyemtbx.boxertools import TrimBox
+						from boxer.boxertools import TrimBox
 						value = item[1]
 						name = value["e2boxer_image_name"]
 						auto = None

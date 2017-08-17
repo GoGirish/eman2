@@ -34,7 +34,7 @@
 from EMAN2 import BoxingTools,gm_time_string,Transform, E2init, E2end, E2progress,db_open_dict,EMArgumentParser
 from EMAN2db import db_check_dict
 from EMAN2jsondb import *
-from pyemtbx.boxertools import CoarsenedFlattenedImageCache,FLCFImageCache
+from boxer.boxertools import CoarsenedFlattenedImageCache,FLCFImageCache
 from copy import deepcopy
 from EMAN2 import *
 from boxer.emboxerbase import *

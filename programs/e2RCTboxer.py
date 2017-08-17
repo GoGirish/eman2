@@ -37,7 +37,7 @@ from PyQt4 import QtCore
 from emapplication import EMApp
 from emimagemx import EMImageMXWidget
 from emimage2d import EMImage2DWidget
-from pyemtbx.boxertools import BigImageCache
+from boxer.boxertools import BigImageCache
 from rct.emrctstrategy import Strategy2IMGMan, Strategy2IMGPair
 from rct.emrctboxergui import ControlPannel
 from emshape import EMShape
