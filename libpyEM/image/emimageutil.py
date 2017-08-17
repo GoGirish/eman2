@@ -576,32 +576,3 @@ class ImgHistogram(QtGui.QWidget):
 		#self.probe=None
 		self.mpressed = False
 		pass
-		
-class EMMetaDataTable(object):
-	"""This is basically a factory class that will return an instance of QtWidget
-	"""
-	def __new__(cls,parent,metadata):
-		'''
-		metadata should be a dict
-		'''
-		if not isinstance(metadata,dict): raise
-		
-		left = [str(k) for k in metadata.keys()]
-		right = [str(v) for v in metadata.values()]
-		
-		from gui.emform import EMParamTable, ParamDef,EMFormWidget
-		
-		params = []
-		a = EMParamTable(name="Metadata",desc_short="",desc_long="Meta data associated with this image")
-		pleft = ParamDef(name="key",vartype="stringlist",desc_short="Key",desc_long="The key of the metadata value object",property=None,choices=left)
-		pright = ParamDef(name="value",vartype="stringlist",desc_short="Value",desc_long="The value of the metadata object as a string",property=None,choices=right)
-
-		
-		a.append(pleft)
-		a.append(pright)
-		params.append(a)
-		
-		form = EMFormWidget(parent,params,disable_ok_cancel=True)
-		return form
-	
-	
