@@ -32,7 +32,7 @@
 #
 
 from emapplication import EMApp, get_application
-from emimage3dsym import EM3DSymModel,EMSymInspector
+from image.emimage3dsym import EM3DSymModel,EMSymInspector
 import os,sys
 from EMAN2 import *
 from PyQt4 import QtGui,QtCore

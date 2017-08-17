@@ -1032,7 +1032,7 @@ class EMPDBInspector(QtGui.QWidget):
 
 if __name__ == '__main__':
 	from emapplication import EMApp
-	from emimage3d import EMImage3DWidget
+	from image.emimage3d import EMImage3DWidget
 	em_app = EMApp()
 
 	window = EMImage3DWidget()

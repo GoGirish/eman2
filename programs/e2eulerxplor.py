@@ -42,7 +42,7 @@ from emanimationutil import OrientationListAnimation,Animator
 from emapplication import EMApp, get_application, error
 from emglobjects import EM3DModel
 from emimage2d import EMImage2DWidget
-from emimage3dsym import EM3DSymModel, EMSymInspector, EMSymViewerWidget
+from image.emimage3dsym import EM3DSymModel, EMSymInspector, EMSymViewerWidget
 from image.emimagemx import EMImageMXWidget, EMLightWeightParticleCache
 import os
 import sys

@@ -33,8 +33,8 @@
 from EMAN2 import PDBReader, EMData
 from emapplication import EMApp, get_application
 from PyQt4 import QtCore, QtGui
-from emimage3d import EMImage3DWidget
-from emimage3diso import EMIsosurfaceModel
+from image.emimage3d import EMImage3DWidget
+from image.emimage3diso import EMIsosurfaceModel
 from empdbviewer import *
 from emselector import EMSelectorDialog
 

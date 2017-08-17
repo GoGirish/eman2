@@ -43,7 +43,7 @@ from emplot2d import EMPlot2DWidget
 from EMAN2db import db_convert_path, db_open_dict, db_check_dict, db_list_dicts
 from emapplication import EMApp, get_application
 from emglobjects import EM3DGLWidget
-from emimage3dsym import EM3DSymModel,EMSymInspector, EMSymViewerWidget
+from image.emimage3dsym import EM3DSymModel,EMSymInspector, EMSymViewerWidget
 from EMAN2 import *
 
 def main():

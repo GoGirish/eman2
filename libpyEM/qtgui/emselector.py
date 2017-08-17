@@ -41,10 +41,10 @@ from PyQt4.QtCore import Qt
 from emapplication import ModuleEventsManager, EMApp, get_application
 from emimage2d import EMImage2DWidget
 from image.emimagemx import EMImageMXWidget
-from emimage3diso import EMIsosurfaceModel
-from emimage3dslice import EM3DSliceModel
-from emimage3dsym import EM3DSymModel
-from emimage3dvol import EMVolumeModel
+from image.emimage3diso import EMIsosurfaceModel
+from image.emimage3dslice import EM3DSliceModel
+from image.emimage3dsym import EM3DSymModel
+from image.emimage3dvol import EMVolumeModel
 from image.emimageutil import EMTransformPanel
 from emplot2d import EMPlot2DWidget
 #from e2simmxxplor import EMSimmxExplorer
@@ -171,7 +171,7 @@ def DataDisplayModuleTemplate(Type,get_data_attr="get_data",data_functors=[],use
 			from e2simmxxplor import EMSimmxExplorer
 
 			if self.module_type == EM3DSymModel: #TODO: get correct symmetry or switch to e2eulerxplor.py
-				from emimage3dsym import EMSymViewerWidget
+				from image.emimage3dsym import EMSymViewerWidget
 				widget = EMSymViewerWidget()
 			elif self.module_type in (EMIsosurfaceModel, EMVolumeModel, EM3DSliceModel, EMSimmxExplorer):
 				from emglobjects import EM3DGLWidget
@@ -752,7 +752,7 @@ class EMBrowser(EMBrowserType):
 			from emscene3d import EMScene3D
 			self.action_delegates[VIEWER_3D] = DataDisplayModuleTemplate(EMScene3D, usescenegraph=self.usescenegraph)()
 		else:
-			from emimage3d import EMImage3DWidget
+			from image.emimage3d import EMImage3DWidget
 			self.action_delegates[VIEWER_3D] = DataDisplayModuleTemplate(EMImage3DWidget)()
 		from image.emimagemx import ApplyProcessor
 		self.action_delegates[VOLUME_VIEWER] = DataDisplayModuleTemplate(EMVolumeModel,data_functors=[ApplyProcessor("normalize",{})])()

@@ -106,7 +106,7 @@ class EMOrientationDistDialog(EMButtonDialog):
 		symnumber = name_map["symnumber"][0] # assume the first entry in the list is a text entry
 		if symnumber.isEnabled(): symname += str(symnumber.text())
 		
-		from emimage3dsym import EMSymChoiceDialog
+		from image.emimage3dsym import EMSymChoiceDialog
 		dialog = EMSymChoiceDialog(symname)
 		result = dialog.exec_()
 		if result != None:
