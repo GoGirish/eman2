@@ -74,7 +74,7 @@ from numpy import *
 from gui.valslider import *
 from cStringIO import StringIO
 import re
-import emimage2d
+from image import emimage2d
 
 import matplotlib.pyplot as plt
 import matplotlib
