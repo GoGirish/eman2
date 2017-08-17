@@ -39,19 +39,16 @@ from OpenGL.GLU import *
 from gui.valslider import ValSlider
 from math import *
 from EMAN2 import *
-#import EMAN2db
 from EMAN2db import db_open_dict, db_check_dict
 from EMAN2jsondb import js_open_dict, js_check_dict
 import EMAN2
 import copy
 import sys
 import numpy
-from emimageutil import EMParentWin
 from emhist import ImgHistogram
 from weakref import WeakKeyDictionary
 from pickle import dumps,loads
 from PyQt4.QtGui import QImage
-from PyQt4.QtCore import QTimer
 from libpyGLUtils2 import *
 
 from emglobjects import EMOpenGLFlagsAndTools,EMGLProjectionViewMatrices,EMBasicOpenGLObjects,init_glut

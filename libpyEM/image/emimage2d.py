@@ -31,20 +31,16 @@
 #
 #
 
-import PyQt4
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 from OpenGL import GL,GLU,GLUT
 from OpenGL.GL import *
 from gui.valslider import ValSlider,ValBox,StringBox
-from math import *
-import EMAN2db
 from EMAN2 import *
 import EMAN2
 import sys
 import numpy
 import struct
-from emimageutil import EMParentWin
 from emhist import ImgHistogram
 import emshape
 from emshape import EMShape
@@ -53,12 +49,9 @@ import weakref
 from pickle import dumps,loads
 from libpyGLUtils2 import *
 
-from emglobjects import EMOpenGLFlagsAndTools
 from emapplication import get_application, EMGLWidget
 
 from emanimationutil import SingleValueIncrementAnimation, LineAnimation
-
-import platform
 
 MAG_INC = 1.1
 
