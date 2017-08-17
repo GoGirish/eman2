@@ -42,7 +42,7 @@
 #from EMAN2 import *
 #import sys
 #import numpy
-#from emimageutil import ImgHistogram,EMParentWin
+#from emhist import ImgHistogram,EMParentWin
 #from weakref import WeakKeyDictionary
 #from time import time
 #from PyQt4.QtCore import QTimer

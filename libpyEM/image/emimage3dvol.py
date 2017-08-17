@@ -48,7 +48,9 @@ import weakref
 from time import *
 
 from emglobjects import EM3DModel, EMViewportDepthTools, Camera2, Camera, EMOpenGLFlagsAndTools
-from emimageutil import ImgHistogram, EMTransformPanel
+from emimageutil import EMTransformPanel
+from emhist import ImgHistogram
+
 
 MAG_INCREMENT_FACTOR = 1.1
 

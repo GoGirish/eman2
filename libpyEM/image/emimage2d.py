@@ -44,7 +44,8 @@ import EMAN2
 import sys
 import numpy
 import struct
-from emimageutil import ImgHistogram, EMParentWin
+from emimageutil import EMParentWin
+from emhist import ImgHistogram
 import emshape
 from emshape import EMShape
 from weakref import WeakKeyDictionary

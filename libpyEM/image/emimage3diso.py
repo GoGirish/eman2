@@ -48,7 +48,8 @@ from time import *
 from libpyGLUtils2 import GLUtil
 
 from emglobjects import EMViewportDepthTools, Camera2, get_default_gl_colors,get_RGB_tab, EM3DModel
-from emimageutil import ImgHistogram, EMTransformPanel
+from emimageutil import EMTransformPanel
+from emhist import ImgHistogram
 
 
 MAG_INCREMENT_FACTOR = 1.1

@@ -46,7 +46,8 @@ import EMAN2
 import copy
 import sys
 import numpy
-from emimageutil import ImgHistogram, EMParentWin
+from emimageutil import EMParentWin
+from emhist import ImgHistogram
 from weakref import WeakKeyDictionary
 from pickle import dumps,loads
 from PyQt4.QtGui import QImage
