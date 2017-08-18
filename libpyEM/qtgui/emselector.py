@@ -1375,15 +1375,15 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 				keys = d.keys()
 				keys.sort() #alphabetical order
 				return_items = [EMDataHeaderItem(self,str(k)+" : "+str(d[k]),url,k,d[k]) for k in keys]
-			elif len(vals) == val_idx+1:
+			elif len(vals) == val_idx + 1:
 				val = d[vals[val_idx]]
-				return_items = [EMGenericItem(self,str(val))]
-			else: pass
+				return_items = [EMGenericItem(self, str(val))]
+			else:
+				pass
 
 		return return_items
-		
-		
-	def __get_file_item(self,file,directory):
+
+	def __get_file_item(self, file, directory):
 		"""
 		Called internally
 		@returns the correct item for the given file in the given directory, returns None in exceptional circumstances
@@ -1416,9 +1416,10 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 			item = EMFSPlotItem(self,file,full_name)
 		else:
 			if filt != "EM types":
-				item = EMGenericFileItem(self,file,full_name)
+				item = EMGenericFileItem(self, file, full_name)
 
 		return item
+
 
 class EMListItem(QtGui.QListWidgetItem):
 	"""
@@ -1426,7 +1427,8 @@ class EMListItem(QtGui.QListWidgetItem):
 	required by the EMSelector
 	"""
 	ICON = None
-	def __init__(self,delegate=None,text=""):
+
+	def __init__(self, delegate=None, text=""):
 		"""
 		@param delegate an instance of an EMBrowseDelegate - a strong reference is made to this
 		@param text the string that will be displayed in the QtGui.QListWidgetItem
@@ -1486,13 +1488,14 @@ class EMListItem(QtGui.QListWidgetItem):
 		Return a list of strings defining feasible view actions
 		"""
 		return None
-	
+
 	def default_view_action(self):
 		"""
 		Return the default view action
 		"""
 		return None
-	
+
+
 class EMUpArrowItem(EMListItem):
 	ICON = None
 	NAME = "go up a directory"
@@ -1510,10 +1513,10 @@ class EMUpArrowItem(EMListItem):
 		return EMUpArrowItem.ICON
 	
 	def get_name(self): return EMUpArrowItem.NAME
-	
-	
+
 	def get_url(self): return self.url
-	
+
+
 class EMDataListItem(EMListItem):
 	"""
 	Objects of this type are items that list EMData types -
@@ -1538,16 +1541,17 @@ class EMDataListItem(EMListItem):
 	def get_url(self):
 		return self.full_path
 
-	
 	def actions(self):
 		"""
 		Return a list of strings defining feasible view actions
 		"""
-		return [DELETE,SAVE_AS]
+		return [DELETE, SAVE_AS]
+
 
 class EMDataHeaderItem(EMListItem):
 	NAME = "EMData Header"
-	def __init__(self,delegate=None,text="",url="",key="",value=None):
+
+	def __init__(self, delegate=None, text="", url="", key="", value=None):
 		EMListItem.__init__(self,delegate,text)
 		self.url = url
 		self.key = key
@@ -1556,7 +1560,8 @@ class EMDataHeaderItem(EMListItem):
 	def get_name(self): return EMDataHeaderItem.NAME
 
 	def get_url(self):
-		return self.url +MDS+str(self.key)
+		return self.url + MDS + str(self.key)
+
 
 class EMStack2DCapableMixin:
 	"""
@@ -1567,11 +1572,14 @@ class EMStack2DCapableMixin:
 	def get_2d_stack(self):
 		raise NotImplementedException("Inheriting classes must supply this function")
 
-class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
+
+class EM2DStackItem(EMDataListItem, EMStack2DCapableMixin):
 	ICON = None
 	NAME = "2D stack"
-	def get_name(self): return EM2DStackItem.NAME
-	
+
+	def get_name(self):
+		return EM2DStackItem.NAME
+
 	def get_icon(self):
 		"""Supply your own Icon	"""
 		if EM2DStackItem.ICON is None:
@@ -1602,10 +1610,11 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 		if md.has_key("xform.projection"):
 			# the assumption is that they all have the xform.projection header attribute, which could be fatal
 			ret.append(EULER_VIEWER)
-		if md.has_key(PROJ_FILE_ATTR) and md.has_key(PART_FILE_ATTR): 
+		if md.has_key(PROJ_FILE_ATTR) and md.has_key(PART_FILE_ATTR):
 			ret.append(SIMMX_EULER_VIEWER)
-		return  ret
-	
+		return ret
+
+
 class EM3DStackItem(EMDataListItem):
 	ICON = None
 	NAME = "3D stack"
@@ -1620,10 +1629,12 @@ class EM3DStackItem(EMDataListItem):
 		if EM3DStackItem.ICON is None:
 			EM3DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images_3d.png")
 		return EM3DStackItem.ICON
+
 	# no preview for this item as of Feb 2009
 	def get_data(self):
 		return self.delegate.get_stack_data(self.full_path)
-	
+
+
 class EM2DImageItem(EMDataListItem):
 	ICON = None
 	NAME = "2D image"
@@ -1667,12 +1678,14 @@ class EM2DImageItem(EMDataListItem):
 		if md["ny"] < 1025 and md["nx"] < 1025:
 			ret.append(VIEWER_3D)
 			ret.append(PLOT_3D_VIEWER)
-			
+
 		return ret
-	
-class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
+
+
+class EM3DImageItem(EM2DImageItem, EMStack2DCapableMixin):
 	ICON = None
 	NAME = "3D image"
+
 	def get_name(self): return EM3DImageItem.NAME
 	def get_icon(self):
 		"""
@@ -1695,6 +1708,7 @@ class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
 	def get_2d_stack(self):
 		return self.delegate.get_stack_data(self.full_path)
 
+
 class EM2DMetaImageItem(EM2DImageItem):
 	"""
 	This is a 2D Image in a stack
@@ -1716,8 +1730,9 @@ class EM2DMetaImageItem(EM2DImageItem):
 		if md["ny"] < 1025 and md["nx"] < 1025:
 			ret.append(VIEWER_3D)
 			ret.append(PLOT_3D_VIEWER)
-			
+
 		return ret
+
 
 class EM3DMetaImageItem(EM3DImageItem):
 	"""
@@ -1727,21 +1742,22 @@ class EM3DMetaImageItem(EM3DImageItem):
 #	def get_name(self): return EM3DMetaImageItem.NAME
 	
 	def get_url(self):
-		return self.full_path+MDS+str(self.idx)
-	
+		return self.full_path + MDS + str(self.idx)
+
 	def actions(self):
 		"""
 		No Delete
 		"""
 		ret = [SAVE_AS, VIEWER_3D, VOLUME_VIEWER, SLICE_VIEWER, SINGLE_2D_VIEWER, MULTI_2D_VIEWER]
 		return ret
-	
+
+
 class EMFSPlotItem(EMListItem):
 	ICON = None
 	NAME = "fs plot"
-	
-	def __init__(self,delegate=None,text="",full_name=""):
-		EMListItem.__init__(self,delegate,text)
+
+	def __init__(self, delegate=None, text="", full_name=""):
+		EMListItem.__init__(self, delegate, text)
 		self.full_path = full_name
 	
 	def get_name(self): return EMFSPlotItem.NAME
@@ -1756,15 +1772,16 @@ class EMFSPlotItem(EMListItem):
 	
 	def get_data(self):
 		return EMPlot2DWidget.get_data_from_file(self.get_url())
-		
+
 	def get_url(self): return self.full_path
-	
+
 	def default_view_action(self): return PLOT_2D_VIEWER
-	
+
 	def actions(self):
 		ret = [DELETE, PLOT_2D_VIEWER]
-		return  ret
-	
+		return ret
+
+
 class EMFSFolderItem(EMListItem):
 	ICON = None
 	NAME = "fs folder"
@@ -1782,17 +1799,18 @@ class EMFSFolderItem(EMListItem):
 		if EMFSFolderItem.ICON is None:
 			EMFSFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
 		return EMFSFolderItem.ICON
-	
+
 	def get_url(self): return self.full_path
-	
+
 	def actions(self):
 		ret = [DELETE]
-		return  ret
+		return ret
+
 
 class EMBDBDelegate(EMBrowseDelegate):
-	def __init__(self,target):
+	def __init__(self, target):
 		self.target = weakref.ref(target)
-		self.directory_replacements = {"EMAN2DB":"bdb"}
+		self.directory_replacements = {"EMAN2DB": "bdb"}
 	
 	def get_data(self,full_path,idx=0):
 		"""
@@ -2051,23 +2069,26 @@ class EMBDBDelegate(EMBrowseDelegate):
 		a.file_name = file
 		return a
 		
-	def __get_database_directory(self,file):
+	def __get_database_directory(self, file):
 		"""
 		Get the database where EMAN2DB should be opening in order to open the given file
 		e.g. if db path is /home/someone/work/EMAN2DB/data.bdb will return /home/someone/work
 		"""
 		idx1 = file.find("EMAN2DB")
 		if idx1 > 0:
-			return file[0:idx1-1]
-		else: return None
-	
+			return file[0:idx1 - 1]
+		else:
+			return None
+
+
 class EMBDBFolderItem(EMListItem):
 	ICON = None
 	NAME = "db folder"
-	def __init__(self,delegate=None,text="",real_directory=""):
-		EMListItem.__init__(self,delegate,text)
+
+	def __init__(self, delegate=None, text="", real_directory=""):
+		EMListItem.__init__(self, delegate, text)
 		self.full_path = real_directory
-	
+
 	def get_name(self): return EMBDBFolderItem.NAME
 	
 	def get_icon(self):
@@ -2078,13 +2099,15 @@ class EMBDBFolderItem(EMListItem):
 			EMBDBFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
 
 		return EMBDBFolderItem.ICON
-	
+
 	def get_url(self):
 		return self.full_path
+
 
 class EMBDBDirectoryItem(EMListItem):
 	NAME = "bdb directory"
 	ICON = None
+
 	def __init__(self,delegate,text,real_directory):
 		EMListItem.__init__(self,delegate,text)
 		self.full_path = real_directory
@@ -2099,16 +2122,18 @@ class EMBDBDirectoryItem(EMListItem):
 			EMBDBDirectoryItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
 
 		return EMBDBDirectoryItem.ICON
-	
+
 	def get_url(self): return self.full_path
+
 
 class EMBDBItem(EMListItem):
 	ICON = None
 	NAME = "bdb dict"
-	def __init__(self,delegate,text,db_url):
-		EMListItem.__init__(self,delegate,text)
+
+	def __init__(self, delegate, text, db_url):
+		EMListItem.__init__(self, delegate, text)
 		self.full_path = db_url
-		
+
 	def get_name(self): return EMBDBItem.NAME
 	
 	def get_icon(self):
@@ -2122,20 +2147,23 @@ class EMBDBItem(EMListItem):
 
 	def get_url(self): return self.full_path
 
+
 class EMBDBKeyValueItem(EMListItem):
 	"""
 	Most basic BDB item, basic string display
 	"""
 	NAME = "BDB key value"
-	def __init__(self,delegate=None,text="",url="",key=""):
-		EMListItem.__init__(self,delegate,text)
+
+	def __init__(self, delegate=None, text="", url="", key=""):
+		EMListItem.__init__(self, delegate, text)
 		self.url = url
 		self.key = key
-		
+
 	def get_name(self): return EMBDBKeyValueItem.NAME
 
 	def get_url(self):
-		return self.url +MDS+str(self.key)
+		return self.url + MDS + str(self.key)
+
 
 class EMBDBDictItem(EMListItem):
 	"""
@@ -2143,8 +2171,9 @@ class EMBDBDictItem(EMListItem):
 	"""
 	NAME = "BDB dict"
 	ICON = None
-	def __init__(self,delegate=None,text="",url="",key=""):
-		EMListItem.__init__(self,delegate,text)
+
+	def __init__(self, delegate=None, text="", url="", key=""):
+		EMListItem.__init__(self, delegate, text)
 		self.url = url
 		self.key = key
 		
@@ -2162,21 +2191,25 @@ class EMBDBDictItem(EMListItem):
 
 		return EMBDBDictItem.ICON
 
+
 class EMGenericItem(EMListItem):
 	"""
 	A dead end item, displays a value. Has no metadata and there is no consequence for clicking on it. 
 	"""
 	NAME = "generic"
-	def __init__(self,delegate=None,text="",key=None):
-		EMListItem.__init__(self,delegate,text)
+
+	def __init__(self, delegate=None, text="", key=None):
+		EMListItem.__init__(self, delegate, text)
 		self.key = key
-		
+
 	def get_name(self): return EMGenericItem.NAME
+
 
 class EMGenericFileItem(EMGenericItem):
 	"""
 	A generic item that can be deleted
 	"""
+
 	def actions(self):
 		ret = [DELETE]
 		return  ret
