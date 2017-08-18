@@ -2662,7 +2662,7 @@ class EMMXDataCache:
 		"""
 		raise NotImplementedException
 
-	def __len__(self,idx):
+	def __len__(self):
 		"""
 		must be able to get the length
 		"""
