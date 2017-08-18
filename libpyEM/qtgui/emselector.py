@@ -61,21 +61,21 @@ EMAN2DB = "EMAN2DB"
 MDS = "%" # metadata separator
 
 class EMActionDelegate:
-	'''
+	"""
 	interface for action delegates - they are notified when the widget owning them is closed
-	'''
+	"""
 	def closeEvent(self,event): pass
 	
 class EMItemAction:
-	'''
+	"""
 	interface for single item actions
-	'''
+	"""
 	def item_action(self,item,target): raise NotImplementedException
 	
 class EMMultiItemAction:
-	'''
+	"""
 	interface for multiple item actions
-	'''
+	"""
 	def multi_item_action(self,items,target): raise NotImplementedException
 
 
@@ -121,10 +121,10 @@ class EMDeleteItemAction(EMItemAction, EMMultiItemAction, EMActionDelegate):
 
 
 def DataDisplayModuleTemplate(Type, get_data_attr="get_data", data_functors=[], usescenegraph=False):
-	'''
+	"""
 	This would be similar to policy based design using templated inheritance
 	Type is a type of EMAN2 display module. Search for DataDisplayModuleTemplate
-	'''
+	"""
 
 	class DataDisplayModule(EMItemAction, EMActionDelegate):
 		def __init__(self):
@@ -225,10 +225,10 @@ def DataDisplayModuleTemplate(Type, get_data_attr="get_data", data_functors=[], 
 
 
 class EM2DStackPreviewAction(DataDisplayModuleTemplate(EMImageMXWidget, "get_2d_stack"), EMMultiItemAction):
-	'''
+	"""
 	This is like a template specialization of the DataDisplayModuleTemplate in the case of
 	using an EMImageMXWidget. The reason is because we support a special "Preview Subset" action.
-	'''
+	"""
 
 	def multi_item_action(self, items, target):
 		single_mode = target.single_preview_only()
@@ -273,16 +273,16 @@ SAVE_SUBSET = "Save Subset"
 
 
 def EMSelectorBaseTemplate(Type):
-	'''
+	"""
 	This is templated inheritance. I need the selector to be a dialog, and I need it to be a normal widget.
 	See the EMSelectorDialogType and EMBrowserType
 	Types currently in use are the QtGui.QWidget and the QtGui.QDialog
-	'''
+	"""
 	class EMSelectorBase(Type):
 		def __init__(self, single_selection=False):
-			'''
+			"""
 			@param single_selection - should selections be limited to singles?
-			'''
+			"""
 			Type.__init__(self,None)
 			self.setFocusPolicy(Qt.StrongFocus)
 #			self.module=weakref.ref(module) # Avoid strong cycle
@@ -349,13 +349,13 @@ def EMSelectorBaseTemplate(Type):
 			QtCore.QObject.connect(self.cancel_button, QtCore.SIGNAL("clicked(bool)"),self.cancel_button_clicked)
 		
 		def ok_button_clicked(self,bool):
-			''' Slot for OK button '''
+			""" Slot for OK button """
 			#print "EMSelectorBase.ok_button_clicked"
 			self.emit(QtCore.SIGNAL("ok"),self.selections)
 			self.emit(QtCore.SIGNAL("oky"))
 		
 		def cancel_button_clicked(self, bool):
-			''' Slot for Cancel button '''
+			""" Slot for Cancel button """
 			# print "EMSelectorBase.cancel_button_clicked"
 			self.emit(QtCore.SIGNAL("cancel"), self.selections)
 
@@ -363,18 +363,18 @@ def EMSelectorBaseTemplate(Type):
 			pass
 
 		def set_selection_text(self, text):
-			'''
+			"""
 			Selection label is a QLabel, by default its text is "Save As", but you can change it
 			Called in emsprworkflow
-			'''
+			"""
 			self.selection_label.setText(text)
 		
 		def time_out(self):
-			'''
+			"""
 			This function takes care of automatic updates - if a url is detected to have changed
 			then so does the information we display
 			This is somewhat inefficient but it works
-			'''
+			"""
 			if self.lock: return
 			self.lock = True
 			for idx,widget in enumerate(self.list_widgets):
@@ -433,10 +433,10 @@ def EMSelectorBaseTemplate(Type):
 			self.__redo_list_widget_contents()
 		
 		def __redo_list_widget_contents(self):
-			'''
+			"""
 			Clears the widgets and refreshes widget 0
 			This is not the best way of doing it
-			'''
+			"""
 			self.lock = True
 			directory = folderize(self.list_widgets[0].get_url())
 			for list_widget in self.list_widgets: list_widget.clear()
@@ -469,15 +469,15 @@ def EMSelectorBaseTemplate(Type):
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("itemSelectionChanged()"),self.selection_changed)
 
 		def list_widget_dclicked(self,item):
-			'''
+			"""
 			Inheriting class should supply specialize this
-			'''
+			"""
 			pass
 		
 		def list_widget_context_menu_event(self,event):
-			'''
+			"""
 			Inheriting class should supply specialize this
-			'''
+			"""
 			pass
 		
 		def __go_up_a_directory(self,item=None):
@@ -541,10 +541,10 @@ def EMSelectorBaseTemplate(Type):
 			self.lock = False
 			
 		def update_selections(self):
-			'''
+			"""
 			Makes the list of currently selected files accurate and up to date. Called when
 			something has been clicked in a a list widget
-			'''
+			"""
 			self.selections = []
 			items = self.current_list_widget.selectedItems()
 			if len(items) > 0:
@@ -552,9 +552,9 @@ def EMSelectorBaseTemplate(Type):
 				self.selections = self.valid_emdata_urls(items)
 					
 		def valid_emdata_urls(self,items):
-			'''
+			"""
 			Get the valid EMData urls from the list of items. Useful in EMAN2 when selecting images, etc
-			'''
+			"""
 			# This ALWAYS required save files to be valid EMData objects, which was not always desirable...
 			#return [item.emdata_save_as_url() for item in items if item.emdata_save_as_url() != None]
 		
@@ -574,9 +574,9 @@ def EMSelectorBaseTemplate(Type):
 				QtCore.QObject.connect(self.current_list_widget,QtCore.SIGNAL("itemSelectionChanged()"), self.current_item_changed)
 #				
 		def current_item_changed(self):
-			'''
+			"""
 			This function handles any change in current item
-			'''
+			"""
 			if self.lock: return
 			if self.current_list_widget is None: return 
 			item = self.current_list_widget.currentItem()
@@ -648,14 +648,14 @@ def EMSelectorBaseTemplate(Type):
 			return solution
 						
 		def __load_url(self,url,list_widget):
-			'''
+			"""
 			A way to load items in the list_widget using a url
 			especially at start up
-			'''
+			"""
 			get_application().setOverrideCursor(Qt.BusyCursor)
 			
 			list_widget.clear()
-			if (list_widget == self.list_widgets[0]):
+			if list_widget == self.list_widgets[0]:
 				self.lock = True
 				a = EMUpArrowItem(None,"../",url)
 				list_widget.addItem(a)
@@ -683,10 +683,10 @@ def EMSelectorBaseTemplate(Type):
 			return ret
 		
 		def __load_url_from_item(self,list_widget,item):
-			'''
+			"""
 			A way to load items in the list_widget using data from the item
 			i.e. user clicked on the item
-			'''
+			"""
 			return self.__load_url(item.get_url(),list_widget)
 			
 	
@@ -743,9 +743,9 @@ class EMBrowser(EMBrowserType):
 		EMBrowserType.closeEvent(self, event)
 	
 	def __init_action_delegates(self):
-		'''
+		"""
 		All of the available actions for the context menu (right click)
-		'''
+		"""
 		self.action_delegates = {}
 		if self.usescenegraph:
 			from emscene3d import EMScene3D
@@ -803,10 +803,10 @@ class EMBrowser(EMBrowserType):
 		self.preview_item(item)
 
 	def preview_item(self,item):
-		'''
+		"""
 		previews the item (loads an appropriate display module) if possible
 		Returns True if the item was loaded into a display module, otherwise returns False
-		'''
+		"""
 		preview_occured = False
 		get_application().setOverrideCursor(Qt.BusyCursor)
 		view_action = item.default_view_action()
@@ -818,9 +818,9 @@ class EMBrowser(EMBrowserType):
 		return preview_occured
 	
 	def list_widget_context_menu_event(self,event):
-		'''
+		"""
 		Dynamic menu creation depending on item type
-		'''
+		"""
 		event.accept()
 		focus = self.current_list_widget
 		l = focus
@@ -885,9 +885,9 @@ class EMBrowser(EMBrowserType):
 		menu.exec_(event.globalPos())
 		
 	def menu_action_triggered(self,action):
-		'''
+		"""
 		Slot for right click menu
-		'''
+		"""
 		items = self.menu_selected_items
 		
 		total = len(items)
@@ -926,18 +926,18 @@ class EMSelectorDialog(EMSelectorDialogType):
 		self.setWindowTitle("EMAN2 Selector")
 		
 	def exec_(self):
-		'''
+		"""
 		Wraps QtGui.QDialog.exec_
 		@return a list of selected filenames
-		'''
+		"""
 		QtGui.QDialog.exec_(self)
 		return self.dialog_result
 	
 	def set_validator(self,validator):
-		'''
+		"""
 		Sets the validator which is used only in save_as mode (when this is being used as a file selecting dialog)
 		An example validator is an emsave.EMSaveImageValidator
-		'''
+		"""
 		self.validator = validator
 		
 	def get_current_directory(self):
@@ -970,10 +970,10 @@ class EMSelectorDialog(EMSelectorDialogType):
 		return directory
 	
 	def update_selections(self):
-		'''
+		"""
 		Makes the list of currently selected files accurate and up to date. Called when
 		something has been clicked in a a list widget
-		'''
+		"""
 		# now make the list of selections reflect what is need to display them using
 		EMSelectorDialogType.update_selections(self)
 		
@@ -1043,9 +1043,9 @@ class EMSelectorDialog(EMSelectorDialogType):
 	
 	
 class EMListWidget(QtGui.QListWidget):
-	'''
+	"""
 	Customized ListWidget as displayed in the browser
-	'''
+	"""
 	def __init__(self,target,*args):
 		self.target = weakref.ref(target)
 		QtGui.QListWidget.__init__(self,*args)
@@ -1059,9 +1059,9 @@ class EMListWidget(QtGui.QListWidget):
 		self.target().list_widget_context_menu_event(event)
 		
 	def reset_vars(self):
-		'''
+		"""
 		Can't use reset as a name because the QListWidget has it already, and it's vital
-		'''
+		"""
 		self.mod_time = None # keeps track of mod time, used to provoke auto list widget repopulation
 		self.url = None # keep track of the url that was used to populate the list widget
 		self.delegate = None # the delegate the populated the list widget
@@ -1076,129 +1076,129 @@ class EMListWidget(QtGui.QListWidget):
 	def set_delegate(self,delegate): self.delegate = delegate
 
 class EMBrowseDelegate:
-	'''
+	"""
 	Base class for objects that can read urls and return lists of ListWidgetItems
 	to the EMSelector
-	'''
+	"""
 	def __init__(self): pass
 	
 	def handles_url(self,url):
-		'''
+		"""
 		Definitive way of testing whether or not the object handles the url
 		@param url a string, e.g. "/home/d.woolford/", "sludtke@10.10.10.10:~/test/"
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def get_items(self,url):
-		'''
+		"""
 		Get a list of EMListItems for display in the browser
 		@return a list of EMListItems
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def get_data(self,full_path,idx=0):
-		'''
+		"""
 		EMListItems call this function
 		Get a fully loaded EMData.
 		This is so the read routine is in a single location and makes the EMListItems generic
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 		
 	def get_metadata(self,full_path,idx=0):
-		'''
+		"""
 		EMListItems call this function
 		Get the metadata, typically EMData header information. Must return a dict, or similar
 		This is so the read routine is in a single location and makes the EMListItems generic
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def get_stack_data(self,full_path):
-		'''
+		"""
 		EMListItems call this function
 		Might return a cache, of if that's not possible, a list of EMData objects, for example.
 		The return value should 'look' like a list
-		'''
+		"""
 		#from image.emimagemx import EMLightWeightParticleCache
 		#return EMLightWeightParticleCache.from_file(full_path)
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def url_mod_time(self,url):
-		'''
+		"""
 		Get the last time the url was modified
 		eg. return os.stat(url)[-2]
 		May return None to indicate the call is not valid/supported - this will mean the corresponding list widget will not be automatically updated
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def parent_url(self,url):
-		'''
+		"""
 		Get the parent url - for example, if the up arrow is hit
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def delete_url(self,url):
-		'''
+		"""
 		delete the url
-		'''
+		"""
 		raise NotImplementedException("Inheriting classes must supply this functionality")
 	
 	def emdata_save_as_url(self,url):
-		'''
+		"""
 		What would be the name of the EMData if this url where being used to call EMData.write_image
 		May return None to indicate that the function call makes no sense
-		'''
+		"""
 		return None
 
 def folderize(url):
-	'''
+	"""
 	makes sure the last char in the url is "/" 
-	'''
+	"""
 	if url[-1] == "/": return url
 	else: return url + "/"
 
 class EMFileSystemDelegate(EMBrowseDelegate):
-	'''
+	"""
 	The Delegate for reading file system contents 
 	Main function is to return the the correct list items to the EMSelector 
-	'''
+	"""
 	
 	def __init__(self,target):
 		self.target = weakref.ref(target)
 		self.threed_dim_limit = 128
 		
 	def get_data(self,full_path,idx=0):
-		'''
+		"""
 		All items delegate by this should call this function to get a fully loaded EMData
 		That way the read routine is in the one location
-		'''
+		"""
 		e = EMData()
 		e.read_image(full_path,idx)
 		return e
 		
 	def get_metadata(self,full_path,idx=0):
-		'''
+		"""
 		All items that load metadata using EMData io call this function
-		'''
+		"""
 		e = EMData()
 		e.read_image(full_path,idx, True)
 		return e.get_attr_dict()
 	
 	def get_stack_data(self,full_path):
-		'''
+		"""
 		This function is called by EM2DStackItem and EM3DImageItem
 		Return is a cache that can be treated like a list of EMData objects
 		Can give speed ups
-		'''
+		"""
 		from image.emimagemx import EMLightWeightParticleCache,EM3DDataListCache
 		md = self.get_metadata(full_path,0)
 		if md["nz"] > 1: return EM3DDataListCache(full_path)
 		else: return EMLightWeightParticleCache.from_file(full_path)
 	
 	def url_mod_time(self,url):
-		'''
+		"""
 		Get the last time the url was modified
 		May return None to indicate the call is not valid/supported - this will mean the corresponding list widget will not be automatically updated
-		'''
+		"""
 		if os.path.exists(url): return os.stat(url)[-2]
 		else: return None
 	
@@ -1206,9 +1206,9 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 		return url
 	
 	def handles_url(self,url):
-		'''
+		"""
 		Expected interface Delegate::handles_url
-		'''
+		"""
 		if "EMAN2DB" in url: return False
 		
 		vals = url.split(MDS)
@@ -1277,16 +1277,16 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 		return solution
 	
 	def get_items(self,url):
-		'''
-		'''
+		"""
+		"""
 		if os.path.isdir(url): return self.__get_dir_items(url)
 		elif os.path.isfile(url): return self.__get_file_metadata_items(url)
 		else: return self.__get_metadata_items(url)
 		
 	def __get_dir_items(self,url):
-		'''
+		"""
 		This function called when the url is a directory
-		'''
+		"""
 		if not os.path.isdir(url): raise RuntimeError("%s is not a directory" %url)
 		
 		dirs, files = get_files_and_directories(url)
@@ -1316,9 +1316,9 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 	
 	
 	def __get_file_metadata_items(self,url):
-		'''
+		"""
 		This function called when the url is a file
-		'''
+		"""
 		if not os.path.isfile(url): raise RuntimeError("%s is not a file" %url)
 		
 		return_items = []
@@ -1372,10 +1372,10 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 		
 		
 	def __get_file_item(self,file,directory):
-		'''
+		"""
 		Called internally
 		@returns the correct item for the given file in the given directory, returns None in exceptional circumstances
-		'''
+		"""
 		filt = self.target().get_file_filter()
 		if file[0] == '.': return None
 		if file[-1] == '~': return None
@@ -1409,16 +1409,16 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 		return item
 
 class EMListItem(QtGui.QListWidgetItem):
-	'''
+	"""
 	Base class definition providing the pubic interface of list widget items as 
 	required by the EMSelector
-	'''
+	"""
 	ICON = None
 	def __init__(self,delegate=None,text=""):
-		'''
+		"""
 		@param delegate an instance of an EMBrowseDelegate - a strong reference is made to this
 		@param text the string that will be displayed in the QtGui.QListWidgetItem
-		'''
+		"""
 		QtGui.QListWidgetItem.__init__(self,self.get_icon(),text)
 		self.delegate = delegate
 		self.context_menu_options = {} # this is used for running context menu actions
@@ -1429,56 +1429,56 @@ class EMListItem(QtGui.QListWidgetItem):
 	def get_delegate(self): return self.delegate
 	
 	def get_name(self):
-		'''	Must return a unique name'''
+		"""	Must return a unique name"""
 		raise NotImplementedError("Inheriting classes must supply this function (%s)" %self)
 	
 	def get_icon(self):
-		'''Supply your own Icon'''
+		"""Supply your own Icon"""
 		if EMListItem.ICON is None:
 			EMListItem.ICON = QtGui.QIcon(get_image_directory() + "/File.png")
 		return EMListItem.ICON
 
 	def get_attr_dict(self):
-		'''
+		"""
 		A wrapper for get_metadata - originally added to allow
 		a generic interface in EMStackSaveDialog
 		Unfortunately needs to stay for the time being
-		'''
+		"""
 		return self.get_metadata()
 	
 	def emdata_save_as_url(self):
-		'''
+		"""
 		What would be the name of the EMData if this url where being used to call EMData.write_image
 		May return None to indicate that the function call makes no sense
-		'''
+		"""
 		return None
 	
 	def get_url(self):
-		'''	Returns the file name path, for BDB stuff this should in full bdb syntax'''
+		"""	Returns the file name path, for BDB stuff this should in full bdb syntax"""
 		return None
 	
 	def get_data(self):
-		'''
+		"""
 		Generally returns an EMData objec. May return a list of floats, for example.
 		Is customized to return a list of EMDatas, or a Cache, in some instances
-		'''
+		"""
 		return None
 	
 	def get_metadata(self):
-		'''
+		"""
 		Returns a dictionary if defined
-		'''
+		"""
 		return None
 	def actions(self):
-		'''
+		"""
 		Return a list of strings defining feasible view actions
-		'''
+		"""
 		return None
 	
 	def default_view_action(self):
-		'''
+		"""
 		Return the default view action
-		'''
+		"""
 		return None
 	
 class EMUpArrowItem(EMListItem):
@@ -1490,9 +1490,9 @@ class EMUpArrowItem(EMListItem):
 		self.url = url # this should be the url that can be handed to EMBrowseDelegate.parent_url
 
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMUpArrowItem.ICON is None:
 			EMUpArrowItem.ICON = QtGui.QIcon(get_image_directory() + "/up_arrow.png")
 		return EMUpArrowItem.ICON
@@ -1503,11 +1503,11 @@ class EMUpArrowItem(EMListItem):
 	def get_url(self): return self.url
 	
 class EMDataListItem(EMListItem):
-	'''
+	"""
 	Objects of this type are items that list EMData types -
 	they happen to have the fact that they can be deleted and saved in common, that is all
 	ABSTRACT
-	'''
+	"""
 	def __init__(self,delegate=None,text="",full_name=""):
 		EMListItem.__init__(self,delegate,text)
 		self.full_path = full_name
@@ -1528,9 +1528,9 @@ class EMDataListItem(EMListItem):
 
 	
 	def actions(self):
-		'''
+		"""
 		Return a list of strings defining feasible view actions
-		'''
+		"""
 		return [DELETE,SAVE_AS]
 
 class EMDataHeaderItem(EMListItem):
@@ -1547,11 +1547,11 @@ class EMDataHeaderItem(EMListItem):
 		return self.url +MDS+str(self.key)
 
 class EMStack2DCapableMixin:
-	'''
+	"""
 	a 2D stack capable item is something that knows how to supply
 	data to the EMImageMX set_data function.
 	It's a mixin
-	'''
+	"""
 	def get_2d_stack(self):
 		raise NotImplementedException("Inheriting classes must supply this function")
 
@@ -1561,7 +1561,7 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 	def get_name(self): return EM2DStackItem.NAME
 	
 	def get_icon(self):
-		'''Supply your own Icon	'''
+		"""Supply your own Icon	"""
 		if EM2DStackItem.ICON is None:
 			EM2DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images.png")
 		return EM2DStackItem.ICON
@@ -1569,7 +1569,7 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 	def emdata_save_as_url(self): return self.delegate.emdata_save_as_url(self.get_url())
 	
 	def get_data(self):
-		'''This one returns a list'''
+		"""This one returns a list"""
 		return self.delegate.get_stack_data(self.full_path)
 	
 	def get_2d_stack(self):
@@ -1602,9 +1602,9 @@ class EM3DStackItem(EMDataListItem):
 	def emdata_save_as_url(self): return self.delegate.emdata_save_as_url(self.get_url())
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EM3DStackItem.ICON is None:
 			EM3DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images_3d.png")
 		return EM3DStackItem.ICON
@@ -1616,9 +1616,9 @@ class EM2DImageItem(EMDataListItem):
 	ICON = None
 	NAME = "2D image"
 	def __init__(self,delegate=None,text="",full_name="",idx=0):
-		'''
+		"""
 		Have to supply init because we need the idx
-		'''
+		"""
 		EMDataListItem.__init__(self,delegate,text,full_name)
 		self.idx = idx
 		
@@ -1630,9 +1630,9 @@ class EM2DImageItem(EMDataListItem):
 	def get_name(self): return EM2DImageItem.NAME
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EM2DImageItem.ICON is None:
 			EM2DImageItem.ICON = QtGui.QIcon(get_image_directory() + "/single_image.png")
 		return EM2DImageItem.ICON
@@ -1663,9 +1663,9 @@ class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
 	NAME = "3D image"
 	def get_name(self): return EM3DImageItem.NAME
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EM3DImageItem.ICON is None:
 			EM3DImageItem.ICON = QtGui.QIcon(get_image_directory() + "/single_image_3d.png")
 		return EM3DImageItem.ICON
@@ -1684,9 +1684,9 @@ class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
 		return self.delegate.get_stack_data(self.full_path)
 
 class EM2DMetaImageItem(EM2DImageItem):
-	'''
+	"""
 	This is a 2D Image in a stack
-	'''
+	"""
 #	NAME = "2D meta image"
 #	def get_name(self): return EM2DMetaImageItem.NAME
 	
@@ -1694,9 +1694,9 @@ class EM2DMetaImageItem(EM2DImageItem):
 		return self.full_path+MDS+str(self.idx)
 	
 	def actions(self):
-		'''
+		"""
 		No DELETE
-		'''
+		"""
 		ret = [SAVE_AS, SINGLE_2D_VIEWER]
 
 		md = self.get_metadata()
@@ -1708,9 +1708,9 @@ class EM2DMetaImageItem(EM2DImageItem):
 		return ret
 
 class EM3DMetaImageItem(EM3DImageItem):
-	'''
+	"""
 	This is a 3D Image in a stack
-	'''
+	"""
 #	NAME = "3D meta image"
 #	def get_name(self): return EM3DMetaImageItem.NAME
 	
@@ -1718,9 +1718,9 @@ class EM3DMetaImageItem(EM3DImageItem):
 		return self.full_path+MDS+str(self.idx)
 	
 	def actions(self):
-		'''
+		"""
 		No Delete
-		'''
+		"""
 		ret = [SAVE_AS, VIEWER_3D, VOLUME_VIEWER, SLICE_VIEWER, SINGLE_2D_VIEWER, MULTI_2D_VIEWER]
 		return ret
 	
@@ -1735,9 +1735,9 @@ class EMFSPlotItem(EMListItem):
 	def get_name(self): return EMFSPlotItem.NAME
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMFSPlotItem.ICON is None:
 			EMFSPlotItem.ICON = QtGui.QIcon(get_image_directory() + "/plot.png")
 		return EMFSPlotItem.ICON
@@ -1764,9 +1764,9 @@ class EMFSFolderItem(EMListItem):
 	def get_name(self): return EMFSFolderItem.NAME
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMFSFolderItem.ICON is None:
 			EMFSFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
 		return EMFSFolderItem.ICON
@@ -1783,38 +1783,38 @@ class EMBDBDelegate(EMBrowseDelegate):
 		self.directory_replacements = {"EMAN2DB":"bdb"}
 	
 	def get_data(self,full_path,idx=0):
-		'''
+		"""
 		All items delegate by this should call this function to get a fully loaded EMData
 		That way the read routine is in the one location
-		'''
+		"""
 		e = EMData()
 		e.read_image(db_convert_path(full_path),idx)
 		return e
 		
 	def get_metadata(self,full_path,idx=0):
-		'''
+		"""
 		All items that load metadata using EMData io call this function
-		'''
+		"""
 		db_name =  db_convert_path(full_path)
 		db = db_open_dict(db_name,ro=True)
 		data = db.get_header(idx)
 		return data
 	
 	def get_stack_data(self,full_path):
-		'''
+		"""
 		This function is called by EM2DStackItem and EM3DImageItem
 		Return is a cache that can be treated like a list of EMData objects
-		'''
+		"""
 		from image.emimagemx import EMLightWeightParticleCache,EM3DDataListCache
 		md = self.get_metadata(full_path,0)
 		if md["nz"] > 1: return EM3DDataListCache(db_convert_path(full_path))
 		else: return EMLightWeightParticleCache.from_file(db_convert_path(full_path))
 	
 	def url_mod_time(self,url):
-		'''
+		"""
 		Get the last time the url was modified
 		May return None to indicate the call is not valid/supported - this will mean the corresponding list widget will not be automatically updated
-		'''
+		"""
 		if os.path.exists(url): return os.stat(url)[-2]
 		else: return None
 	
@@ -1946,15 +1946,15 @@ class EMBDBDelegate(EMBrowseDelegate):
 		return return_items
 		
 	def __get_bdb_directory_items(self,url):
-		
-		'''
+
+		"""
 		Displays the file/folder information in the directory /home/someonone/data/EMAN2DB
 		this will typically consist of .bdb (database) files, but may contain folders and other
 		EMAN2DB directories.
 		
 		At the moment I have only written the code so that it supports the interrogation of the .bdb
 		files, and am displaying the other folders only as a I reminder that they need to be dealt with
-		'''
+		"""
 		#if not (os.path.exists(url) and (url.endswith("EMAN2DB") or url.endswith("EMAN2DB/"))):\
 		if not self.handles_url(url): raise RuntimeError("Unknown url %s" %url)
 
@@ -2040,10 +2040,10 @@ class EMBDBDelegate(EMBrowseDelegate):
 		return a
 		
 	def __get_database_directory(self,file):
-		'''
+		"""
 		Get the database where EMAN2DB should be opening in order to open the given file
 		e.g. if db path is /home/someone/work/EMAN2DB/data.bdb will return /home/someone/work
-		'''
+		"""
 		idx1 = file.find("EMAN2DB")
 		if idx1 > 0:
 			return file[0:idx1-1]
@@ -2059,9 +2059,9 @@ class EMBDBFolderItem(EMListItem):
 	def get_name(self): return EMBDBFolderItem.NAME
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMBDBFolderItem.ICON is None:
 			EMBDBFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
 
@@ -2080,9 +2080,9 @@ class EMBDBDirectoryItem(EMListItem):
 	def get_name(self): return EMBDBDirectoryItem.NAME
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMBDBDirectoryItem.ICON is None:
 			EMBDBDirectoryItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
 
@@ -2100,9 +2100,9 @@ class EMBDBItem(EMListItem):
 	def get_name(self): return EMBDBItem.NAME
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMBDBItem.ICON is None:
 			EMBDBItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
 
@@ -2111,9 +2111,9 @@ class EMBDBItem(EMListItem):
 	def get_url(self): return self.full_path
 
 class EMBDBKeyValueItem(EMListItem):
-	'''
+	"""
 	Most basic BDB item, basic string display
-	'''
+	"""
 	NAME = "BDB key value"
 	def __init__(self,delegate=None,text="",url="",key=""):
 		EMListItem.__init__(self,delegate,text)
@@ -2126,9 +2126,9 @@ class EMBDBKeyValueItem(EMListItem):
 		return self.url +MDS+str(self.key)
 
 class EMBDBDictItem(EMListItem):
-	'''
+	"""
 	Most basic BDB item, basic string display
-	'''
+	"""
 	NAME = "BDB dict"
 	ICON = None
 	def __init__(self,delegate=None,text="",url="",key=""):
@@ -2142,18 +2142,18 @@ class EMBDBDictItem(EMListItem):
 		return self.url +MDS+str(self.key)
 	
 	def get_icon(self):
-		'''
+		"""
 		Supply your own Icon
-		'''
+		"""
 		if EMBDBDictItem.ICON is None:
 			EMBDBDictItem.ICON = QtGui.QIcon(get_image_directory() + "/Bag.png")
 
 		return EMBDBDictItem.ICON
 
 class EMGenericItem(EMListItem):
-	'''
+	"""
 	A dead end item, displays a value. Has no metadata and there is no consequence for clicking on it. 
-	'''
+	"""
 	NAME = "generic"
 	def __init__(self,delegate=None,text="",key=None):
 		EMListItem.__init__(self,delegate,text)
@@ -2162,9 +2162,9 @@ class EMGenericItem(EMListItem):
 	def get_name(self): return EMGenericItem.NAME
 
 class EMGenericFileItem(EMGenericItem):
-	'''
+	"""
 	A generic item that can be deleted
-	'''
+	"""
 	def actions(self):
 		ret = [DELETE]
 		return  ret
