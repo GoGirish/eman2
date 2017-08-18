@@ -1584,10 +1584,8 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 	
 	def actions(self):
 		from e2simmx import PROJ_FILE_ATTR,PART_FILE_ATTR
-		ret = [DELETE,SAVE_AS]
-		ret.append(SINGLE_2D_VIEWER)
-		ret.append(MULTI_2D_VIEWER)
-		
+		ret = [DELETE, SAVE_AS, SINGLE_2D_VIEWER, MULTI_2D_VIEWER]
+
 		md = self.get_metadata()
 		if md.has_key("xform.projection"):
 			# the assumption is that they all have the xform.projection header attribute, which could be fatal
@@ -1650,9 +1648,8 @@ class EM2DImageItem(EMDataListItem):
 	def default_view_action(self): return SINGLE_2D_VIEWER
 	
 	def actions(self):
-		ret = [DELETE,SAVE_AS]
-		ret.append(SINGLE_2D_VIEWER)
-		
+		ret = [DELETE, SAVE_AS, SINGLE_2D_VIEWER]
+
 		md = self.get_metadata()
 		ret.append(PLOT_2D_VIEWER)
 		if md["ny"] < 1025 and md["nx"] < 1025:
@@ -1680,12 +1677,7 @@ class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
 		else: return VIEWER_3D
 	
 	def actions(self):
-		ret = [DELETE,SAVE_AS]
-		ret.append(VIEWER_3D)
-		ret.append(VOLUME_VIEWER)
-		ret.append(SLICE_VIEWER)
-		ret.append(SINGLE_2D_VIEWER)
-		ret.append(MULTI_2D_VIEWER)
+		ret = [DELETE, SAVE_AS, VIEWER_3D, VOLUME_VIEWER, SLICE_VIEWER, SINGLE_2D_VIEWER, MULTI_2D_VIEWER]
 		return ret
 	
 	def get_2d_stack(self):
@@ -1705,9 +1697,8 @@ class EM2DMetaImageItem(EM2DImageItem):
 		'''
 		No DELETE
 		'''
-		ret = [SAVE_AS]
-		ret.append(SINGLE_2D_VIEWER)
-		
+		ret = [SAVE_AS, SINGLE_2D_VIEWER]
+
 		md = self.get_metadata()
 		ret.append(PLOT_2D_VIEWER)
 		if md["ny"] < 1025 and md["nx"] < 1025:
@@ -1730,12 +1721,7 @@ class EM3DMetaImageItem(EM3DImageItem):
 		'''
 		No Delete
 		'''
-		ret = [SAVE_AS]
-		ret.append(VIEWER_3D)
-		ret.append(VOLUME_VIEWER)
-		ret.append(SLICE_VIEWER)
-		ret.append(SINGLE_2D_VIEWER)
-		ret.append(MULTI_2D_VIEWER)
+		ret = [SAVE_AS, VIEWER_3D, VOLUME_VIEWER, SLICE_VIEWER, SINGLE_2D_VIEWER, MULTI_2D_VIEWER]
 		return ret
 	
 class EMFSPlotItem(EMListItem):
@@ -1764,8 +1750,7 @@ class EMFSPlotItem(EMListItem):
 	def default_view_action(self): return PLOT_2D_VIEWER
 	
 	def actions(self):
-		ret = [DELETE]
-		ret.append(PLOT_2D_VIEWER)
+		ret = [DELETE, PLOT_2D_VIEWER]
 		return  ret
 	
 class EMFSFolderItem(EMListItem):
