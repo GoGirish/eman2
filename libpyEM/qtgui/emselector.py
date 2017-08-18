@@ -82,12 +82,12 @@ class EMMultiItemAction:
 class EMSaveItemAction(EMItemAction, EMMultiItemAction, EMActionDelegate):
 	def item_action(self, item, target):
 		data = item.get_data()
-		if data != None: save_data(data)
+		if data is not None: save_data(data)
 
 	def multi_item_action(self, items, target):
 		for item in items:
 			data = item.get_data()
-			if data != None:
+			if data is not None:
 				result = save_data(data)
 				if not result: return
 
@@ -378,7 +378,7 @@ def EMSelectorBaseTemplate(Type):
 			if self.lock: return
 			self.lock = True
 			for idx,widget in enumerate(self.list_widgets):
-				if widget.get_mod_time() != None and widget.get_delegate() != None:
+				if widget.get_mod_time() is not None and widget.get_delegate() is not None:
 					mod_time = widget.get_delegate().url_mod_time(widget.get_url())
 					if mod_time != widget.get_mod_time():
 						old_items = [widget.item(i) for i in range(widget.count())]
@@ -482,7 +482,7 @@ def EMSelectorBaseTemplate(Type):
 		
 		def __go_up_a_directory(self,item=None):
 			
-			if item != None:
+			if item is not None:
 				#url = item.get_url()
 				url = self.list_widgets[0].get_url()
 				for delegate in self.browse_delegates:
@@ -560,15 +560,15 @@ def EMSelectorBaseTemplate(Type):
 		
 			ret=[]
 			for item in items:
-				if item.emdata_save_as_url() != None : ret.append(item.emdata_save_as_url())
-				elif item.get_url() != None: ret.append(item.get_url())
+				if item.emdata_save_as_url() is not None: ret.append(item.emdata_save_as_url())
+				elif item.get_url() is not None: ret.append(item.get_url())
 
 			return ret
 		
 		def list_widget_item_entered(self,item):
 			list_widget = item.listWidget()
 			if list_widget != self.current_list_widget:
-				if self.current_list_widget != None:
+				if self.current_list_widget is not None:
 					QtCore.QObject.disconnect(self.current_list_widget,QtCore.SIGNAL("itemSelectionChanged()"), self.current_item_changed)
 				self.current_list_widget = item.listWidget()
 				QtCore.QObject.connect(self.current_list_widget,QtCore.SIGNAL("itemSelectionChanged()"), self.current_item_changed)
@@ -578,9 +578,9 @@ def EMSelectorBaseTemplate(Type):
 			This function handles any change in current item
 			'''
 			if self.lock: return
-			if self.current_list_widget == None: return 
+			if self.current_list_widget is None: return 
 			item = self.current_list_widget.currentItem()
-			if item != None:
+			if item is not None:
 				self.list_item_selected(item)
 				
 		def keyPressEvent(self,event):
@@ -597,7 +597,7 @@ def EMSelectorBaseTemplate(Type):
 			if item.get_name() == EMGenericItem.NAME: return #it's just a value in the db
 			
 			self.update_selections()
-			if item == None: return		
+			if item is None: return		
 			
 			if item.get_name() == EMUpArrowItem.NAME: 
 				self.__go_up_a_directory(item)
@@ -668,7 +668,7 @@ def EMSelectorBaseTemplate(Type):
 				if delegate.handles_url(url): 
 					items = delegate.get_items(url)
 					for item in items:
-						if item.get_url()!=None and ".hed" in item.get_url(): continue
+						if item.get_url() is not None and ".hed" in item.get_url(): continue
 						list_widget.addItem(item)
 					ret = True
 					list_widget.set_url(url)
@@ -810,7 +810,7 @@ class EMBrowser(EMBrowserType):
 		preview_occured = False
 		get_application().setOverrideCursor(Qt.BusyCursor)
 		view_action = item.default_view_action()
-		if view_action != None:
+		if view_action is not None:
 			self.action_delegates[view_action].item_action(item,self)
 			preview_occured = True
 		get_application().setOverrideCursor(Qt.ArrowCursor)
@@ -824,7 +824,7 @@ class EMBrowser(EMBrowserType):
 		event.accept()
 		focus = self.current_list_widget
 		l = focus
-		if focus == None: return
+		if focus is None: return
 		selected_items = l.selectedItems()
 		if len(selected_items) == 0: return
 		
@@ -833,14 +833,14 @@ class EMBrowser(EMBrowserType):
 		if len(selected_items) == 1:
 			first_item = selected_items[0]
 			actions = first_item.actions()
-			if actions == None: return
+			if actions is None: return
 			for action in actions: menu.addAction(action)
 		else:
 			multi_actions = []
 			common = [SAVE_AS,DELETE]
 			for item in selected_items:
 				actions = item.actions()
-				if actions == None: 
+				if actions is None: 
 					common = [] # the items has no actions - abort
 					break 
 				rm = []
@@ -994,7 +994,7 @@ class EMSelectorDialog(EMSelectorDialogType):
 		EMSelectorDialogType.ok_button_clicked(self, bool)
 		
 		directory = self.get_current_directory()
-		if directory == None:
+		if directory is None:
 			msg = QtGui.QMessageBox()
 			msg.setText("Can not deduce the current directory. Please update your selection")
 			msg.exec_()
@@ -1008,7 +1008,7 @@ class EMSelectorDialog(EMSelectorDialogType):
 		else:
 			file = [self.__convert_name_to_write_image_format(name,directory) for name in names]
 		
-		if self.validator == None:
+		if self.validator is None:
 			self.dialog_result = file
 			self.accept()
 		else:
@@ -1309,7 +1309,7 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 			
 		for file in files:
 			a = self.__get_file_item(file,url)
-			if a != None: return_items.append(a)
+			if a is not None: return_items.append(a)
 	
 		return return_items
 	
@@ -1434,7 +1434,7 @@ class EMListItem(QtGui.QListWidgetItem):
 	
 	def get_icon(self):
 		'''Supply your own Icon'''
-		if EMListItem.ICON == None:
+		if EMListItem.ICON is None:
 			EMListItem.ICON = QtGui.QIcon(get_image_directory() + "/File.png")
 		return EMListItem.ICON
 
@@ -1493,7 +1493,7 @@ class EMUpArrowItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMUpArrowItem.ICON == None:
+		if EMUpArrowItem.ICON is None:
 			EMUpArrowItem.ICON = QtGui.QIcon(get_image_directory() + "/up_arrow.png")
 		return EMUpArrowItem.ICON
 	
@@ -1562,7 +1562,7 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 	
 	def get_icon(self):
 		'''Supply your own Icon	'''
-		if EM2DStackItem.ICON == None:
+		if EM2DStackItem.ICON is None:
 			EM2DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images.png")
 		return EM2DStackItem.ICON
 	
@@ -1576,7 +1576,7 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 		return self.delegate.get_stack_data(self.full_path)
 	
 	def get_metadata(self):
-		if self.metadata == None:
+		if self.metadata is None:
 			self.metadata = self.delegate.get_metadata(self.full_path,0)
 		return self.metadata
 	
@@ -1607,7 +1607,7 @@ class EM3DStackItem(EMDataListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EM3DStackItem.ICON == None:
+		if EM3DStackItem.ICON is None:
 			EM3DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images_3d.png")
 		return EM3DStackItem.ICON
 	# no preview for this item as of Feb 2009
@@ -1635,12 +1635,12 @@ class EM2DImageItem(EMDataListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EM2DImageItem.ICON == None:
+		if EM2DImageItem.ICON is None:
 			EM2DImageItem.ICON = QtGui.QIcon(get_image_directory() + "/single_image.png")
 		return EM2DImageItem.ICON
 
 	def get_metadata(self):
-		if self.metadata == None:
+		if self.metadata is None:
 			self.metadata = self.delegate.get_metadata(self.full_path,self.idx)
 		return self.metadata
 	
@@ -1669,7 +1669,7 @@ class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
 		'''
 		Supply your own Icon
 		'''
-		if EM3DImageItem.ICON == None:
+		if EM3DImageItem.ICON is None:
 			EM3DImageItem.ICON = QtGui.QIcon(get_image_directory() + "/single_image_3d.png")
 		return EM3DImageItem.ICON
 	
@@ -1752,7 +1752,7 @@ class EMFSPlotItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMFSPlotItem.ICON == None:
+		if EMFSPlotItem.ICON is None:
 			EMFSPlotItem.ICON = QtGui.QIcon(get_image_directory() + "/plot.png")
 		return EMFSPlotItem.ICON
 	
@@ -1782,7 +1782,7 @@ class EMFSFolderItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMFSFolderItem.ICON == None:
+		if EMFSFolderItem.ICON is None:
 			EMFSFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
 		return EMFSFolderItem.ICON
 	
@@ -1905,7 +1905,7 @@ class EMBDBDelegate(EMBrowseDelegate):
 		if len(vals) == 1:
 			for i in range(n):
 				d = db.get_header(i)
-				if d!=None and d.has_key("nz") : break
+				if d is not None and d.has_key("nz") : break
 			if  n > 1:
 				if d["nz"] > 1: return_items = [EM3DMetaImageItem(self,str(i),url,i) for i in xrange(0,n)]
 				else: return_items = [EM2DMetaImageItem(self,str(i),url,i) for i in xrange(0,n)]
@@ -1992,7 +1992,7 @@ class EMBDBDelegate(EMBrowseDelegate):
 			
 		for file in files:
 			a = self.__get_bdb_file_item(file,real_directory)
-			if a != None: return_items.append(a)
+			if a is not None: return_items.append(a)
 		return return_items
 
 	def __get_bdb_file_item(self,file,real_directory):
@@ -2028,7 +2028,7 @@ class EMBDBDelegate(EMBrowseDelegate):
 				for i in range(n):
 					d = db.get_header(i)
 					try:
-						if d!=None and d.has_key("nz") : break
+						if d is not None and d.has_key("nz") : break
 					except: 
 						return EMBDBItem(self,f[0],real_directory+MDS+f[0])
 				if d["nz"] == 1:
@@ -2077,7 +2077,7 @@ class EMBDBFolderItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMBDBFolderItem.ICON == None:
+		if EMBDBFolderItem.ICON is None:
 			EMBDBFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
 
 		return EMBDBFolderItem.ICON
@@ -2098,7 +2098,7 @@ class EMBDBDirectoryItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMBDBDirectoryItem.ICON == None:
+		if EMBDBDirectoryItem.ICON is None:
 			EMBDBDirectoryItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
 
 		return EMBDBDirectoryItem.ICON
@@ -2118,7 +2118,7 @@ class EMBDBItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMBDBItem.ICON == None:
+		if EMBDBItem.ICON is None:
 			EMBDBItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
 
 		return EMBDBItem.ICON
@@ -2160,7 +2160,7 @@ class EMBDBDictItem(EMListItem):
 		'''
 		Supply your own Icon
 		'''
-		if EMBDBDictItem.ICON == None:
+		if EMBDBDictItem.ICON is None:
 			EMBDBDictItem.ICON = QtGui.QIcon(get_image_directory() + "/Bag.png")
 
 		return EMBDBDictItem.ICON
