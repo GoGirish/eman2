@@ -79,7 +79,7 @@ class EMMatrixPanel:
 		rendered_image_height = view_data.get_ysize()*view_scale
 
 		[self.ystart,self.visiblerows,self.visiblecols] = self.visible_row_col(view_width,view_height,view_scale,view_data,y)
-		if self.ystart == None:
+		if self.ystart is None:
 			return False
 			# if you uncomment this code it will automatically set the scale in the main window so that the mxs stay visible
 			# it's not what we wanted but it's left here in case anyone wants to experiment
@@ -391,7 +391,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def save_set(self,name):
 		"""Saves the particles in a named set to a file"""
 		outset=self.get_set(name)
-		if len(outset)==None :
+		if len(outset) is None:
 			QtGui.QMessageBox.warning(None,"Error","The set: %s is empty" % name)
 			return
 		
@@ -425,7 +425,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		"""
 		if not self.sets.has_key(name) or force : self.sets[name]=set(lst)
 		if display : self.sets_visible[name]=self.sets[name]
-		if self.current_set==None : self.current_set=name
+		if self.current_set is None: self.current_set=name
 		self.force_display_update()
 		if update: self.updateGL()
 
@@ -444,7 +444,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		"""
 		try: self.sets_visible={db_name:self.sets[db_name]}
 		except : self.sets_visible={}
-		if self.current_set==None : self.current_set=name
+		if self.current_set is None: self.current_set=name
 
 		self.emit(QtCore.SIGNAL("setsChanged"))
 		self.force_display_update()
@@ -468,7 +468,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def commit_sets(self):
 		"""this will store all of the current sets in the appropriate _info.json file, if available"""
 #		print "commit ",self.file_name,self.infoname
-		if self.infoname==None : return	# an in-ram stack of particles, no place to save to...
+		if self.infoname is None: return	# an in-ram stack of particles, no place to save to...
 
 		# convert sets into tuples for more legible files
 		# sets={i:tuple(self.sets[i]) for i in self.sets}				
@@ -482,7 +482,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		Unset all images in the current set
 		"""
 
-		if self.current_set==None : return
+		if self.current_set is None: return
 
 		self.sets[self.current_set]=set()
 		self.sets_visible[self.current_set]=self.sets[self.current_set]
@@ -497,7 +497,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		Invert the current selection
 		"""
 
-		if self.current_set==None : return
+		if self.current_set is None: return
 
 		cset=self.sets[self.current_set]
 		self.sets[self.current_set]=set(range(self.nimg))-cset
@@ -511,7 +511,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		"""
 		Sets all images in the current set
 		"""
-		if self.current_set==None : return
+		if self.current_set is None: return
 
 		self.sets[self.current_set]=set(range(self.nimg))
 		self.commit_sets()
@@ -523,7 +523,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def subset_set(self,toadd,update_gl=True):
 		"""merges toadd to current set"""
 
-		if self.current_set==None : return
+		if self.current_set is None: return
 
 		cset=self.sets[self.current_set]
 		self.sets[self.current_set]=cset|set(toadd)
@@ -536,7 +536,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def image_set_associate(self,idx,event=None,update_gl=False):
 		"""toggles a single image in the current set"""
 
-		if self.current_set==None:
+		if self.current_set is None:
 			self.enable_set("bad_particles",[idx],update=update_gl)
 			self.commit_sets()
 			return
@@ -609,7 +609,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			if update_gl:
 				self.force_display_update()
 				self.updateGL()
-				if event != None: self.emit(QtCore.SIGNAL("mx_boxdeleted"),event,[idx],False)
+				if event is not None: self.emit(QtCore.SIGNAL("mx_boxdeleted"), event, [idx], False)
 		else:
 			self.emit(QtCore.SIGNAL("mx_boxdeleted"),event,[idx],False)
 
@@ -621,7 +621,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		if self.main_display_list != 0:
 			glDeleteLists(self.main_display_list,1)
 			self.main_display_list = 0
-		if self.tex_names != None and ( len(self.tex_names) > 0 ):
+		if self.tex_names is not None and (len(self.tex_names) > 0):
 			glDeleteTextures(self.tex_names)
 			self.tex_names = []
 
@@ -667,7 +667,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 #		print self.scale
 
 	def get_parent_suggested_size(self):
-		if self.data != None and isinstance(self.data[0],EMData):
+		if self.data is not None and isinstance(self.data[0], EMData):
 			if len(self.data)<self.matrix_panel.visiblecols :
 				w=len(self.data)*(self.data.get_xsize()+2)
 				hfac = 1
@@ -722,7 +722,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				
 		cache_size = -1
 
-		if self.data==None and not self.rzonce: 
+		if self.data is None and not self.rzonce: 
 			needresize=True
 			self.rzonce=True
 		else: needresize=False
@@ -732,7 +732,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		else :
 			self.data = self.__get_cache(obj, soft_delete)
 
-		if self.data == None : 
+		if self.data is None: 
 			return
 
 		if self.data.is_3d() :
@@ -743,7 +743,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			self.get_inspector()
 			self.inspector.disable_xyz()
 
-		if filename == None or len(filename) == 0 :
+		if filename is None or len(filename) == 0 :
 			try :
 				filename = obj[0]["data_path"]
 			except :
@@ -751,7 +751,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 		self.file_name = filename
 
-		if self.file_name != None and len(self.file_name) > 0 :
+		if self.file_name is not None and len(self.file_name) > 0 :
 			self.setWindowTitle(self.file_name)
 			self.infoname=info_name(self.file_name)
 
@@ -869,7 +869,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		"""Set the display origin within the image"""
 
 		if self.animation_enabled:
-			if self.line_animation != None and self.line_animation.animated: return # this is so the current animation has to end before starting another one. It could be the other way but I like it this way
+			if self.line_animation is not None and self.line_animation.animated: return # this is so the current animation has to end before starting another one. It could be the other way but I like it this way
 			self.line_animation = LineAnimation(self,self.origin,(x,y))
 			self.qt_parent.register_animatable(self.line_animation)
 			return True
@@ -1081,7 +1081,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 						if i >= n:
 							break
-						if self.data[i]==None:
+						if self.data[i] is None:
 							print "Bad image in imagemx display: ",i
 							continue
 
@@ -1520,7 +1520,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
 		msg = QtGui.QMessageBox()
 		msg.setWindowTitle("Woops")
-		if self.data==None or len(self.data)==0:
+		if self.data is None or len(self.data)==0:
 			msg.setText("there is no data to save" %fsp)
 			msg.exec_()
 			return
@@ -1546,7 +1546,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		progress.show()
 		for i in xrange(0,len(self.data)):
 			d = self.data[i]
-			if d == None: continue # the image has been excluded
+			if d is None: continue # the image has been excluded
 			progress.setValue(i)
 			get_application().processEvents()
 			if progress.wasCanceled():
@@ -1584,12 +1584,12 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			event.acceptProposedAction()
 
 	def keyPressEvent(self,event):
-		if self.data == None: return
+		if self.data is None: return
 
 		if event.key() == Qt.Key_F1:
 			self.display_web_help("http://blake.bcm.edu/emanwiki/EMAN2/Programs/emimagemx")
 		elif event.key()==Qt.Key_I :
-			if self.data==None or len(self.data)==0: return
+			if self.data is None or len(self.data)==0: return
 
 			for j,i in enumerate(self.data):
 				i.mult(-1)
@@ -1644,7 +1644,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				self.emit(QtCore.SIGNAL("mx_image_selected"),event,lc)
 			xians_stuff = False
 			if xians_stuff:
-				if lc[0] != None:
+				if lc[0] is not None:
 					image = self.get_box_image(lc[0])
 					cx = image.get_xsize()/2
 					cy = image.get_ysize()/2
@@ -1690,7 +1690,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def __del_mode_mouse_up(self,event):
 		if event.button()==Qt.LeftButton:
 			lc=self.scr_to_img((event.x(),event.y()))
-			if lc != None and self.lc != None and lc[0] == self.lc[0]:
+			if lc is not None and self.lc is not None and lc[0] == self.lc[0]:
 				self.remove_particle_image(lc[0],event,True)
 				#self.force_display_update()
 
@@ -1701,7 +1701,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		# this is currently disabled because it causes seg faults on MAC. FIXME investigate and establish the functionality that we want for mouse dragging and dropping
 		if event.button()==Qt.LeftButton:
 			lc= self.scr_to_img((event.x(),event.y()))
-			if lc == None:
+			if lc is None:
 				print "strange lc error"
 				return
 			box_image = self.get_box_image(lc[0])
@@ -1735,7 +1735,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 		"""
 		Inheriting classes to potentially define this function
 		"""
-		if lc != None:
+		if lc is not None:
 			a = self.get_box_image(lc[0])
 			d = a.get_attr_dict()
 			if d.has_key("class_ptcl_src") and d.has_key("class_ptcl_idxs"):
@@ -1773,7 +1773,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				i = 0
 				for idx in idxs:
 					data.append(EMData(name,idx))
-					if mx!=None:
+					if mx is not None:
 						xfm=Transform({"type":"2d","tx":mx[0][idx],"ty":mx[1][idx],"alpha":mx[2][idx],"mirror":bool(mx[3][idx])})
 						#ad=data[-1].align("rotate_translate_flip",a,{},"ccc",{})
 						data[-1].transform(xfm)
@@ -1791,7 +1791,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				idxseim = []
 				for idx in idxse:
 					data.append(EMData(name,idx))
-					if mx!=None:
+					if mx is not None:
 						xfm=Transform({"type":"2d","tx":mx[0][idx],"ty":mx[1][idx],"alpha":mx[2][idx],"mirror":bool(mx[3][idx])})
 						data[-1].transform(xfm)
 					idxseim.append(i)
@@ -1808,7 +1808,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 				get_application().setOverrideCursor(Qt.ArrowCursor)
 
 				resize_necessary = False
-				if self.class_window == None:
+				if self.class_window is None:
 					self.class_window = EMImageMXWidget()
 					QtCore.QObject.connect(self.class_window,QtCore.SIGNAL("module_closed"),self.on_class_window_closed)
 					resize_necessary = True
@@ -1833,7 +1833,7 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 	def __set_mode_mouse_up(self,event):
 		if event.button()==Qt.LeftButton:
 			lc=self.scr_to_img((event.x(),event.y()))
-			if lc != None and self.lc != None and lc[0] == self.lc[0]:
+			if lc is not None and self.lc is not None and lc[0] == self.lc[0]:
 				self.image_set_associate(lc[0],event,True)
 				#self.force_display_update()
 
@@ -2153,7 +2153,7 @@ class EMGLScrollBar:
 				self.scroll_up()
 
 	def mouseMoveEvent(self,event):
-		if self.mouse_scroll_pos != None:
+		if self.mouse_scroll_pos is not None:
 			y = self.target().height()-event.y()
 			dy = y - self.mouse_scroll_pos
 			self.scroll_move(dy)
@@ -2344,7 +2344,7 @@ class EMImageInspectorMX(QtGui.QWidget):
 
 	def enable_xyz(self):
 
-		if self.xyz == None:
+		if self.xyz is None:
 			self.xyz = QtGui.QComboBox()
 			self.xyz.addItems(QtCore.QStringList(["x","y","z"]))
 			self.hbl.addWidget(self.xyz)
@@ -2352,7 +2352,7 @@ class EMImageInspectorMX(QtGui.QWidget):
 			QtCore.QObject.connect(self.xyz, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.target().xyz_changed)
 
 	def disable_xyz(self):
-		if self.xyz != None:
+		if self.xyz is not None:
 			self.hbl.removeWidget(self.xyz)
 			self.xyz.deleteLater()
 			self.xyz = None
@@ -2597,7 +2597,7 @@ class EMMXSetsPanel(QtGui.QWidget):
 
 	def set_list_row_changed(self,i):
 		a = self.setlist.item(i)
-		if a==None : return
+		if a is None: return
 		name = str(a.text())
 		self.target().set_current_set(name)
 
@@ -2810,7 +2810,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		"""
 		Get the get_xsize of the particles. Assumes all particle have the same size, which is potentially flawed
 		"""
-		if self.xsize == None:
+		if self.xsize is None:
 			image = self[self.cache_start]
 			self.xsize = image.get_xsize()
 
@@ -2820,7 +2820,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		"""
 		Get the get_ysize of the particles. Assumes all particle have the same size, which is potentially flawed
 		"""
-		if self.ysize == None:
+		if self.ysize is None:
 			image = self[self.cache_start]
 			self.ysize = image.get_ysize()
 
@@ -2830,7 +2830,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		"""
 		Get the get_ysize of the particles. Assumes all particle have the same size, which is potentially flawed
 		"""
-		if self.zsize == None:
+		if self.zsize is None:
 			image = self[self.cache_start]
 			self.zsize = image.get_zsize()
 
@@ -2845,7 +2845,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 #		return self[idx].get_attr_dict()
 		adj_idx = idx-self.cache_start
 		image = self.cache[adj_idx]
-		if image == None:
+		if image is None:
 			data = self.data[idx]
 			h = get_header(data[0],data[1])
 			return h
@@ -2857,7 +2857,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		"""
 		Gets the keys in the header of the first image
 		"""
-		if self.header_keys == None:
+		if self.header_keys is None:
 			self.header_keys = self.get_image_header(self.cache_start).keys()
 		return self.header_keys
 
@@ -2897,7 +2897,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		adj_idx = idx-self.cache_start
 		try: image = self.cache[adj_idx]
 		except: image=None
-		if image == None:
+		if image is None:
 			try: a = self.__load_item(idx,adj_idx)
 			except: a=None
 			return a
@@ -2911,12 +2911,12 @@ class EMLightWeightParticleCache(EMMXDataCache):
 
 		try:
 			a = EMData(data[0],data[1])
-			if a==None : raise Exception
+			if a is None: raise Exception
 		except :
 			for i in range(10):
 				try:
 					a=EMData(data[0],i)
-					if a==None: raise Exception
+					if a is None: raise Exception
 				except: continue
 				break
 			a.to_zero()
@@ -2931,7 +2931,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		This needs to be rethought, maybe use a thread?
 		"""
 		for idx,i in enumerate(self.cache):
-			if i == None:
+			if i is None:
 				# only does one at a time
 				self.__load_item(idx,idx+self.cache_start)
 				return
@@ -3012,7 +3012,7 @@ class EMDataListCache(EMMXDataCache):
 			if self.mode == EMDataListCache.FILE_MODE:
 				for i in self.images:
 					try:
-						if self.images[i] != None:
+						if self.images[i] is not None:
 							self.xsize = self.images[i].get_xsize()
 							break
 					except: pass
@@ -3032,7 +3032,7 @@ class EMDataListCache(EMMXDataCache):
 			if self.mode == EMDataListCache.FILE_MODE:
 				for i in self.images:
 					try:
-						if self.images[i] != None:
+						if self.images[i] is not None:
 							self.ysize = self.images[i].get_ysize()
 							break
 					except: pass
@@ -3062,11 +3062,11 @@ class EMDataListCache(EMMXDataCache):
 			return self.images[idx].get_attr_dict()
 
 	def get_image_header_keys(self):
-		if self.keys == None:
+		if self.keys is None:
 			if self.mode == EMDataListCache.FILE_MODE:
 				for i in self.images:
 					try:
-						if self.images[i] != None:
+						if self.images[i] is not None:
 							self.keys = self.images[i].get_attr_dict().keys()
 							break
 					except: pass
@@ -3085,7 +3085,7 @@ class EMDataListCache(EMMXDataCache):
 		call this to load unloaded images in the cache
 		"""
 		for idx,i in enumerate(self.cache):
-			if i == None:
+			if i is None:
 				# only does one at a time
 				self.__load_item(idx,idx+self.cache_start)
 				return
@@ -3150,7 +3150,7 @@ class EMDataListCache(EMMXDataCache):
 							a.read_image(self.file_name,idx)
 #							if idx in self.exclusions: a["excluded"] = True
 							cache[idx] = a
-							if self.current_set != None:
+							if self.current_set is not None:
 								sets = []
 								for set in self.current_set:
 
@@ -3260,14 +3260,14 @@ class EM3DDataListCache(EMMXDataCache):
 		return self.nz
 
 	def get_image_header(self,idx):
-		if self.header ==None:
+		if self.header is None:
 			image = self[self.nz/2]
 			self.header = image.get_attr_dict()
 
 		return self.header
 
 	def get_image_header_keys(self):
-		if self.keys == None:
+		if self.keys is None:
 			self.keys = self[0].get_attr_dict().keys()
 
 		return self.keys
