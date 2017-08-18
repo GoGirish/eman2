@@ -2655,6 +2655,7 @@ class EMMXDataCache:
 		and let the calling program display the deleted box differently
 		"""
 		raise NotImplementedException
+	
 	def __getitem__(self,idx):
 		"""
 		operator[] must be supported
@@ -2704,6 +2705,7 @@ class EMMXDataCache:
 		from disk if the image is not already in memory
 		"""
 		raise NotImplementedException
+	
 	def on_idle(self):
 		"""
 		the EMImageMXWidget is at liberty to call this function when it becomes idle, etc.
@@ -2739,17 +2741,23 @@ class EMMXDataCache:
 
 class EMLightWeightParticleCache(EMMXDataCache):
 	"""
-	A light weight particle cache is exactly that and more. Initialize it with a list of filenames and particle indices
-	corresponding to the particles that you want to view. So the calling function doesn't do any image reading, you just tell this
+	A light weight particle cache is exactly that and more. 
+	Initialize it with a list of filenames and particle indices
+	corresponding to the particles that you want to view. 
+	So the calling function doesn't do any image reading, you just tell this
 	thing what will need to be (or not) read.
 
-	Primary data is basically a list like this: [[filename, idx, [func1,func2,...]], [filename, idx2, [func1,func2,...]],...]
-	the filename and idx variables should be obvious, however the extra list contains functions that take an EMData as the argument -
-	I used this, for example, for assignint attributes to images once they are in memory, and for transforming them, etc.
+	Primary data is basically a list like this: 
+	[[filename, idx, [func1,func2,...]], [filename, idx2, [func1,func2,...]],...]
+	the filename and idx variables should be obvious, 
+	however the extra list contains functions that take an EMData as the argument -
+	I used this, for example, for assignint attributes to images once they are in memory, 
+	and for transforming them, etc.
 
-	A big advantage of this cache is that it only displays the images that are asked for. Additionally, it has a maximum cache size,
-	and refocuses the cache when asked for an image outside its current index bounds. This makes this cache only suitable for linear access
-	schemes, not random.
+	A big advantage of this cache is that it only displays the images that are asked for. 
+	Additionally, it has a maximum cache size,
+	and refocuses the cache when asked for an image outside its current index bounds. 
+	This makes this cache only suitable for linear access schemes, not random.
 
 	"""
 	def from_file(file_name):
@@ -2856,7 +2864,8 @@ class EMLightWeightParticleCache(EMMXDataCache):
 	def refocus_cache(self,new_focus):
 		"""
 		Called internally to refocus the cache on a new focal point.
-		@param new_focus the value at which the current cache failed - i.e. the first value that was beyond the current cache limits
+		@param new_focus the value at which the current cache failed 
+		- i.e. the first value that was beyond the current cache limits
 		"""
 		new_cache_start = new_focus-self.cache_max/2
 		# Don't let cache start go negative; it will break.
