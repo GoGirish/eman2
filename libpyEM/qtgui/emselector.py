@@ -223,12 +223,14 @@ def DataDisplayModuleTemplate(Type, get_data_attr="get_data", data_functors=[], 
 			
 	return DataDisplayModule
 
-class EM2DStackPreviewAction(DataDisplayModuleTemplate(EMImageMXWidget,"get_2d_stack"),EMMultiItemAction):
+
+class EM2DStackPreviewAction(DataDisplayModuleTemplate(EMImageMXWidget, "get_2d_stack"), EMMultiItemAction):
 	'''
 	This is like a template specialization of the DataDisplayModuleTemplate in the case of
 	using an EMImageMXWidget. The reason is because we support a special "Preview Subset" action.
 	'''
-	def multi_item_action(self,items,target):
+
+	def multi_item_action(self, items, target):
 		single_mode = target.single_preview_only()
 		data = []
 		from utils.misc import ApplyAttribute
@@ -352,16 +354,15 @@ def EMSelectorBaseTemplate(Type):
 			self.emit(QtCore.SIGNAL("ok"),self.selections)
 			self.emit(QtCore.SIGNAL("oky"))
 		
-		def cancel_button_clicked(self,bool):
+		def cancel_button_clicked(self, bool):
 			''' Slot for Cancel button '''
-			#print "EMSelectorBase.cancel_button_clicked"
-			self.emit(QtCore.SIGNAL("cancel"),self.selections)
-		
-		
+			# print "EMSelectorBase.cancel_button_clicked"
+			self.emit(QtCore.SIGNAL("cancel"), self.selections)
+
 		def __del__(self):
 			pass
-		
-		def set_selection_text(self,text):
+
+		def set_selection_text(self, text):
 			'''
 			Selection label is a QLabel, by default its text is "Save As", but you can change it
 			Called in emsprworkflow
