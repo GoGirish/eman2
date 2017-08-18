@@ -84,21 +84,9 @@ add_custom_target(EMPyLibs
 				  COMMAND ${CMAKE_COMMAND} -DCOMPONENT=EMPyLibs -P cmake_install.cmake
 				  )
 
-file(GLOB empythonlibs "${CMAKE_CURRENT_SOURCE_DIR}/*.py")
-install(FILES ${empythonlibs}
+install(DIRECTORY gui utils pm rct boxer image item3d qtgui
 		DESTINATION ${SP_DIR}
 		COMPONENT EMPyLibs
-		)
-
-add_subdirectory(qtgui)
-
-add_custom_target(Gui
-				  COMMAND ${CMAKE_COMMAND} -DCOMPONENT=Gui -P cmake_install.cmake
-				  )
-
-install(DIRECTORY gui utils pm rct boxer image item3d
-		DESTINATION ${SP_DIR}
-		COMPONENT Gui
 		)
 
 target_link_libraries(pyUtils2         NumPy)
