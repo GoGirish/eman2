@@ -590,7 +590,7 @@ class EMEulerExplorer(EM3DSymModel,Animator):
 			data = []
 			idx_included = []
 			running_idx = 0
-			from image.emimagemx import ApplyAttribute
+			from utils.misc import ApplyAttribute
 			for val in included:
 				bdata.append([self.particle_file,val,[ApplyAttribute("Img #",val)]])
 				idx_included.append(running_idx)
@@ -641,7 +641,7 @@ class EMEulerExplorer(EM3DSymModel,Animator):
 
 					t = Transform({"type":"2d","alpha":a,"mirror":int(m)})
 					t.set_trans(x,y)
-					from image.emimagemx import ApplyTransform
+					from utils.misc import ApplyTransform
 					f.append(ApplyTransform(t))
 					#data[i].transform(t)
 				self.particle_viewer.set_data(data)

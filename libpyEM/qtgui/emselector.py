@@ -233,7 +233,7 @@ class EM2DStackPreviewAction(DataDisplayModuleTemplate(EMImageMXWidget,"get_2d_s
 	def multi_item_action(self,items,target):
 		single_mode = target.single_preview_only()
 		data = []
-		from image.emimagemx import ApplyAttribute
+		from utils.misc import ApplyAttribute
 		for item in items:
 			data.append([item.image_path(),item.get_idx(),[ApplyAttribute("Img #",item.get_idx())]])
 		
@@ -754,7 +754,7 @@ class EMBrowser(EMBrowserType):
 		else:
 			from image.emimage3d import EMImage3DWidget
 			self.action_delegates[VIEWER_3D] = DataDisplayModuleTemplate(EMImage3DWidget)()
-		from image.emimagemx import ApplyProcessor
+		from utils.misc import ApplyProcessor
 		self.action_delegates[VOLUME_VIEWER] = DataDisplayModuleTemplate(EMVolumeModel,data_functors=[ApplyProcessor("normalize",{})])()
 		self.action_delegates[SLICE_VIEWER] = DataDisplayModuleTemplate(EM3DSliceModel,data_functors=[ApplyProcessor("normalize",{})])()
 		self.action_delegates[SINGLE_2D_VIEWER] = DataDisplayModuleTemplate(EMImage2DWidget)()
