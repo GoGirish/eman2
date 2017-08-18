@@ -2871,15 +2871,15 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		# Don't let cache start go negative; it will break.
 		if new_cache_start < 0:
 			new_cache_start = 0
-		if new_cache_start < self.cache_start < (new_cache_start + self.cache_max):
+		if new_cache_start < self.cache_start < new_cache_start + self.cache_max:
 			overlap = new_cache_start + self.cache_max - self.cache_start
-			cache = [None for i in range(0,self.cache_max-overlap)]
+			cache = [None for i in range(self.cache_max-overlap)]
 			cache.extend(self.cache[0:overlap])
 			self.cache = cache
-		elif self.cache_start < new_cache_start < (self.cache_start + self.cache_max):
+		elif self.cache_start < new_cache_start < self.cache_start + self.cache_max:
 			cache = self.cache[new_cache_start:self.cache_start+self.cache_max]
 			overlap =self.cache_max - ( new_cache_start - self.cache_start)
-			cache = [None for i in range(0,self.cache_max-overlap)]
+			cache = [None for i in range(self.cache_max-overlap)]
 			cache.extend(self.cache[0:overlap])
 			self.cache = cache
 		else:
