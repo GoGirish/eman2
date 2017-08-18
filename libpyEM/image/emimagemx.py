@@ -3217,7 +3217,7 @@ class EMDataListCache(EMMXDataCache):
 
 class EM3DDataListCache(EMMXDataCache):
 	"""
-	A class that looks like a list to the outside word
+	A class that looks like a list to the outside world
 	automated way of handling 3d images for the EMImageMXWidget
 
 	"""
