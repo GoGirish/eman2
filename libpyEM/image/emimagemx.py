@@ -2941,11 +2941,12 @@ class EMLightWeightParticleCache(EMMXDataCache):
 
 class EMDataListCache(EMMXDataCache):
 	"""
-	This class became semi-redundant after the introduction of the EMLightWeightParticleCache, however it is still used
+	This class became semi-redundant after the introduction of the EMLightWeightParticleCache, 
+	however it is still used
 	as the primary container for lists of the form [EMData,EMData,EMData,EMData,...].
 
-	You can also initialize this object with a filename of an image matrix. Then you can treat it as though it's
-	a list of EMData objects. For example,
+	You can also initialize this object with a filename of an image matrix. 
+	Then you can treat it as though it's a list of EMData objects. For example,
 
 	data = EMDataListCache("particles.hdf")
 	image1 = data[1] # just treat it like a list
@@ -3091,7 +3092,8 @@ class EMDataListCache(EMMXDataCache):
 
 	def delete_box(self,idx):
 		"""
-		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
+		@ must return a value = 1 indicates the box is permanently gone, 
+		0 indicates the class is happy to do nothing
 		and let the calling program display the deleted box differently
 		"""
 		if self.mode == EMDataListCache.LIST_MODE and not self.soft_delete:
@@ -3233,7 +3235,8 @@ class EM3DDataListCache(EMMXDataCache):
 
 	def delete_box(self,idx):
 		"""
-		@ must return a value = 1 indicates the box is permanently gone, 0 indicates the class is happy to do nothing
+		@ must return a value = 1 indicates the box is permanently gone, 
+		0 indicates the class is happy to do nothing
 		and let the calling program display the deleted box differently
 		"""
 		return 0
@@ -3300,7 +3303,6 @@ class EM3DDataListCache(EMMXDataCache):
 		pass
 
 	def __getitem__(self,idx):
-
 		if not self.images.has_key(idx):
 			a = EMData()
 			if self.major_axis == "z":
