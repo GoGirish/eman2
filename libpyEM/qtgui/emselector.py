@@ -278,12 +278,13 @@ def EMSelectorBaseTemplate(Type):
 	See the EMSelectorDialogType and EMBrowserType
 	Types currently in use are the QtGui.QWidget and the QtGui.QDialog
 	"""
+
 	class EMSelectorBase(Type):
 		def __init__(self, single_selection=False):
 			"""
 			@param single_selection - should selections be limited to singles?
 			"""
-			Type.__init__(self,None)
+			Type.__init__(self, None)
 			self.setFocusPolicy(Qt.StrongFocus)
 #			self.module=weakref.ref(module) # Avoid strong cycle
 			self.single_selection = single_selection # Flag indicating single selection in interface
@@ -692,6 +693,7 @@ def EMSelectorBaseTemplate(Type):
 	
 	return EMSelectorBase
 
+
 def fspsort(x):
 #	print x
 	if x[:4].lower()=="bdb:" : return x
@@ -699,16 +701,19 @@ def fspsort(x):
 	y=x.rsplit(".",1)
 	return y[1]+"."+y[0]
 
+
 EMBrowserType = EMSelectorBaseTemplate(QtGui.QWidget)
+
+
 class EMBrowser(EMBrowserType):
 	def __init__(self, single_selection=False, usescenegraph=False):
-		EMBrowserType.__init__(self,single_selection)
-		
-		self.add_list_widget() # 3 panels in browsing mode
+		EMBrowserType.__init__(self, single_selection)
+
+		self.add_list_widget()  # 3 panels in browsing mode
 		self.usescenegraph = usescenegraph
-		
+
 		self.__init_action_delegates()
-		
+
 		bottom_hbl2 = QtGui.QHBoxLayout()
 		self.__init_preview_options()
 		bottom_hbl2.addWidget(self.preview_options,0)
@@ -899,16 +904,19 @@ class EMBrowser(EMBrowserType):
 			return
 		else:
 			get_application().setOverrideCursor(Qt.BusyCursor)
-			self.action_delegates[str(action.text())].multi_item_action(items,self)
+			self.action_delegates[str(action.text())].multi_item_action(items, self)
 			get_application().setOverrideCursor(Qt.ArrowCursor)
 			return
 
+
 EMSelectorDialogType = EMSelectorBaseTemplate(QtGui.QDialog)
+
+
 class EMSelectorDialog(EMSelectorDialogType):
 	def __init__(self,single_selection=False,save_as_mode=True): #TODO: figure out whether save_as_mode is needed (unused)
 		EMSelectorDialogType.__init__(self,single_selection)	
 
-		hbl2=QtGui.QHBoxLayout()
+		hbl2 = QtGui.QHBoxLayout()
 		hbl2.setMargin(0)
 		hbl2.setSpacing(2)
 		self.selection_label = QtGui.QLabel(SAVE_AS,self)
@@ -1040,12 +1048,13 @@ class EMSelectorDialog(EMSelectorDialogType):
 		else: ret = directory + name
 			
 		return ret
-	
-	
+
+
 class EMListWidget(QtGui.QListWidget):
 	"""
 	Customized ListWidget as displayed in the browser
 	"""
+
 	def __init__(self,target,*args):
 		self.target = weakref.ref(target)
 		QtGui.QListWidget.__init__(self,*args)
@@ -1066,23 +1075,28 @@ class EMListWidget(QtGui.QListWidget):
 		self.url = None # keep track of the url that was used to populate the list widget
 		self.delegate = None # the delegate the populated the list widget
 		
-	def set_mod_time(self,mod_time): self.mod_time = mod_time
+	def set_mod_time(self, mod_time): self.mod_time = mod_time
+
 	def get_mod_time(self): return self.mod_time
-	
-	def set_url(self,url): self.url = url
+
+	def set_url(self, url): self.url = url
+
 	def get_url(self): return self.url
-	
+
 	def get_delegate(self): return self.delegate
-	def set_delegate(self,delegate): self.delegate = delegate
+
+	def set_delegate(self, delegate): self.delegate = delegate
+
 
 class EMBrowseDelegate:
 	"""
 	Base class for objects that can read urls and return lists of ListWidgetItems
 	to the EMSelector
 	"""
+
 	def __init__(self): pass
-	
-	def handles_url(self,url):
+
+	def handles_url(self, url):
 		"""
 		Definitive way of testing whether or not the object handles the url
 		@param url a string, e.g. "/home/d.woolford/", "sludtke@10.10.10.10:~/test/"
@@ -1156,13 +1170,14 @@ def folderize(url):
 	if url[-1] == "/": return url
 	else: return url + "/"
 
+
 class EMFileSystemDelegate(EMBrowseDelegate):
 	"""
 	The Delegate for reading file system contents 
 	Main function is to return the the correct list items to the EMSelector 
 	"""
-	
-	def __init__(self,target):
+
+	def __init__(self, target):
 		self.target = weakref.ref(target)
 		self.threed_dim_limit = 128
 		
@@ -1298,7 +1313,7 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 		files.sort(key=fspsort)
 		 
 		return_items = []
-		
+
 		for i in dirs:
 			if i[0] == '.': continue
 
@@ -1308,18 +1323,16 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 			else: return_items.append(EMFSFolderItem(self,i,folderize(url)+i))
 			
 		for file in files:
-			a = self.__get_file_item(file,url)
+			a = self.__get_file_item(file, url)
 			if a is not None: return_items.append(a)
-	
+
 		return return_items
-	
-	
-	
-	def __get_file_metadata_items(self,url):
+
+	def __get_file_metadata_items(self, url):
 		"""
 		This function called when the url is a file
 		"""
-		if not os.path.isfile(url): raise RuntimeError("%s is not a file" %url)
+		if not os.path.isfile(url): raise RuntimeError("%s is not a file" % url)
 		
 		return_items = []
 		item = None
@@ -1337,12 +1350,11 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 			else:
 				d = e.get_attr_dict()
 				keys = d.keys()
-				keys.sort() #alphabetical order
-				return_items = [EMDataHeaderItem(self,str(k)+" : "+str(d[k]),url,k,d[k]) for k in keys]
-			
+				keys.sort()  # alphabetical order
+				return_items = [EMDataHeaderItem(self, str(k) + " : " + str(d[k]), url, k, d[k]) for k in keys]
 
 		return return_items
-	
+
 	def __get_metadata_items(self,url):
 		vals = url.split(MDS)
 		if not os.path.isfile(vals[0]): raise RuntimeError("% is not a valid file system url" %url)
@@ -2174,7 +2186,6 @@ class EMGenericFileItem(EMGenericItem):
 
 
 app = None
-
 
 if __name__ == '__main__':
 	em_app = EMApp()
