@@ -70,71 +70,69 @@ class EMItemAction:
 	'''
 	interface for single item actions
 	'''
-	
 	def item_action(self,item,target): raise NotImplementedException
 	
 class EMMultiItemAction:
 	'''
 	interface for multiple item actions
 	'''
-	
 	def multi_item_action(self,items,target): raise NotImplementedException
-	
-class EMSaveItemAction(EMItemAction,EMMultiItemAction,EMActionDelegate):
-	
-	def item_action(self,item,target):
+
+
+class EMSaveItemAction(EMItemAction, EMMultiItemAction, EMActionDelegate):
+	def item_action(self, item, target):
 		data = item.get_data()
 		if data != None: save_data(data)
-		
-	def multi_item_action(self,items,target):
+
+	def multi_item_action(self, items, target):
 		for item in items:
 			data = item.get_data()
-			if data != None: 
+			if data != None:
 				result = save_data(data)
 				if not result: return
-		
-class EMSaveStackSaveAction(EMMultiItemAction,EMActionDelegate):
-	
-	def multi_item_action(self,items,target):
-		save_data(items) # save_data knows how to deal with items
 
-class EMDeleteItemAction(EMItemAction,EMMultiItemAction,EMActionDelegate):
-	
-	def item_action(self,item,target):
-		self.__delete_items( [item] )
 
-	def __delete_items(self,items):
+class EMSaveStackSaveAction(EMMultiItemAction, EMActionDelegate):
+	def multi_item_action(self, items, target):
+		save_data(items)  # save_data knows how to deal with items
+
+
+class EMDeleteItemAction(EMItemAction, EMMultiItemAction, EMActionDelegate):
+	def item_action(self, item, target):
+		self.__delete_items([item])
+
+	def __delete_items(self, items):
 		msg = QtGui.QMessageBox()
 		msg.setText("Deletion will be permanent. Are you sure you want to delete the selected file(s)?")
 		s = ""
-		for i in items: s+=i.text()+"\n"
+		for i in items: s += i.text() + "\n"
 		msg.setInformativeText(s)
-		msg.setStandardButtons(QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok )
+		msg.setStandardButtons(QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
 		msg.setDefaultButton(QtGui.QMessageBox.Cancel)
 		ret = msg.exec_()
 		if ret == QtGui.QMessageBox.Cancel: return False
-		
-		for item in items:
-			delegate= item.get_delegate()
-			delegate.delete_url(item.get_url())
-			
-	def multi_item_action(self,items,target):
-		self.__delete_items(items)
-			
 
-			
-def DataDisplayModuleTemplate(Type,get_data_attr="get_data",data_functors=[],usescenegraph=False):
+		for item in items:
+			delegate = item.get_delegate()
+			delegate.delete_url(item.get_url())
+
+	def multi_item_action(self, items, target):
+		self.__delete_items(items)
+
+
+def DataDisplayModuleTemplate(Type, get_data_attr="get_data", data_functors=[], usescenegraph=False):
 	'''
 	This would be similar to policy based design using templated inheritance
 	Type is a type of EMAN2 display module. Search for DataDisplayModuleTemplate
 	'''
-	class DataDisplayModule(EMItemAction,EMActionDelegate):
+
+	class DataDisplayModule(EMItemAction, EMActionDelegate):
 		def __init__(self):
 			self.module_type = Type
-			self.display_modules = [] # a list of display modules
-			self.module_events = [] # a list of ModuleEventsManagers
+			self.display_modules = []  # a list of display modules
+			self.module_events = []  # a list of ModuleEventsManagers
 			self.get_data_attr = get_data_attr
-			self.data_functors = data_functors # functors that can be called once the data is acquired
+			self.data_functors = data_functors  # functors that can be called once the data is acquired
 			
 		def item_action(self,item,target):
 			from EMAN2 import Transform
