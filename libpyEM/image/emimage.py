@@ -35,7 +35,7 @@ from PyQt4 import QtCore, QtGui, QtOpenGL
 from EMAN2 import Util,EMUtil,file_exists,IMAGE_UNKNOWN,gimme_image_dimensions3D,EMData
 import os
 from EMAN2 import Transform
-from emscene3d import EMScene3D
+from qtgui.emscene3d import EMScene3D
 from item3d.emdataitem3d import EMDataItem3D, EMIsosurface
 
 def image_update():
@@ -81,7 +81,7 @@ class EMImageWidget(object):
 			return None
 		
 		if force_plot or (isinstance(data,EMData) and data.get_zsize()==1 and data.get_ysize()==1):
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 			if old:
 				if isinstance(old,EMPlot2DWidget) :
 					old.set_data(data,remove_directories_from_name(filename),replace)
@@ -118,7 +118,7 @@ class EMImageWidget(object):
 			widget.set_data(data,filename)
 			return widget
 		elif isinstance(data,list):
-			from emplot3d import EMPlot3DWidgetNew
+			from qtgui.emplot3d import EMPlot3DWidgetNew
 			if (isinstance(data[0],list) or isinstance(data[0],tuple)) and len(data) > 2:
 				if old:
 					if isinstance(old,EMPlot3DWidgetNew) :
@@ -129,7 +129,7 @@ class EMImageWidget(object):
 				widget.set_data(data,remove_directories_from_name(filename),replace)
 				return widget	
 			else:
-				from emplot2d import EMPlot2DWidget
+				from qtgui.emplot2d import EMPlot2DWidget
 				if old:
 					if isinstance(old,EMPlot2DWidget) :
 						old.set_data(data,remove_directories_from_name(filename),replace)
@@ -164,7 +164,7 @@ class EMWidgetFromFile(object):
 			return None
 		
 		if force_plot:
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 			if isinstance(old,EMPlot2DWidget): widget = old
 			else: widget = EMPlot2DWidget(application=application)
 			widget.set_data_from_file(filename)
@@ -194,7 +194,7 @@ class EMWidgetFromFile(object):
 					if isinstance(old,EMImage2DWidget): widget = old
 					else: widget= EMImage2DWidget(application=application)
 				else:
-					from emplot2d import EMPlot2DWidget
+					from qtgui.emplot2d import EMPlot2DWidget
 					if isinstance(old,EMPlot2DWidget): widget = old
 					else: widget = EMPlot2DWidget(application=application)
 					widget.set_data_from_file(filename)
@@ -222,7 +222,7 @@ class EMWidgetFromFile(object):
 			widget.set_data(data,filename)
 			return widget
 		else:
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 			if isinstance(old,EMPlot2DWidget): widget = old
 			else: widget = EMPlot2DWidget(application=application)
 			widget.set_data_from_file(filename)

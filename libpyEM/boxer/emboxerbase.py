@@ -45,7 +45,7 @@ The EMBoxerModule is basically the epicenter of everything: functions like "add_
 points in terms of figuring out how to adapt this code to application specific needs
 '''
 from optparse import OptionParser
-from emapplication import EMApp,get_application
+from qtgui.emapplication import EMApp,get_application
 from boxertools import BigImageCache,BinaryCircleImageCache,Cache
 from EMAN2 import file_exists,EMANVERSION,gimme_image_dimensions2D,EMData,get_image_directory,Region,file_exists,gimme_image_dimensions3D,abs_path,get_platform,base_name
 from EMAN2db import db_open_dict,db_check_dict,db_close_dict
@@ -356,7 +356,7 @@ class EMBox:
 			r,g,b = EMBox.BOX_COLORS[self.type]
 		else:
 			r,g,b = 1.0,0.42,0.71 # hot pint, apparently ;)
-		from emshape import EMShape
+		from qtgui.emshape import EMShape
 		shape = EMShape([shape_string,r,g,b,self.x-box_size/2,self.y-box_size/2,self.x+box_size/2,self.y+box_size/2,2.0,self.z_idx])
 		return shape
 
@@ -678,7 +678,7 @@ class EraseTool(EMBoxingTool):
 	def get_2d_window(self): return self.target().get_2d_window()
 
 	def mouse_move(self,event):
-		from emshape import EMShape
+		from qtgui.emshape import EMShape
 		m = self.get_2d_window().scr_to_img((event.x(),event.y()))
 		self.get_2d_window().add_eraser_shape("eraser",["circle",.1,.1,.1,m[0],m[1],self.erase_radius,3])
 		self.get_2d_window().updateGL()
@@ -695,21 +695,21 @@ class EraseTool(EMBoxingTool):
 	def mouse_wheel(self,event):
 		from PyQt4.QtCore import Qt
 		if event.modifiers()&Qt.ShiftModifier:
-			from emshape import EMShape
+			from qtgui.emshape import EMShape
 			self.adjust_erase_rad(event.delta())
 			m= self.get_2d_window().scr_to_img((event.x(),event.y()))
 			self.get_2d_window().add_eraser_shape("eraser",["circle",.1,.1,.1,m[0],m[1],self.erase_radius,3])
 			self.get_2d_window().updateGL()
 
 	def mouse_down(self,event) :
-		from emshape import EMShape
+		from qtgui.emshape import EMShape
 		m=self.get_2d_window().scr_to_img((event.x(),event.y()))
 		#self.boxable.add_exclusion_area("circle",m[0],m[1],self.erase_radius)
 		self.get_2d_window().add_eraser_shape("eraser",["circle",.9,.9,.9,m[0],m[1],self.erase_radius,3])
 		self.target().exclusion_area_added("circle",m[0],m[1],self.erase_radius,self.erase_value)
 
 	def mouse_drag(self,event) :
-		from emshape import EMShape
+		from qtgui.emshape import EMShape
 		m=self.get_2d_window().scr_to_img((event.x(),event.y()))
 		self.get_2d_window().add_eraser_shape("eraser",["circle",.9,.9,.9,m[0],m[1],self.erase_radius,3])
 		self.target().exclusion_area_added("circle",m[0],m[1],self.erase_radius,self.erase_value)
@@ -1160,7 +1160,7 @@ class EMThumbsTools:
 		@param shrink the shrink factor, should be an int
 		@return a list of very small images
 		'''
-		from emapplication import EMProgressDialog
+		from qtgui.emapplication import EMProgressDialog
 
 		if shrink == None or shrink<1.5 : shrink = EMThumbsTools.get_image_thumb_shrink(image_names[0])
 
@@ -2158,7 +2158,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 		self.inspector.add_mouse_tool(event_tool)
 
 from utils.emsprworkflow import WorkFlowTask
-from emapplication import error
+from qtgui.emapplication import error
 class EMBoxerWriteOutputTask(WorkFlowTask):
 	"""Use this form for writing boxed particles and/or coordinate files to disk."""
 	def __init__(self,file_names=[],output_formats=["hdf","spi","img","bdb"],dfl_boxsize=128, current_tool=None):
@@ -2297,7 +2297,7 @@ class EMBoxerWriteOutputTask(WorkFlowTask):
 
 	def write_output(self,input_names,output_names,box_list_function,box_size,msg="Writing Output",extra_args=[]):
 		n = len(input_names)
-		from emapplication import EMProgressDialog
+		from qtgui.emapplication import EMProgressDialog
 		progress = EMProgressDialog(msg, "Cancel", 0,n,None)
 		progress.show()
 		prog = 0

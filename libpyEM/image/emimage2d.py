@@ -41,21 +41,21 @@ import EMAN2
 import sys
 import numpy
 import struct
-from emhist import ImgHistogram
+from qtgui.emhist import ImgHistogram
 import emshape
-from emshape import EMShape
+from qtgui.emshape import EMShape
 from weakref import WeakKeyDictionary
 import weakref
 from pickle import dumps,loads
 from libpyGLUtils2 import *
 
-from emapplication import get_application, EMGLWidget
+from qtgui.emapplication import get_application, EMGLWidget
 
-from emanimationutil import SingleValueIncrementAnimation, LineAnimation
+from qtgui.emanimationutil import SingleValueIncrementAnimation, LineAnimation
 
 MAG_INC = 1.1
 
-from emglobjects import EMOpenGLFlagsAndTools
+from qtgui.emglobjects import EMOpenGLFlagsAndTools
 
 class EMImage2DWidget(EMGLWidget):
 	"""
@@ -2259,7 +2259,7 @@ class EMImageInspector2D(QtGui.QWidget):
 		ds=1.0/(fft["ny"]*data["apix_x"])
 		s=[ds*i for i in xrange(fft["ny"]/2)]
 
-		from emplot2d import EMDataFnPlotter
+		from qtgui.emplot2d import EMDataFnPlotter
 
 		dfp=EMDataFnPlotter(data=(s,pspec))
 		dfp.show()
@@ -2267,7 +2267,7 @@ class EMImageInspector2D(QtGui.QWidget):
 
 	def do_pspec_stack(self,ign):
 		"""compute average 1D power spectrum of all images and plot"""
-		from emplot2d import EMDataFnPlotter
+		from qtgui.emplot2d import EMDataFnPlotter
 
 		if len(self.target().list_data)<2 : return
 		for im in self.target().list_data:
@@ -2281,7 +2281,7 @@ class EMImageInspector2D(QtGui.QWidget):
 		ds=1.0/(fft["ny"]*self.target().get_data()["apix_x"])
 		s=[ds*i for i in xrange(fft["ny"]/2)]
 
-		from emplot2d import EMDataFnPlotter
+		from qtgui.emplot2d import EMDataFnPlotter
 
 		dfp=EMDataFnPlotter(data=(s,pspec))
 		dfp.show()
@@ -2544,7 +2544,7 @@ class EMImageInspector2D(QtGui.QWidget):
 
 # This is just for testing, of course
 if __name__ == '__main__':
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 	em_app = EMApp()
 	window = EMImage2DWidget(application=em_app)
 

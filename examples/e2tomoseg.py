@@ -31,11 +31,11 @@
 #
 
 from EMAN2 import *
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 from item3d.emdataitem3d import EMDataItem3D, EMIsosurface
 from image.emimage2d import EMImage2DWidget
 from image.emimagemx import EMImageMXWidget
-from emscene3d import EMScene3D, EMInspector3D, EMQTreeWidget
+from qtgui.emscene3d import EMScene3D, EMInspector3D, EMQTreeWidget
 import os
 from gui.valslider import ValSlider, EMANToolButton, EMSpinWidget, EMQTColorWidget
 import weakref

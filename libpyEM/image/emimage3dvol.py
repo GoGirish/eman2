@@ -47,9 +47,9 @@ from weakref import WeakKeyDictionary
 import weakref
 from time import *
 
-from emglobjects import EM3DModel, EMViewportDepthTools, Camera2, Camera, EMOpenGLFlagsAndTools
+from qtgui.emglobjects import EM3DModel, EMViewportDepthTools, Camera2, Camera, EMOpenGLFlagsAndTools
 from emimageutil import EMTransformPanel
-from emhist import ImgHistogram
+from qtgui.emhist import ImgHistogram
 
 
 MAG_INCREMENT_FACTOR = 1.1
@@ -158,7 +158,7 @@ class EMVolumeModel(EM3DModel):
 		
 		self.update_data_and_texture()
 		
-		from emglobjects import EM3DGLWidget
+		from qtgui.emglobjects import EM3DGLWidget
 		if isinstance(self.get_gl_widget(),EM3DGLWidget):
 			self.get_gl_widget().set_camera_defaults(self.data)
 		
@@ -719,8 +719,8 @@ class EMVolumeInspector(QtGui.QWidget):
 
 
 if __name__ == '__main__':
-	from emapplication import EMApp
-	from emglobjects import EM3DGLWidget
+	from qtgui.emapplication import EMApp
+	from qtgui.emglobjects import EM3DGLWidget
 	
 	em_app = EMApp()
 	window = EM3DGLWidget()

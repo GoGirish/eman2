@@ -33,7 +33,7 @@
 #
 
 from EMAN2 import *
-from emglobjects import init_glut, get_default_gl_colors
+from qtgui.emglobjects import init_glut, get_default_gl_colors
 from emitem3d import EMItem3D, EMItem3DInspector, drawBoundingBox
 from libpyGLUtils2 import FTGLFontMode
 import math

@@ -65,7 +65,7 @@ A simple CTF simulation program.
 
 	(options, args) = parser.parse_args()
 
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 	app=EMApp()
 	gui=GUIctfsim(app,options.apix,options.voltage,options.cs,options.ac,options.samples,options.apply)
 	gui.show_guis()
@@ -77,7 +77,7 @@ A simple CTF simulation program.
 try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
 	from PyQt4.QtCore import Qt
-	from emshape import *
+	from qtgui.emshape import *
 	from gui.valslider import ValSlider
 except:
 	print "Error: PyQt4 must be installed"
@@ -106,7 +106,7 @@ class GUIctfsim(QtGui.QWidget):
 			print "Cannot import EMAN image GUI objects (EMImage2DWidget)"
 			sys.exit(1)
 		try:
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 		except:
 			print "Cannot import EMAN plot GUI objects (is matplotlib installed?)"
 			sys.exit(1)

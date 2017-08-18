@@ -35,8 +35,8 @@ from emdatastorage import ParamDef
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtCore import Qt
 import os
-from emselector import EMSelectorDialog
-from emapplication import get_application
+from qtgui.emselector import EMSelectorDialog
+from qtgui.emapplication import get_application
 from EMAN2 import Util, get_image_directory,file_exists,dump_aligners_list,dump_processors_list
 import EMAN2
 import weakref
@@ -294,7 +294,7 @@ class EMFileTable(QtGui.QTableWidget):
 	def time_out(self):
 		if self.busy :
 			self.timer.stop()
-			from emapplication import EMErrorMessageDisplay
+			from qtgui.emapplication import EMErrorMessageDisplay
 			EMErrorMessageDisplay.run(["Disabling updates of %s for speed" %key] )
 		
 		stime=time.time()	
@@ -306,7 +306,7 @@ class EMFileTable(QtGui.QTableWidget):
 						self.animated_columns[key] = i
 						break
 				else:
-					from emapplication import EMErrorMessageDisplay
+					from qtgui.emapplication import EMErrorMessageDisplay
 					EMErrorMessageDisplay.run(["Can't animate %s" %key] )
 					self.animated_columns.pop(key)
 					self.busy = 0
@@ -324,7 +324,7 @@ class EMFileTable(QtGui.QTableWidget):
 		
 		if time.time()-stime>0.5 :
 			self.timer.stop()
-			from emapplication import EMErrorMessageDisplay
+			from qtgui.emapplication import EMErrorMessageDisplay
 			EMErrorMessageDisplay.run(["Disabling updates of %s for speed" %key] )
 		
 	
@@ -672,7 +672,7 @@ class EM2DFileTable(EMFileTable):
 		if self.display_module == None:
 			from image.emimage import EMWidgetFromFile
 			self.display_module = EMWidgetFromFile(filename,get_application())
-			from emapplication import ModuleEventsManager
+			from qtgui.emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
 		else:
 			from EMAN2 import EMData
@@ -766,7 +766,7 @@ class EM2DStackTable(EMFileTable):
 		if self.display_module == None:
 			from image.emimage import EMWidgetFromFile
 			self.display_module = EMWidgetFromFile(filename,get_application())
-			from emapplication import ModuleEventsManager
+			from qtgui.emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
 		else:
 			from image.emimagemx import EMLightWeightParticleCache
@@ -805,7 +805,7 @@ class EMPlotTable(EMFileTable):
 		if self.display_module == None:
 			from image.emimage import EMWidgetFromFile
 			self.display_module = EMWidgetFromFile(filename,get_application())
-			from emapplication import ModuleEventsManager
+			from qtgui.emapplication import ModuleEventsManager
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
 		else:
 			self.display_module.set_data_from_file(filename,True)
@@ -863,7 +863,7 @@ class EM2DStackExamineTable(EM2DStackTable):
 		if self.display_module == None:
 			from image.emimagemx import EMImageMXWidget
 			self.display_module = EMImageMXWidget(None,get_application())
-			from emapplication import ModuleEventsManager
+			from qtgui.emapplication import ModuleEventsManager
 			#self.module_events_manager = ModuleEventsManager(self,self.display_module)
 		
 		self.display_module.set_data(filename,filename) #  I know this looks stupid, but c'est la vie
@@ -2115,7 +2115,7 @@ def on_cancel():
 # This is just for testing, of course
 if __name__ == '__main__':
 	
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 	em_app = EMApp()
 	window = EMFormWidget(params=get_example_form_params())
 	window.setWindowTitle("A test form")

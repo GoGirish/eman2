@@ -39,9 +39,9 @@ from EMAN2db import db_check_dict
 import sys, math, weakref
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt
-from emselector import EMSelectorDialog	# This will be replaced by something more sensible in the future
+from qtgui.emselector import EMSelectorDialog	# This will be replaced by something more sensible in the future
 import re, os, glob
-from embrowser import EMBrowserWidget
+from qtgui.embrowser import EMBrowserWidget
 from empmtabwidgets import *
 
 class PMComboBox(QtGui.QComboBox):

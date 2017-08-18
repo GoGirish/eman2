@@ -31,13 +31,13 @@
 #
 #
 
-from emapplication import EMApp, get_application
+from qtgui.emapplication import EMApp, get_application
 from image.emimage3dsym import EM3DSymModel,EMSymInspector
 import os,sys
 from EMAN2 import *
 from PyQt4 import QtGui,QtCore
 from image.emimagemx import EMImageMXWidget
-from emglobjects import *
+from qtgui.emglobjects import *
 
 	
 def main():

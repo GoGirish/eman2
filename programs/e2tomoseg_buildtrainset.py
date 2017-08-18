@@ -3,7 +3,7 @@
 from EMAN2 import *
 import numpy as np
 import random
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 from image.emimage import EMImageWidget
 from boxer.emboxerbase import *
 import shutil

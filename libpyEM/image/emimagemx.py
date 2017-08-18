@@ -45,18 +45,18 @@ import EMAN2
 import copy
 import sys
 import numpy
-from emhist import ImgHistogram
+from qtgui.emhist import ImgHistogram
 from weakref import WeakKeyDictionary
 from pickle import dumps,loads
 from PyQt4.QtGui import QImage
 from libpyGLUtils2 import *
 
-from emglobjects import EMOpenGLFlagsAndTools, EMGLProjectionViewMatrices
-from emapplication import EMGLWidget, get_application, EMApp
-from emanimationutil import LineAnimation
+from qtgui.emglobjects import EMOpenGLFlagsAndTools, EMGLProjectionViewMatrices
+from qtgui.emapplication import EMGLWidget, get_application, EMApp
+from qtgui.emanimationutil import LineAnimation
 import weakref
 
-from emapplication import EMProgressDialog
+from qtgui.emapplication import EMProgressDialog
 
 
 class EMMatrixPanel:

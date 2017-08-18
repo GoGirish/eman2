@@ -57,7 +57,7 @@ def main():
 	(options, args) = parser.parse_args()
 	
 	if options.gui:
-		from emapplication import EMApp
+		from qtgui.emapplication import EMApp
 		app = EMApp()
 		hist = HistoryForm(app,os.getcwd())
 		app.show()

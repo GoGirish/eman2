@@ -46,7 +46,7 @@ from numpy import *
 import os
 import sys
 import weakref
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 
 from Simplex import Simplex
 
@@ -850,7 +850,7 @@ class GUIctf(QtGui.QWidget):
 			print "Cannot import EMAN image GUI objects (EMImage2DWidget)"
 			sys.exit(1)
 		try: 
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 		except:
 			print "Cannot import EMAN plot GUI objects (is matplotlib installed?)"
 			sys.exit(1)

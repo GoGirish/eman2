@@ -34,7 +34,7 @@ import EMAN2db
 from gui.emdatastorage import ParamDef 
 
 from utils.emsprworkflow import WorkFlowTask
-from emapplication import get_application
+from qtgui.emapplication import get_application
 
 global HOMEDB
 HOMEDB=EMAN2db.EMAN2DB.open_db()
@@ -113,7 +113,7 @@ class EMPreferencesTask(WorkFlowTask):
 			
 		
 def main():
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 
 	em_app = EMApp()
 	

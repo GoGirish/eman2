@@ -46,10 +46,10 @@ try:
 	from PyQt4 import QtCore, QtGui
 	from PyQt4.QtCore import Qt
 	from image.emimage2d import EMImage2DWidget
-	from emplot2d import EMPlot2DWidget
+	from qtgui.emplot2d import EMPlot2DWidget
 	from image.emimagemx import EMImageMXWidget
 	from gui.valslider import ValSlider,CheckBox,ValBox
-	from emshape import EMShape
+	from qtgui.emshape import EMShape
 except:
 	QtGui=nothing()
 	QtCore=nothing()
@@ -262,7 +262,7 @@ def main():
 			print "====================================="
 			print "ERROR: GUI mode unavailable without PyQt4"
 			sys.exit(1)
-		from emapplication import EMApp
+		from qtgui.emapplication import EMApp
 		app=EMApp()
 		gui=GUIBoxer(args,options.voltage,options.apix,options.cs,options.ac,options.boxsize,options.ptclsize,options.threads)
 		gui.show()

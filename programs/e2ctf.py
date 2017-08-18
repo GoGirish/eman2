@@ -262,7 +262,7 @@ NOTE: This program should be run from the project directory, not from within the
 		if len(img_sets) == 0:
 			if not options.chunk: E2end(logid)
 			exit(1)
-		from emapplication import EMApp
+		from qtgui.emapplication import EMApp
 		app=EMApp()
 		gui=GUIctf(app,img_sets,options.autohp,options.nosmooth)
 		gui.show_guis()
@@ -2234,7 +2234,7 @@ try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
 	from PyQt4.QtCore import Qt
 	from OpenGL import GL,GLUT
-	from emshape import *
+	from qtgui.emshape import *
 	from gui.valslider import ValSlider,CheckBox
 except:
 	print "Warning: PyQt4 must be installed to use the --gui option"
@@ -2280,7 +2280,7 @@ class GUIctf(QtGui.QWidget):
 			print "Cannot import EMAN image GUI objects (EMImage2DWidget)"
 			sys.exit(1)
 		try:
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 		except:
 			print "Cannot import EMAN plot GUI objects (is matplotlib installed?)"
 			sys.exit(1)

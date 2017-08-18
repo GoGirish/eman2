@@ -38,9 +38,9 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtCore import Qt
-from emanimationutil import OrientationListAnimation,Animator
-from emapplication import EMApp, get_application, error
-from emglobjects import EM3DModel
+from qtgui.emanimationutil import OrientationListAnimation,Animator
+from qtgui.emapplication import EMApp, get_application, error
+from qtgui.emglobjects import EM3DModel
 from image.emimage2d import EMImage2DWidget
 from image.emimage3dsym import EM3DSymModel, EMSymInspector, EMSymViewerWidget
 from image.emimagemx import EMImageMXWidget, EMLightWeightParticleCache

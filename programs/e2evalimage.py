@@ -47,7 +47,7 @@ try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
 	from PyQt4.QtCore import Qt
 	from PyQt4.QtCore import QTimer
-	from emshape import *
+	from qtgui.emshape import *
 	from gui.valslider import *
 except:
 	print "Warning: PyQt4 must be installed"
@@ -93,7 +93,7 @@ power spectrum in various ways."""
 
 	logid=E2init(sys.argv,options.ppid)
 
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 	app=EMApp()
 	gui=GUIEvalImage(args,options.voltage,options.apix,options.cs,options.ac,options.box,options.usefoldername,options.constbfactor,options.astigmatism)
 	gui.show()
@@ -125,7 +125,7 @@ class GUIEvalImage(QtGui.QWidget):
 			print "Cannot import EMAN image GUI objects (EMImage2DWidget)"
 			sys.exit(1)
 		try:
-			from emplot2d import EMPlot2DWidget
+			from qtgui.emplot2d import EMPlot2DWidget
 		except:
 			print "Cannot import EMAN plot GUI objects (is matplotlib installed?)"
 			sys.exit(1)

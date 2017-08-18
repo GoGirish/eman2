@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from emscene3d import EMScene3D, EMInspector3D, EMInspectorControlShape
+from qtgui.emscene3d import EMScene3D, EMInspector3D, EMInspectorControlShape
 from item3d.emshapeitem3d import *
 
 from EMAN2 import *

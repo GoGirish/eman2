@@ -38,7 +38,7 @@ import sys
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 #from OpenGL import GL,GLU,GLUT
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 import os
 from EMAN2db import *
 from gui.valslider import *

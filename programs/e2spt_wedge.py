@@ -33,7 +33,7 @@
 from EMAN2 import *
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 import emscene3d
 import emdataitem3d 
 

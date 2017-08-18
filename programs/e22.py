@@ -37,7 +37,7 @@ from image.emimage import image_update
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 import threading
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 
 from IPython.frontend.terminal.ipapp import launch_new_instance
 ttx=False

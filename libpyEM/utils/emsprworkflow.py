@@ -38,7 +38,7 @@ from EMAN2db import db_check_dict, db_open_dict,db_remove_dict,db_list_dicts,db_
 from EMAN2 import *
 import os
 import copy
-from emapplication import EMProgressDialog, get_application, EMErrorMessageDisplay, error
+from qtgui.emapplication import EMProgressDialog, get_application, EMErrorMessageDisplay, error
 from e2ctf import pspec_and_ctf_fit,GUIctf,write_e2ctf_output,get_gui_arg_img_sets,init_sfcurve
 import subprocess
 import weakref
@@ -57,7 +57,7 @@ def workflow_path(path="",dir=None):
 	
 	if USING_RELATIVE_DIRS:
 		if dir==None: dir = e2getcwd()
-		from emselector import folderize
+		from qtgui.emselector import folderize
 		dir = folderize(dir)
 		name = path
 		if dir in name:
@@ -933,7 +933,7 @@ Note that the data cannot be filtered unless it is imported."
 			def __call__(self,list_of_names,table_widget):
 			
 		#def add_files_from_context_menu(self,list_of_names,table_widget):
-				from emselector import EMSelectorDialog
+				from qtgui.emselector import EMSelectorDialog
 				selector = EMSelectorDialog(save_as_mode=False)
 				
 				selector.set_selection_text("Selection(s)")
@@ -1375,7 +1375,7 @@ class ParticleWorkFlowTask(WorkFlowTask):
 			
 		def __call__(self,list_of_names,table_widget):
 		
-			from emselector import EMSelectorDialog
+			from qtgui.emselector import EMSelectorDialog
 			selector = EMSelectorDialog(save_as_mode=False)
 			
 			if self.validator != None: 
@@ -1779,7 +1779,7 @@ class EMParticleImportTask(ParticleWorkFlowTask):
 			def __call__(self,list_of_names,table_widget):
 			
 		#def add_files_from_context_menu(self,list_of_names,table_widget):
-				from emselector import EMSelectorDialog
+				from qtgui.emselector import EMSelectorDialog
 				selector = EMSelectorDialog(save_as_mode=False)
 				
 				selector.set_selection_text("Selection(s)")
@@ -6579,7 +6579,7 @@ class E2ResolutionTask(WorkFlowTask):
 	
 if __name__ == '__main__':
 	
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 	em_app = EMApp()
 	sprinit = SPRInitTask()
 	window = sprinit.run_form() 

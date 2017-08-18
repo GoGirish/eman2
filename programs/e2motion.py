@@ -39,7 +39,7 @@ from sys import argv
 from EMAN2 import *
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt
-from emapplication import get_application, EMApp
+from qtgui.emapplication import get_application, EMApp
 from image.emimage2d import EMImage2DWidget
 from image.emimagemx import EMImageMXWidget
 from gui.valslider import *

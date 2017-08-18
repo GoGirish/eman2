@@ -32,7 +32,7 @@
 #
 
 from EMAN2 import *
-from emglobjects import get_default_gl_colors
+from qtgui.emglobjects import get_default_gl_colors
 from emitem3d import EMItem3D, EMItem3DInspector, drawBoundingBox
 from libpyGLUtils2 import GLUtil
 import os
@@ -1206,8 +1206,8 @@ class EMSphereModelInspector(EMPDBItem3DInspector):
 
 if __name__ == '__main__' :
 	print("WARNING: This module is not designed to be run as a program. The browser you see is for testing purposes.")
-	from emapplication import EMApp
-	from embrowser import EMBrowserWidget
+	from qtgui.emapplication import EMApp
+	from qtgui.embrowser import EMBrowserWidget
 	app = EMApp()
 	browser = EMBrowserWidget(withmodal = False, multiselect = False)
 	browser.show()

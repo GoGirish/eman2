@@ -42,9 +42,9 @@ try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
 	from PyQt4.QtCore import Qt
 	from PyQt4.QtCore import QTimer
-	from emshape import *
+	from qtgui.emshape import *
 	from gui.valslider import *
-	from emplot2d import EMPlot2DWidget
+	from qtgui.emplot2d import EMPlot2DWidget
 except:
 	print "Warning: PyQt4 must be installed"
 	sys.exit(1)
@@ -66,7 +66,7 @@ def main():
 		print "see usage " + usage
 		sys.exit()
 	
-	from emapplication import EMApp
+	from qtgui.emapplication import EMApp
 	app=EMApp()
 	
 	cter_ctf_file = None

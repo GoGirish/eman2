@@ -32,9 +32,9 @@
 
 from EMAN2 import *
 from EMAN2fsc import *
-from emplot2d import EMPlot2DWidget,colortypes
+from qtgui.emplot2d import EMPlot2DWidget,colortypes
 from pm.empmwidgets import PMFSCTableWidget
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 
 def main():
 	progname = os.path.basename(sys.argv[0])

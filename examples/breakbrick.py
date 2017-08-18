@@ -2,9 +2,9 @@
 # Muyuan Chen 2016-09
 from EMAN2 import *
 import numpy as np
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 from image.emimage2d import EMImage2DWidget
-from emshape import EMShape
+from qtgui.emshape import EMShape
 
 import PyQt4
 from PyQt4 import QtCore, QtGui, QtOpenGL

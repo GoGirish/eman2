@@ -33,10 +33,10 @@
 
 from EMAN2 import EMANVERSION, E2init, E2end, EMData, base_name, file_exists, EMArgumentParser
 import EMAN2db
-from emapplication import EMApp
+from qtgui.emapplication import EMApp
 import embrowser
 from image.emimage import EMImageWidget, EMWidgetFromFile
-from emscene3d import EMScene3D
+from qtgui.emscene3d import EMScene3D
 import os
 import sys
 
@@ -249,7 +249,7 @@ def display(img,app,title="EMAN2 image"):
 	return w
 
 def plot(files,app):
-	from emplot2d import EMPlot2DWidget
+	from qtgui.emplot2d import EMPlot2DWidget
 	plotw=EMPlot2DWidget(application=app)
 	for f in files:
 		plotw.set_data_from_file(f,quiet=True)
@@ -258,7 +258,7 @@ def plot(files,app):
 	return plotw
 
 def hist(files,app):
-	from emhist import EMHistogramWidget
+	from qtgui.emhist import EMHistogramWidget
 	histw=EMHistogramWidget(application=app)
 	for f in files:
 		histw.set_data_from_file(f,quiet=True)
@@ -267,7 +267,7 @@ def hist(files,app):
 	return histw
 
 def plot_3d(files,app):
-	from emplot3d import EMPlot3DWidgetNew
+	from qtgui.emplot3d import EMPlot3DWidgetNew
 	plotw=EMPlot3DWidgetNew(application=app)
 	for f in files:
 		plotw.set_data_from_file(f)
