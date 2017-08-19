@@ -208,12 +208,6 @@ class WorkFlowTask:
 			pass
 		
 		#db_close_dict("bdb:project")
-	def get_wd(self):
-		'''
-		Get the working directory, originally introduced to provide a centralized mechanism for accessing the working directory,
-		specificially for the purpose of spawning processes. Could be used more generally, however.
-		'''
-		return e2getcwd()
 
 	def spawn_task(self,program,options,string_args,bool_args,additional_args=[],temp_file_name="e2workflow_tmp.txt"):
 		'''
