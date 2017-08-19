@@ -44,7 +44,7 @@ from image.emimage2d import EMImage2DWidget
 from image.emimagemx import EMImageMXWidget
 from gui.valslider import *
 import Queue
-import embrowser
+from qtgui import embrowser
 
 def main():
 	progname = os.path.basename(sys.argv[0])

@@ -34,7 +34,7 @@
 from EMAN2 import EMANVERSION, E2init, E2end, EMData, base_name, file_exists, EMArgumentParser
 import EMAN2db
 from qtgui.emapplication import EMApp
-import embrowser
+from qtgui import embrowser
 from image.emimage import EMImageWidget, EMWidgetFromFile
 from qtgui.emscene3d import EMScene3D
 import os
