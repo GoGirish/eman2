@@ -92,11 +92,7 @@ tpr_ptcl_ave_dict = "global.tpr_ptcl_ave_dict"
 tpr_ptcls_ali_dict = "global.tpr_ptcls_ali_dict"
 
 class EmptyObject:
-	'''
-	This just because I need an object I can assign attributes to, and object() doesn't seem to work
-	'''
-	def __init__(self):
-		pass
+	pass
 
 class WorkFlowTask:
 	def __init__(self):
