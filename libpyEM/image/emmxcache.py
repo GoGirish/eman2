@@ -1,8 +1,9 @@
 import os
 from libpyEMData2 import EMData
+from libpyGeometry2 import Region
 from libpyUtils2 import EMUtil
 
-from EMAN2 import get_header
+from EMAN2 import get_header, gimme_image_dimensions3D
 from EMAN2db import db_check_dict, db_open_dict
 from PyQt4 import QtGui
 from PyQt4.QtCore import Qt
@@ -489,3 +490,134 @@ class EMDataListCache(EMMXDataCache):
 		pass
 
 	def is_3d(self): return False
+
+
+class EM3DDataListCache(EMMXDataCache):
+	"""
+	A class that looks like a list to the outside world
+	automated way of handling 3d images for the EMImageMXWidget
+
+	"""
+	def __init__(self,filename):
+		EMMXDataCache.__init__(self)
+		self.filename = filename
+		self.nx, self.ny, self.nz = gimme_image_dimensions3D(filename)
+		if self.nz == 1: raise RuntimeError("EM3DDataForMx class is only meant to be used with 3D images")
+		self.keys = None
+		self.header = None
+		self.exclusions = []
+		self.images = {}
+		self.major_axis = "z"
+		self.max_idx = self.nz
+
+	def delete_box(self,idx):
+		"""
+		@ must return a value = 1 indicates the box is permanently gone, 
+		0 indicates the class is happy to do nothing
+		and let the calling program display the deleted box differently
+		"""
+		return 0
+
+	def is_complex(self): return False
+
+	def set_xyz(self,xyz):
+		if xyz != self.major_axis:
+			self.major_axis = xyz
+			self.images = {}
+			return True
+		return False
+
+	def get_xsize(self):
+		return self.nx
+
+	def get_ysize(self):
+		return self.ny
+
+	def get_zsize(self):
+		return self.nz
+
+	def get_image_header(self,idx):
+		if self.header is None:
+			image = self[self.nz/2]
+			self.header = image.get_attr_dict()
+
+		return self.header
+
+	def get_image_header_keys(self):
+		if self.keys is None:
+			self.keys = self[0].get_attr_dict().keys()
+
+		return self.keys
+
+	def get_max_idx(self):
+		""" Get the maximum image index  """
+		return self.max_idx
+
+	def get_num_images(self):
+		""" Get the number of images currently cached """
+		return self.max_idx
+
+	def set_cache_size(self,cache_size,refresh=False):
+		""" Set the cache size. May cause the cache to be refreshed, which could take a few moments """
+		pass
+#		if self.mode != EMDataListCache.LIST_MODE:
+#			if cache_size > self.max_idx: self.cache_size = self.max_idx
+#			else: self.cache_size = cache_size
+#			self.start_idx = self.start_idx - self.cache_size/2
+#			if refresh: self.__refresh_cache()
+#		else:
+#			if self.cache_size != self.max_idx:
+#				print "error, in list mode the cache size is always equal to the max idx"
+#				return
+	
+	def set_start_idx(self,start_idx,refresh=True):
+		""" Set the starting index of the cache, """
+		pass
+#		self.start_idx = start_idx
+#		if refresh: self.__refresh_cache()
+
+	def __refresh_cache(self):
+		pass
+
+	def __getitem__(self,idx):
+		if not self.images.has_key(idx):
+			a = EMData()
+			if self.major_axis == "z":
+				r = Region(0,0,idx,self.nx,self.ny,1)
+				a.read_image(self.filename,0,False,r)
+			elif self.major_axis == "y":
+				r = Region(0,idx,0,self.nx,1,self.nz)
+				a.read_image(self.filename,0,False,r)
+				a.set_size(self.nx,self.nz)
+			elif self.major_axis == "x":
+				r = Region(idx,0,0,1,self.ny,self.nz)
+				a.read_image(self.filename,0,False,r)
+				a.set_size(self.ny,self.nz)
+
+			self.images[idx] = a
+
+		return self.images[idx]
+
+	def __len__(self):
+		return self.max_idx
+
+	def __iter__(self):
+		""" Iteration support """
+		self.current_iter = 0
+		return self
+
+	def next(self):
+		""" Iteration support """
+		if self.current_iter > self.max_idx:
+			raise StopIteration
+		else:
+			self.current_iter += 1
+			return self[self.current_iter-1]
+
+	def on_idle(self):
+		"""
+		call this to load unloaded images in the cache, for example
+		"""
+		pass
+
+	def is_3d(self): return True
