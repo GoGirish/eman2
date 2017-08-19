@@ -34,8 +34,8 @@ from EMAN2 import *
 from PyQt4 import QtCore, QtGui, QtOpenGL
 from PyQt4.QtCore import Qt
 from qtgui.emapplication import EMApp
-import emscene3d
-import emdataitem3d 
+import qtgui.emscene3d
+import qtgui.emdataitem3d 
 
 def main():
 	progname = os.path.basename(sys.argv[0])

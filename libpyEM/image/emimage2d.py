@@ -42,7 +42,7 @@ import sys
 import numpy
 import struct
 from qtgui.emhist import ImgHistogram
-import emshape
+import qtgui.emshape
 from qtgui.emshape import EMShape
 from weakref import WeakKeyDictionary
 import weakref

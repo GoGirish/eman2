@@ -676,8 +676,8 @@ class EM2DFileTable(EMFileTable):
 			self.module_events_manager = ModuleEventsManager(self,self.display_module)
 		else:
 			from EMAN2 import EMData
-			import emscene3d
-			import emdataitem3d 
+			import qtgui.emscene3d
+			import qtgui.emdataitem3d 
 			
 			data=emdataitem3d.EMDataItem3D(filename)
 			self.display_module.insertNewNode(os.path.basename(filename), data, parentnode=self.display_module)
