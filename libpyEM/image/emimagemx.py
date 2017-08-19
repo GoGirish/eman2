@@ -58,6 +58,8 @@ import weakref
 
 from qtgui.emapplication import EMProgressDialog
 
+from image.emmxcache import EMMXDataCache
+
 
 class EMMatrixPanel:
 	"""
@@ -2639,14 +2641,6 @@ class EMMXSetsPanel(QtGui.QWidget):
 			self.setlist.addItem(item)
 			if k in viskeys : item.setCheckState(Qt.Checked)
 			else : item.setCheckState(Qt.Unchecked)
-
-
-class EMMXDataCache:
-	"""
-	Base class for EMMXDataCaches
-	"""
-	def __init__(self):
-		self.excluded_list = []  # a list of excluded idxs, used when saving the data to disk
 
 
 class EMLightWeightParticleCache(EMMXDataCache):
