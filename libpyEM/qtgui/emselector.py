@@ -360,9 +360,6 @@ def EMSelectorBaseTemplate(Type):
 			# print "EMSelectorBase.cancel_button_clicked"
 			self.emit(QtCore.SIGNAL("cancel"), self.selections)
 
-		def __del__(self):
-			pass
-
 		def set_selection_text(self, text):
 			"""
 			Selection label is a QLabel, by default its text is "Save As", but you can change it
@@ -469,18 +466,6 @@ def EMSelectorBaseTemplate(Type):
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("activated(QModelIndex)"),self.activated)
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("itemSelectionChanged()"),self.selection_changed)
 
-		def list_widget_dclicked(self,item):
-			"""
-			Inheriting class should supply specialize this
-			"""
-			pass
-		
-		def list_widget_context_menu_event(self,event):
-			"""
-			Inheriting class should supply specialize this
-			"""
-			pass
-		
 		def __go_up_a_directory(self,item=None):
 			
 			if item is not None:
