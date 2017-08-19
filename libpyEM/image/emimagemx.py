@@ -2718,13 +2718,6 @@ class EMMXDataCache:
 	def set_excluded_ptcls(self,excluded_list):
 		self.excluded_list = excluded_list
 
-	def get_item_from_emsave(self,idx):
-		try:
-			(i for i in self.excluded_list if i == idx).next()
-			return None
-		except:
-			return self[idx]
-
 	def is_3d(self):
 		"""
 		Asks whether the cache is of type 3D - so the inspector can have an x/y/z combo box
