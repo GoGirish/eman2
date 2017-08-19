@@ -770,16 +770,6 @@ def euler_display(emdata_list):
 	else:
 		print "gui mode is disabled"
 
-def browse():
-	if GUIMode:
-		from qtgui.emselector import EMBrowser
-		browser = EMBrowser()
-		browser.show()
-		#app.attach_child(browser)
-		#app.show_specific(browser)
-	else:
-		os.system("e2display.py")
-
 class EMImage(object):
 	"""This is basically a factory class that will return an instance of the appropriate EMImage* class """
 	def __new__(cls,data=None,old=None,parent=1):
