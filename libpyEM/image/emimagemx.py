@@ -2760,6 +2760,7 @@ class EMLightWeightParticleCache(EMMXDataCache):
 	This makes this cache only suitable for linear access schemes, not random.
 
 	"""
+	@staticmethod
 	def from_file(file_name):
 		"""
 		If this was C++ this would be the constructor for this class that took a single file name
@@ -2770,8 +2771,6 @@ class EMLightWeightParticleCache(EMMXDataCache):
 		data = [[file_name,i,[]] for i in xrange(n)]
 
 		return EMLightWeightParticleCache(data,len(data))
-
-	from_file = staticmethod(from_file)
 
 	def __init__(self,data,cache_max=2048):
 		"""
