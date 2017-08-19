@@ -3021,7 +3021,7 @@ class EMBrowserWidget(QtGui.QWidget) :
 
 		global emscene3d, emdataitem3d
 		import emscene3d
-		import emdataitem3d
+		from item3d import emdataitem3d
 
 		QtGui.QWidget.__init__(self, parent)
 
