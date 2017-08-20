@@ -2536,23 +2536,6 @@ class E2CTFWorkFlowTask(EMParticleReportTask):
 			
 			data_dict = EMProjectDataDict(spr_ptcls_dict)
 			self.db_map = data_dict.get_data_dict()
-#			db = db_open_dict("bdb:project",ro=True)
-#			self.db_map = db.get(,dfl={})
-#			update = False
-#			for name,map in self.db_map.items():
-#				for key,image_name in map.items():
-#					if not file_exists(image_name):
-#						map.pop(key)
-#						update = True
-#				if len(map) == 0:
-#					self.db_map.pop(name)
-#					
-#			if update:
-#				EMErrorMessageDisplay.run("Warning, filtered particle data was lost.")
-#				db["global.spr_filt_ptcls_map"] = self.db_map					
-						
-#		def __del__(self):
-#			print "CTF columns dies"
 		
 		def __get_num_filtered(self,name,filt):
 			
@@ -2915,17 +2898,7 @@ class E2CTFOutputTask(E2CTFWorkFlowTask):
 		error_message = []	
 		
 		options = EmptyObject()
-	
-#		filenames = params["filenames"]
-##
-#		db_file_names = []
-#		for i,name in enumerate(filenames):
-#			db_name=name
-#			db_file_names.append(db_name)
-#			if not file_exists(db_name):
-#				print "error, particle entry doesn't exist for",name,"aborting."
-#				return None
-			
+		
 		options.filenames = params["filenames"]
 		options.wiener = params["wiener"]
 		options.phaseflip = params["phaseflip"]
@@ -3319,14 +3292,6 @@ this stage. It is used for display purposes only !"
 
 			choice = params["particle_set_choice"]
 			
-#			name_map = {}
-#			particles = self.particles_map[self.particles_name_map[choice]]
-#			for name in particles:
-#				if self.name_map.has_key(name):
-#					name_map[name] = base_name(self.name_map[name])
-#				else:
-#					name_map[name] = base_name(name)
-					
 			self.emit(QtCore.SIGNAL("replace_task"),E2ParticleExamineTask(particles,self.name_map),"Particle Set Examination")
 		
 		self.form.close()
@@ -3636,14 +3601,6 @@ class EMSetReportTask(ParticleWorkFlowTask):
 		
 		from gui.emform import EM2DStackTable,EMFileTable,int_lt
 		table = EM2DStackTable(stack_names,desc_short="Project Particle Sets",desc_long="",enable_save=False)
-#		context_menu_data = EMRawDataReportTask.ProjectListContextMenu(spr_sets_dict,remove_only=True)
-#		table.add_context_menu_data(context_menu_data)
-		#table.add_button_data(EMRawDataReportTask.ProjectAddRawDataButton(table,context_menu_data))
-#		table.insert_column_data(1,EMFileTable.EMColumnData("Particles On Disk",EMParticleReportTask.get_num_ptcls,"Particles in this image"))
-#		table.insert_column_data(2,EMFileTable.EMColumnData("Particle Dims",EMParticleReportTask.get_particle_dims,"The dimensions of the particles that are stored on disk"))
-#		
-#		project_db = db_open_dict("bdb:project",ro=True)
-#		if project_db.has_key(spr_sets_dict):
 			
 		if len(stack_names) != 0:
 			
@@ -4293,16 +4250,7 @@ documentation for other details. Don't forget the other tabs !\
 	def get_main_params(self):
 		params = []
 		
-#		if self.end_tag != "generic":
-#			p,n = self.get_particle_selection_table(tag=self.end_tag)
-#		else:
-#			p = ParamDef(name="filenames",vartype="url",desc_short="Input file name(s)",desc_long="The names of the particle files you want to use as in the input data for e2refine2d.py",property=None,defaultunits=[],choices=[])
-#			n = 1 # just to fool the next bit, that's all
-#
 	   	p,n = self.get_particle_selection_table(self.particles,None,self.single_selection,enable_ctf=False)
-#		if n == 0:
-#			params.append(ParamDef(name="blurb",vartype="text",desc_short="",desc_long="",property=None,defaultunits=E2Refine2DRunTask.documentation_string+E2Refine2DRunTask.warning_string,choices=None))
-#		else:
 		params.append(ParamDef(name="blurb",vartype="text",desc_short="",desc_long="",property=None,defaultunits=E2Refine2DRunTask.documentation_string,choices=None))
 		params.append(p)
 	
@@ -4314,10 +4262,6 @@ documentation for other details. Don't forget the other tabs !\
 	def on_form_ok(self,params):
 		self.write_db_entries(params) # I wrote the entries here so that the filenames entry is not altered, allowing the form parameters to be correctly memorized. This breaks a general pattern I am following. It probably doesn't matter at all.
 		
-#		if self.end_tag != "generic":
-#			names = ["bdb:particles#"+name for name in params["filenames"]]
-#			params["filenames"] = names 
-			
 		options = EmptyObject()
 		for checker in [self.check_classaverage_page,self.check_simmx_page,self.check_main_page]: # check main page needs the shrink parameter to be checked first
 			error_message = checker(params,options)
@@ -4846,19 +4790,6 @@ class E2RefineParticlesTaskBase(EMClassificationTools, E2Make3DTools):
 		self.form.close()
 		self.form = None
 
-# This functionality is being redesigned and pends a discussion with Steve ludtke with respect to the history mechanism
-#	def write_db_parms(self,options,string_args,bool_args):
-#		db = db_open_dict("bdb:e2refine.args")
-#		
-#		for string in string_args:
-#			db[string] = getattr(options,string)
-#			
-#		for string in bool_args:
-#			db[string] = getattr(options,string)
-#			
-#		db_close_dict("bdb:e2refine.args")
-#		
-	
 	def display_errors(self,error_message):
 		'''
 		error_message is a list of strings
