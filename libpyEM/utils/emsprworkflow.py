@@ -642,29 +642,6 @@ class EMProjectDataDict:
 		project_db = db_open_dict(self.db_name)
 		project_db[self.data_dict_name] = dict
 		
-#	def __convert_ptcls_dict_to_tags(self):
-#		'''
-#		Converts the ptcls dict so that its keys are file tags, not full names
-#		This was deemed necessary when we ran into problems using the full names for particle files,
-#		specifically at the point of building sets and removing bad particles
-#		This function is only called if the self.data_dict_name is spr_ptcls_dict (in self.get_data_dict)
-#		'''
-#		
-#		project_db = db_open_dict(self.db_name)
-#		data_dict = project_db.get(spr_ptcls_dict,dfl={})
-#		acted = False
-#		for key, value in data_dict.items():
-#			tag = base_name(key)
-#			print tag,key
-#			if tag != key:
-#				acted = True
-#				data_dict.pop(key)
-#				data_dict[tag] = value
-#		
-#		if acted:
-#			error("Converted global.spr_ptcls_dict to using file tags","Warning")
-#			project_db[spr_ptcls_dict] = data_dict
-	
 	def __remove_dict_if_files_lost(self):
 		'''
 		Looks at all of the data in the filter dictionary, if any of that data does not exist the
