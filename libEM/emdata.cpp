@@ -1565,7 +1565,7 @@ EMData *EMData::calc_ccf(EMData * with, fp_flag fpflag,bool center)
 		
 		// If the argument EMData pointer is not the same size we automatically resize it
 		bool undoresize = false;
-		int wnx = with->get_xsize(); int wny = with->get_ysize(); int wnz = with->get_zsize();
+		unsigned int wnx = with->get_xsize(); unsigned int wny = with->get_ysize(); unsigned int wnz = with->get_zsize();
 		if (!(is_complex()^with->is_complex()) && (wnx != nx || wny != ny || wnz != nz) ) {
 			Region r((wnx-nx)/2, (wny-ny)/2, (wnz-nz)/2,nx,ny,nz);
 			with->clip_inplace(r);
@@ -3439,7 +3439,7 @@ EMData * EMData::calc_fast_sigma_image( EMData* mask)
 
 	if (get_ndim() != mask->get_ndim() ) throw ImageDimensionException("The dimensions do not match");
 
-	int mnx = mask->get_xsize(); int mny = mask->get_ysize(); int mnz = mask->get_zsize();
+	unsigned int mnx = mask->get_xsize(); unsigned int mny = mask->get_ysize(); unsigned int mnz = mask->get_zsize();
 
 	if ( mnx > nx || mny > ny || mnz > nz)
 		throw ImageDimensionException("Can not calculate variance map using an image that is larger than this image");
@@ -3454,7 +3454,7 @@ EMData * EMData::calc_fast_sigma_image( EMData* mask)
 
 //	bool undoclip = false;
 
-	int nxc = nx+mnx; int nyc = ny+mny; int nzc = nz+mnz;
+	unsigned int nxc = nx+mnx; unsigned int nyc = ny+mny; unsigned int nzc = nz+mnz;
 //	if ( mnx < nx || mny < ny || mnz < nz) {
 	Region r;
 	if (ny == 1) r = Region((mnx-nxc)/2,nxc);
@@ -3525,8 +3525,8 @@ EMData *EMData::calc_flcf(EMData * with)
 	EMData *this_copy=this;
 	this_copy=copy();
 
-	int mnx = with->get_xsize(); int mny = with->get_ysize(); int mnz = with->get_zsize();
-	int nxc = nx+mnx; int nyc = ny+mny; int nzc = nz+mnz;
+	unsigned int mnx = with->get_xsize(); unsigned int mny = with->get_ysize(); unsigned int mnz = with->get_zsize();
+	unsigned int nxc = nx+mnx; unsigned int nyc = ny+mny; unsigned int nzc = nz+mnz;
 
 	// Ones is a circular/spherical mask, consisting of 1s.
 	EMData* ones = new EMData(mnx,mny,mnz);
