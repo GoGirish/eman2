@@ -1001,7 +1001,7 @@ MCArray3D* EMData::get_3dcviewptr() const
 }
 
 
-MArray2D EMData::get_2dview(int x0, int y0) const
+MArray2D EMData::get_2dview(unsigned int x0, unsigned int y0) const
 {
 	const int ndims = 2;
 	if (get_ndim() != ndims) {
@@ -1015,7 +1015,7 @@ MArray2D EMData::get_2dview(int x0, int y0) const
 }
 
 
-MArray3D EMData::get_3dview(int x0, int y0, int z0) const
+MArray3D EMData::get_3dview(unsigned int x0, unsigned int y0, unsigned int z0) const
 {
 	const int ndims = 3;
 	boost::array<std::size_t,ndims> dims = {{nx, ny, nz}};
@@ -1026,7 +1026,7 @@ MArray3D EMData::get_3dview(int x0, int y0, int z0) const
 }
 
 
-MCArray2D EMData::get_2dcview(int x0, int y0) const
+MCArray2D EMData::get_2dcview(unsigned int x0, unsigned int y0) const
 {
 	const int ndims = 2;
 	if (get_ndim() != ndims) {
@@ -1041,7 +1041,7 @@ MCArray2D EMData::get_2dcview(int x0, int y0) const
 }
 
 
-MCArray3D EMData::get_3dcview(int x0, int y0, int z0) const
+MCArray3D EMData::get_3dcview(unsigned int x0, unsigned int y0, unsigned int z0) const
 {
 	const int ndims = 3;
 	boost::array<std::size_t,ndims> dims = {{nx/2, ny, nz}};
