@@ -158,6 +158,7 @@ namespace EMAN
 		EMObject(short);
 		EMObject(int num);
 		EMObject(unsigned int num);
+		EMObject(unsigned long num);
 		EMObject(float ff);
 		EMObject(double dd);
 		EMObject(const char *s);
@@ -196,6 +197,7 @@ namespace EMAN
 		operator short () const;
 		operator int () const;
 		operator unsigned int () const;
+        operator unsigned long () const;
 		operator float () const;
 		operator double () const;
 		operator const char *() const;

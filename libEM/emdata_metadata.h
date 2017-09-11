@@ -480,7 +480,7 @@ MCArray3D* get_3dcviewptr() const;
  * @param y0 Y-axis translation amount.
  * @return 2D multi-array format of the raw data.
  */
-MArray2D get_2dview(int x0, int y0) const;
+MArray2D get_2dview(unsigned long x0, unsigned long y0) const;
 
 
 /** Get image raw pixel data in a 3D multi-array format. The
@@ -496,7 +496,7 @@ MArray2D get_2dview(int x0, int y0) const;
  * @param z0 Z-axis translation amount.
  * @return 3D multi-array format of the raw data.
  */
-MArray3D get_3dview(int x0, int y0, int z0) const;
+MArray3D get_3dview(unsigned long x0, unsigned long y0, unsigned long z0) const;
 
 
 /** Get complex image raw pixel data in a 2D multi-array format. The
@@ -511,7 +511,7 @@ MArray3D get_3dview(int x0, int y0, int z0) const;
  * @param y0 Y-axis translation amount.
  * @return 2D multi-array format of the raw data.
  */
-MCArray2D get_2dcview(int x0, int y0) const;
+MCArray2D get_2dcview(unsigned long x0, unsigned long y0) const;
 
 
 /** Get complex image raw pixel data in a 3D multi-array format. The
@@ -527,7 +527,7 @@ MCArray2D get_2dcview(int x0, int y0) const;
  * @param z0 Z-axis translation amount.
  * @return 3D multi-array format of the raw data.
  */
-MCArray3D get_3dcview(int x0, int y0, int z0) const;
+MCArray3D get_3dcview(unsigned long x0, unsigned long y0, unsigned long z0) const;
 
 
 /** The generic way to get any image header information

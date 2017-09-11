@@ -169,7 +169,16 @@ EMObject::EMObject(int num) :
 }
 
 EMObject::EMObject(unsigned int num) :
-	ui(num), type(UNSIGNEDINT)
+		ui(num), type(UNSIGNEDINT)
+{
+#ifdef MEMDEBUG
+	allemobjlist.insert(this);
+	printf("  +(%6d) %p\n",(int)allemobjlist.size(),this);
+#endif
+}
+
+EMObject::EMObject(unsigned long num) :
+		ui(num), type(UNSIGNEDINT)
 {
 #ifdef MEMDEBUG
 	allemobjlist.insert(this);
@@ -419,16 +428,30 @@ EMObject::operator int () const
 
 EMObject::operator unsigned int () const
 {
-	if (type == UNSIGNEDINT) {
-		return (unsigned int) ui;
-	}
-	else {
-		if (type != UNKNOWN) {
-			throw TypeException("Cannot convert to int this data type ",
-								get_object_type_name(type));
-		}
-	}
-	return 0;
+    if (type == UNSIGNEDINT) {
+        return (unsigned int) ui;
+    }
+    else {
+        if (type != UNKNOWN) {
+            throw TypeException("Cannot convert to int this data type ",
+                                get_object_type_name(type));
+        }
+    }
+    return 0;
+}
+
+EMObject::operator unsigned long () const
+{
+    if (type == UNSIGNEDINT) {
+        return (unsigned int) ui;
+    }
+    else {
+        if (type != UNKNOWN) {
+            throw TypeException("Cannot convert to int this data type ",
+                                get_object_type_name(type));
+        }
+    }
+    return 0;
 }
 
 EMObject::operator float () const

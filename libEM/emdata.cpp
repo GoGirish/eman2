@@ -1567,7 +1567,7 @@ EMData *EMData::calc_ccf(EMData * with, fp_flag fpflag,bool center)
 		bool undoresize = false;
 		int wnx = with->get_xsize(); int wny = with->get_ysize(); int wnz = with->get_zsize();
 		if (!(is_complex()^with->is_complex()) && (wnx != nx || wny != ny || wnz != nz) ) {
-			Region r((wnx-nx)/2, (wny-ny)/2, (wnz-nz)/2,nx,ny,nz);
+			Region r(int((wnx-nx)/2), int((wny-ny)/2), int((wnz-nz)/2), int(nx), int(ny), int(nz));
 			with->clip_inplace(r);
 			undoresize = true;
 		}
@@ -2928,7 +2928,7 @@ vector<float> EMData::calc_radial_dist(int n, float x0, float dx, int inten)
 					}
 					else {
 						if (inten==5) r=Util::hypot3(x,y-ny/2,z-nz/2);
-						else r=Util::hypot3(x-nx/2,y-ny/2,z-nz/2);
+						else r=Util::hypot3(int(x-nx/2),int(y-ny/2),int(z-nz/2));
 						r=(r-x0)/dx;
 						f=int(r);	// safe truncation, so floor isn't needed
 						if (f<0 || f>=n) continue;
@@ -3509,9 +3509,9 @@ EMData * EMData::calc_fast_sigma_image( EMData* mask)
 
 	s->process_inplace("xform.phaseorigin.tocenter");
 	Region r3;
-	if (ny == 1) r3 = Region((nxc-nx)/2,nx);
-	else if (nz == 1) r3 = Region((nxc-nx)/2, (nyc-ny)/2,nx,ny);
-	else r3 = Region((nxc-nx)/2, (nyc-ny)/2,(nzc-nz)/2,nx,ny,nz);
+	if (ny == 1)      r3 = Region(int((nxc-nx)/2), int(nx));
+	else if (nz == 1) r3 = Region(int((nxc-nx)/2), int((nyc-ny)/2),int(nx), int(ny));
+	else              r3 = Region(int((nxc-nx)/2), int((nyc-ny)/2),int((nzc-nz)/2), int(nx), int(ny), int(nz));
 	s->clip_inplace(r3);
 	EXITFUNC;
 	return s;
@@ -3555,9 +3555,9 @@ EMData *EMData::calc_flcf(EMData * with)
 
 	corr->process_inplace("xform.phaseorigin.tocenter");
 	Region r3;
-	if (ny == 1) r3 = Region((nxc-nx)/2,nx);
-	else if (nz == 1) r3 = Region((nxc-nx)/2, (nyc-ny)/2,nx,ny);
-	else r3 = Region((nxc-nx)/2, (nyc-ny)/2,(nzc-nz)/2,nx,ny,nz);
+	if (ny == 1)      r3 = Region(int((nxc-nx)/2),nx);
+	else if (nz == 1) r3 = Region(int((nxc-nx)/2), int((nyc-ny)/2),nx,ny);
+	else              r3 = Region(int((nxc-nx)/2), int((nyc-ny)/2),int((nzc-nz)/2),nx,ny,nz);
 	corr->clip_inplace(r3);
 
 	corr->div(*s);
