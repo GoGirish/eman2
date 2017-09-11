@@ -2749,7 +2749,7 @@ vector<float> EMData::calc_radial_dist(int n, float x0, float dx, int inten)
 	vector<double>norm(n);
 	vector<double>count(n);
 
-	int x,y,z,i;
+	unsigned int x,y,z,i;
 	int step=is_complex()?2:1;
 	int isinten=get_attr_default("is_intensity",0);
 	int isri=is_ri();
