@@ -201,7 +201,7 @@ bool HdfIO::is_valid(const void *first_block)
 	ENTERFUNC;
 
 	if (first_block) {
-		char signature[8] = { 137,72,68,70,13,10,26,10 };
+		char signature[8] = { static_cast<char>(137),static_cast<char>(72),static_cast<char>(68),static_cast<char>(70),static_cast<char>(13),static_cast<char>(10),static_cast<char>(26), static_cast<char>(10) };
 		if (strncmp((const char *)first_block,signature,8)==0) return true;
 		// const char* f=(const char *)first_block;
 		// printf("bad hdf signature %d %d %d %d %d %d %d %d",f[0],f[1],f[2],f[3],f[4],f[5],f[6],f[7]);

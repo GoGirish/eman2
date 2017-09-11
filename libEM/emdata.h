@@ -840,7 +840,7 @@ namespace EMAN
 		// Incremented every time the image changes
 		int changecount;
 		/** image size */
-		int nx, ny, nz, nxy;
+		unsigned long int nx, ny, nz, nxy;
 		size_t nxyz;
 		/** array index offsets */
 		int xoff, yoff, zoff;

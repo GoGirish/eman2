@@ -1426,7 +1426,7 @@ EMData *EMData::do_radon()
 
 		for (int y = 0; y < nx; y++) {
 			for (int x = 0; x < nx; x++) {
-				if (Util::square(x - nx / 2) + Util::square(y - nx / 2) <= nx * nx / 4) {
+				if (Util::square(int(x - nx / 2)) + Util::square(int(y - nx / 2)) <= nx * nx / 4) {
 					result_data[i + y * nx] += copy_data[x + y * nx];
 				}
 			}
