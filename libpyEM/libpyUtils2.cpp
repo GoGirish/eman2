@@ -709,7 +709,6 @@ hyb -- y- mesh spacing above f0\nhya -- y- mesh spacing below f0\n \nInterpolant
 		.def("square", (float (*)(float))&EMAN::Util::square, args("x"), "Calculate a float number's square.\nx - n Given float number.")
 		.def("square", (float (*)(double))&EMAN::Util::square, args("x"), "Calculate a double number's square.\nx - n Given double number.")
 		.def("square_sum", &EMAN::Util::square_sum, args("x", "y"), "Calcuate (x*x + y*y).\n \nx - The first number.\ny - The second number.\n \nreturn (x*x + y*y).")
-		.def("hypot3", (float (*)(int, int, int))&EMAN::Util::hypot3, args("x", "y", "z"), "Euclidean distance function in 3D: f(x,y,z) = sqrt(x*x + y*y + z*z)\n \nx - The first number\ny - The second number\nz - The third number\n \nreturn sqrt(x*x + y*y + z*z)")
 		.def("hypot3", (float (*)(float, float, float))&EMAN::Util::hypot3, args("x", "y", "z"), "Euclidean distance function in 3D: f(x,y,z) = sqrt(x*x + y*y + z*z)\n \nx - The first number\ny - The second number\nz - The third number\n \nreturn sqrt(x*x + y*y + z*z)")
 		.def("hypot3", (double (*)(double, double, double))&EMAN::Util::hypot3, args("x", "y", "z"), "Euclidean distance function in 3D: f(x,y,z) = sqrt(x*x + y*y + z*z)\n \nx - The first number\ny - The second number\nz - The third number\n \nreturn sqrt(x*x + y*y + z*z)")
 		.def("fast_floor", &EMAN::Util::fast_floor, args("x"), "A fast way to calculate a floor, which is largest integral\nvalue not greater than argument.\n \nx - A float point number.\n \nreturn floor of x.")
