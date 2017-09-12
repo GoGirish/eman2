@@ -3070,21 +3070,21 @@ EMData::rot_scale_trans(const Transform &RA, EMData* ret) {
 					int IOZ = int(zold);
 
 					#ifdef _WIN32
-					int IOXp1 = _cpp_min( nx-1 ,IOX+1);
+					int IOXp1 = _cpp_min( (int)nx-1 ,IOX+1);
 					#else
-					int IOXp1 = std::min( nx-1 ,IOX+1);
+					int IOXp1 = std::min( (int)nx-1 ,IOX+1);
 					#endif  //_WIN32
 
 					#ifdef _WIN32
-					int IOYp1 = _cpp_min( ny-1 ,IOY+1);
+					int IOYp1 = _cpp_min( (int)ny-1 ,IOY+1);
 					#else
-					int IOYp1 = std::min( ny-1 ,IOY+1);
+					int IOYp1 = std::min( (int)ny-1 ,IOY+1);
 					#endif  //_WIN32
 
 					#ifdef _WIN32
-					int IOZp1 = _cpp_min( nz-1 ,IOZ+1);
+					int IOZp1 = _cpp_min( (int)nz-1 ,IOZ+1);
 					#else
-					int IOZp1 = std::min( nz-1 ,IOZ+1);
+					int IOZp1 = std::min( (int)nz-1 ,IOZ+1);
 					#endif  //_WIN32
 
 					float dx = xold-IOX;
@@ -3231,21 +3231,21 @@ EMData::rot_scale_trans_background(const Transform &RA) {
 					int IOZ = int(zold);
 
 					#ifdef _WIN32
-					int IOXp1 = _cpp_min( nx-1 ,IOX+1);
+					int IOXp1 = _cpp_min( (int)nx-1 ,IOX+1);
 					#else
-					int IOXp1 = std::min( nx-1 ,IOX+1);
+					int IOXp1 = std::min( (int)nx-1 ,IOX+1);
 					#endif  //_WIN32
 
 					#ifdef _WIN32
-					int IOYp1 = _cpp_min( ny-1 ,IOY+1);
+					int IOYp1 = _cpp_min( (int)ny-1 ,IOY+1);
 					#else
-					int IOYp1 = std::min( ny-1 ,IOY+1);
+					int IOYp1 = std::min( (int)ny-1 ,IOY+1);
 					#endif  //_WIN32
 
 					#ifdef _WIN32
-					int IOZp1 = _cpp_min( nz-1 ,IOZ+1);
+					int IOZp1 = _cpp_min( (int)nz-1 ,IOZ+1);
 					#else
-					int IOZp1 = std::min( nz-1 ,IOZ+1);
+					int IOZp1 = std::min( (int)nz-1 ,IOZ+1);
 					#endif  //_WIN32
 
 					float dx = xold-IOX;
@@ -7103,9 +7103,9 @@ float EMData::find_3d_threshold(float mass, float pixel_size)
 	float x0 = thr1,x3 = thr3,x1,x2,THR=0;
 
 	#ifdef _WIN32
-		int ILE = _cpp_min(nx*ny*nx,_cpp_max(1,vol_voxels));
+		int ILE = _cpp_min(int(nx*ny*nx),_cpp_max(1,vol_voxels));
 	#else
-		int ILE = std::min(nx*ny*nx,std::max(1,vol_voxels));
+		int ILE = std::min(int(nx*ny*nx),std::max(1,vol_voxels));
 	#endif	//_WIN32
 
 	if (abs(thr3-thr2)>abs(thr2-thr1)) {
@@ -7435,21 +7435,21 @@ EMData* EMData::helicise(float pixel_size, float dp, float dphi, float section_u
 	int IOZ = int(zz);
 
 	#ifdef _WIN32
-	int IOXp1 = _cpp_min( nx-1 ,IOX+1);
+	int IOXp1 = _cpp_min( (int)nx-1 ,IOX+1);
 	#else
-	int IOXp1 = std::min( nx-1 ,IOX+1);
+	int IOXp1 = std::min( (int)nx-1 ,IOX+1);
 	#endif  //_WIN32
 
 	#ifdef _WIN32
-	int IOYp1 = _cpp_min( ny-1 ,IOY+1);
+	int IOYp1 = _cpp_min( (int)ny-1 ,IOY+1);
 	#else
-	int IOYp1 = std::min( ny-1 ,IOY+1);
+	int IOYp1 = std::min( (int)ny-1 ,IOY+1);
 	#endif  //_WIN32
 
 	#ifdef _WIN32
-	int IOZp1 = _cpp_min( nz-1 ,IOZ+1);
+	int IOZp1 = _cpp_min( (int)nz-1 ,IOZ+1);
 	#else
-	int IOZp1 = std::min( nz-1 ,IOZ+1);
+	int IOZp1 = std::min( (int)nz-1 ,IOZ+1);
 	#endif  //_WIN32
 
 	float dx = xx-IOX;
